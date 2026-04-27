@@ -32,7 +32,7 @@ export default function Home() {
   const [sokt, setSokt] = useState(false)
 
   function toggleFag(fag: string) {
-    setValgteFag(prev =>
+    const [valgteByer, setValgteByer] = useState<string[]>([])
       prev.includes(fag) ? prev.filter(f => f !== fag) : [...prev, fag]
     )
   }
