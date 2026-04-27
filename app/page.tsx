@@ -3,35 +3,13 @@ import { useState } from 'react'
 import { supabase } from '../lib/supabase'
 
 const fagomraader = [
-  'Medisin',
-  'Psykologi',
-  'Sykepleie',
-  'Fysioterapi',
-  'Tannhelse',
-  'Farmasi',
-  'Bioingeniør',
-  'Annen helse',
-  'Data og IT',
-  'Kunstig intelligens',
-  'Cybersikkerhet',
-  'Ingeniør',
-  'Økonomi',
-  'Markedsføring',
-  'Regnskap',
-  'Jus',
-  'Lærer',
-  'Statsvitenskap',
-  'Sosiologi',
-  'Samfunnsfag',
-  'Kunst og design',
-  'Musikk',
-  'Film og media',
-  'Journalistikk',
-  'Språk',
-  'Realfag',
-  'Matematikk',
-  'Idrett',
-  'Annet'
+  'Medisin', 'Psykologi', 'Sykepleie', 'Fysioterapi', 'Tannhelse',
+  'Farmasi', 'Bioingeniør', 'Annen helse', 'Data og IT',
+  'Kunstig intelligens', 'Cybersikkerhet', 'Ingeniør', 'Økonomi',
+  'Markedsføring', 'Regnskap', 'Jus', 'Lærer', 'Statsvitenskap',
+  'Sosiologi', 'Samfunnsfag', 'Kunst og design', 'Musikk',
+  'Film og media', 'Journalistikk', 'Språk', 'Realfag', 'Matematikk',
+  'Idrett', 'Annet'
 ]
 
 export default function Home() {
@@ -51,17 +29,14 @@ export default function Home() {
     if (!snitt) return
     setLaster(true)
     setSokt(true)
-
     let query = supabase
       .from('studier')
       .select('*')
       .lte('cutoff_score', parseFloat(snitt))
       .order('cutoff_score', { ascending: false })
-
     if (valgteFag.length > 0) {
       query = query.in('fagomraade', valgteFag)
     }
-
     const { data } = await query
     setResultater(data || [])
     setLaster(false)
@@ -70,12 +45,10 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
       <div className="max-w-4xl mx-auto px-6 py-16">
-
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold text-blue-700 mb-3">Studievalg</h1>
-          <p className="text-xl text-gray-500">Finn studier du kommer inn på – raskt og enkelt</p>
+          <p className="text-xl text-gray-500">Finn studier du kommer inn på</p>
         </div>
-
         <div className="bg-white rounded-2xl shadow-lg p-8 mb-6">
           <label className="block text-gray-700 font-semibold mb-2">Karaktersnitt</label>
           <div className="flex gap-3 mb-6">
@@ -94,7 +67,6 @@ export default function Home() {
               Søk
             </button>
           </div>
-
           <label className="block text-gray-700 font-semibold mb-3">
             Fagområde {valgteFag.length > 0 && <span className="text-blue-500 font-normal text-sm">({valgteFag.length} valgt)</span>}
           </label>
@@ -113,7 +85,6 @@ export default function Home() {
               </button>
             ))}
           </div>
-
           {valgteFag.length > 0 && (
             <button
               onClick={() => setValgteFag([])}
@@ -123,32 +94,33 @@ export default function Home() {
             </button>
           )}
         </div>
-
-        {laster && (
-          <div className="text-center text-gray-400 py-8">Laster resultater...</div>
-        )}
-
-        {sokt && !laster && (
-          <p className="text-gray-500 mb-4 text-sm">{resultater.length} studier funnet</p>
-        )}
-
+        {laster && <div className="text-center text-gray-400 py-8">Laster resultater...</div>}
+        {sokt && !laster && <p className="text-gray-500 mb-4 text-sm">{resultater.length} studier funnet</p>}
         <div className="space-y-3">
           {resultater.map(s => (
-            <div key={s.id} className="bg-white rounded-xl shadow-sm border border-gray-100 p-5 hover:shadow-md transition">
+            
+              key={s.id}
+              href={s.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block bg-white rounded-xl shadow-sm border border-gray-100 p-5 hover:shadow-md hover:border-blue-200 transition"
+            >
               <div className="flex justify-between items-start">
                 <div>
                   <h2 className="font-semibold text-lg text-gray-800">{s.study_name}</h2>
                   <p className="text-gray-400 text-sm mt-1">{s.university} – {s.location}</p>
-                  <span className="inline-block mt-2 bg-indigo-50 text-indigo-600 text-xs px-2 py-1 rounded-full">{s.fagomraade}</span>
+                  <div className="flex items-center gap-2 mt-2">
+                    <span className="bg-indigo-50 text-indigo-600 text-xs px-2 py-1 rounded-full">{s.fagomraade}</span>
+                    <span className="text-blue-400 text-xs">Trykk for mer info →</span>
+                  </div>
                 </div>
                 <span className="bg-blue-50 text-blue-700 font-bold px-3 py-1 rounded-lg text-sm whitespace-nowrap">
                   Poenggrense: {s.cutoff_score}
                 </span>
               </div>
-            </div>
+            </a>
           ))}
         </div>
-
       </div>
     </main>
   )
