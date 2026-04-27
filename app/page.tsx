@@ -4,7 +4,7 @@ import { supabase } from '../lib/supabase'
 
 export default function Home() {
   const [snitt, setSnitt] = useState('')
-  const [resultater, setResultater] = useState([])
+  const [resultater, setResultater] = useState<any[]>([])
   const [laster, setLaster] = useState(false)
 
   async function finnStudier() {
