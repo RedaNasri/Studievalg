@@ -2,52 +2,137 @@
 import { useState } from 'react'
 import { supabase } from '../lib/supabase'
 
+const fagomraader = [
+  'Alle',
+  'Medisin',
+  'Psykologi',
+  'Sykepleie',
+  'Fysioterapi',
+  'Tannhelse',
+  'Farmasi',
+  'Bioingeniør',
+  'Annen helse',
+  'Data og IT',
+  'Kunstig intelligens',
+  'Cybersikkerhet',
+  'Ingeniør',
+  'Økonomi',
+  'Markedsføring',
+  'Regnskap',
+  'Jus',
+  'Lærer',
+  'Statsvitenskap',
+  'Sosiologi',
+  'Samfunnsfag',
+  'Kunst og design',
+  'Musikk',
+  'Film og media',
+  'Journalistikk',
+  'Språk',
+  'Realfag',
+  'Matematikk',
+  'Idrett',
+  'Annet'
+]
+
 export default function Home() {
   const [snitt, setSnitt] = useState('')
+  const [valgtFag, setValgtFag] = useState('Alle')
   const [resultater, setResultater] = useState<any[]>([])
   const [laster, setLaster] = useState(false)
+  const [sokt, setSokt] = useState(false)
 
   async function finnStudier() {
+    if (!snitt) return
     setLaster(true)
-    const { data } = await supabase
+    setSokt(true)
+    let query = supabase
       .from('studier')
       .select('*')
       .lte('cutoff_score', parseFloat(snitt))
       .order('cutoff_score', { ascending: false })
+
+    if (valgtFag !== 'Alle') {
+      query = query.eq('fagomraade', valgtFag)
+    }
+
+    const { data } = await query
     setResultater(data || [])
     setLaster(false)
   }
 
   return (
-    <main className="max-w-2xl mx-auto p-8">
-      <h1 className="text-3xl font-bold mb-2">Finn studier du kommer inn på</h1>
-      <p className="text-gray-500 mb-6">Skriv inn karaktersnittet ditt så finner vi matching studier</p>
+    <main className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
+      <div className="max-w-4xl mx-auto px-6 py-16">
 
-      <div className="flex gap-3 mb-8">
-        <input
-          type="number"
-          placeholder="F.eks. 52.4"
-          value={snitt}
-          onChange={e => setSnitt(e.target.value)}
-          className="border rounded-lg px-4 py-2 w-48 text-lg"
-        />
-        <button
-          onClick={finnStudier}
-          className="bg-blue-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-700"
-        >
-          Søk
-        </button>
-      </div>
-
-      {laster && <p className="text-gray-500">Laster...</p>}
-
-      {resultater.map(s => (
-        <div key={s.id} className="border rounded-lg p-4 mb-3 hover:shadow-md transition">
-          <h2 className="font-semibold text-lg">{s.study_name}</h2>
-          <p className="text-gray-500">{s.university} – {s.location}</p>
-          <p className="text-blue-600 font-medium">Poenggrense: {s.cutoff_score}</p>
+        <div className="text-center mb-12">
+          <h1 className="text-5xl font-bold text-blue-700 mb-3">Studievalg</h1>
+          <p className="text-xl text-gray-500">Finn studier du kommer inn på – raskt og enkelt</p>
         </div>
-      ))}
+
+        <div className="bg-white rounded-2xl shadow-lg p-8 mb-6">
+          <label className="block text-gray-700 font-semibold mb-2">Karaktersnitt</label>
+          <div className="flex gap-3 mb-6">
+            <input
+              type="number"
+              placeholder="F.eks. 52.4"
+              value={snitt}
+              onChange={e => setSnitt(e.target.value)}
+              onKeyDown={e => e.key === 'Enter' && finnStudier()}
+              className="border border-gray-200 rounded-xl px-4 py-3 w-full text-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            />
+            <button
+              onClick={finnStudier}
+              className="bg-blue-600 text-white px-8 py-3 rounded-xl font-semibold hover:bg-blue-700 transition whitespace-nowrap"
+            >
+              Søk
+            </button>
+          </div>
+
+          <label className="block text-gray-700 font-semibold mb-3">Fagområde</label>
+          <div className="flex flex-wrap gap-2">
+            {fagomraader.map(fag => (
+              <button
+                key={fag}
+                onClick={() => setValgtFag(fag)}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition ${
+                  valgtFag === fag
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-gray-100 text-gray-600 hover:bg-blue-50'
+                }`}
+              >
+                {fag}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {laster && (
+          <div className="text-center text-gray-400 py-8">Laster resultater...</div>
+        )}
+
+        {sokt && !laster && (
+          <p className="text-gray-500 mb-4 text-sm">{resultater.length} studier funnet</p>
+        )}
+
+        <div className="space-y-3">
+          {resultater.map(s => (
+            <div key={s.id} className="bg-white rounded-xl shadow-sm border border-gray-100 p-5 hover:shadow-md transition">
+              <div className="flex justify-between items-start">
+                <div>
+                  <h2 className="font-semibold text-lg text-gray-800">{s.study_name}</h2>
+                  <p className="text-gray-400 text-sm mt-1">{s.university} – {s.location}</p>
+                  <span className="inline-block mt-2 bg-indigo-50 text-indigo-600 text-xs px-2 py-1 rounded-full">{s.fagomraade}</span>
+                </div>
+                <span className="bg-blue-50 text-blue-700 font-bold px-3 py-1 rounded-lg text-sm whitespace-nowrap">
+                  Poenggrense: {s.cutoff_score}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+      </div>
     </main>
   )
 }
