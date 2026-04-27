@@ -12,9 +12,21 @@ const fagomraader = [
   'Idrett', 'Annet'
 ]
 
+const byer = [
+  'Alle byer', 'Oslo', 'Bergen', 'Trondheim', 'Tromsø', 'Stavanger',
+  'Kristiansand', 'Ålesund', 'Bodø', 'Gjøvik', 'Lillehammer',
+  'Drammen', 'Sogndal', 'Levanger', 'Haugesund', 'Molde',
+  'Narvik', 'Alta', 'Åmot', 'Ås', 'Bærum', 'Elverum',
+  'Fredrikstad', 'Gol', 'Grimstad', 'Hamar', 'Harstad',
+  'Horten', 'Indre Østfold', 'Kongsvinger', 'Larvik', 'Lillestrøm',
+  'Mo i Rana', 'Namsos', 'Notodden', 'Orkland', 'Porsgrunn',
+  'Ringerike', 'Sør-Varanger', 'Stord', 'Sunnfjord', 'Volda'
+]
+
 export default function Home() {
   const [snitt, setSnitt] = useState('')
   const [valgteFag, setValgteFag] = useState<string[]>([])
+  const [valgtBy, setValgtBy] = useState('Alle byer')
   const [resultater, setResultater] = useState<any[]>([])
   const [laster, setLaster] = useState(false)
   const [sokt, setSokt] = useState(false)
@@ -36,6 +48,9 @@ export default function Home() {
       .order('cutoff_score', { ascending: false })
     if (valgteFag.length > 0) {
       query = query.in('fagomraade', valgteFag)
+    }
+    if (valgtBy !== 'Alle byer') {
+      query = query.eq('location', valgtBy)
     }
     const { data } = await query
     setResultater(data || [])
@@ -66,7 +81,21 @@ export default function Home() {
               Søk
             </button>
           </div>
-          <label className="block text-gray-700 font-semibold mb-3">Fagområde</label>
+
+          <label className="block text-gray-700 font-semibold mb-3">By</label>
+          <select
+            value={valgtBy}
+            onChange={e => setValgtBy(e.target.value)}
+            className="border border-gray-200 rounded-xl px-4 py-3 w-full text-gray-900 mb-6 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          >
+            {byer.map(by => (
+              <option key={by} value={by}>{by}</option>
+            ))}
+          </select>
+
+          <label className="block text-gray-700 font-semibold mb-3">
+            Fagområde {valgteFag.length > 0 && <span className="text-blue-500 font-normal text-sm">({valgteFag.length} valgt)</span>}
+          </label>
           <div className="flex flex-wrap gap-2">
             {fagomraader.map(fag => (
               <button
@@ -90,13 +119,14 @@ export default function Home() {
             </button>
           )}
         </div>
+
         {laster && <div className="text-center text-gray-400 py-8">Laster...</div>}
         {sokt && !laster && (
           <p className="text-gray-500 mb-4 text-sm">{resultater.length} studier funnet</p>
         )}
         <div className="space-y-3">
           {resultater.map(s => (
-            <a
+            
               key={s.id}
               href={s.url}
               target="_blank"
