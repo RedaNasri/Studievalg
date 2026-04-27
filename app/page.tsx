@@ -14,12 +14,12 @@ const fagomraader = [
 
 export default function Home() {
   const [snitt, setSnitt] = useState('')
-  const [valgteFag, setValgteFag] = useState([])
-  const [resultater, setResultater] = useState([])
+  const [valgteFag, setValgteFag] = useState<string[]>([])
+  const [resultater, setResultater] = useState<any[]>([])
   const [laster, setLaster] = useState(false)
   const [sokt, setSokt] = useState(false)
 
-  function toggleFag(fag) {
+  function toggleFag(fag: string) {
     setValgteFag(prev =>
       prev.includes(fag) ? prev.filter(f => f !== fag) : [...prev, fag]
     )
