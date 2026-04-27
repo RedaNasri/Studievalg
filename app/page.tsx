@@ -126,7 +126,7 @@ export default function Home() {
         )}
         <div className="space-y-3">
           {resultater.map(s => (
-            
+            <a
               key={s.id}
               href={s.url}
               target="_blank"
