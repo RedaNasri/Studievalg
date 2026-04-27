@@ -13,7 +13,7 @@ const fagomraader = [
 ]
 
 const byer = [
-  'Alle byer', 'Oslo', 'Bergen', 'Trondheim', 'Tromsø', 'Stavanger',
+  'Oslo', 'Bergen', 'Trondheim', 'Tromsø', 'Stavanger',
   'Kristiansand', 'Ålesund', 'Bodø', 'Gjøvik', 'Lillehammer',
   'Drammen', 'Sogndal', 'Levanger', 'Haugesund', 'Molde',
   'Narvik', 'Alta', 'Åmot', 'Ås', 'Bærum', 'Elverum',
@@ -26,14 +26,20 @@ const byer = [
 export default function Home() {
   const [snitt, setSnitt] = useState('')
   const [valgteFag, setValgteFag] = useState<string[]>([])
-  const [valgtBy, setValgtBy] = useState('Alle byer')
+  const [valgteByer, setValgteByer] = useState<string[]>([])
   const [resultater, setResultater] = useState<any[]>([])
   const [laster, setLaster] = useState(false)
   const [sokt, setSokt] = useState(false)
 
   function toggleFag(fag: string) {
-    const [valgteByer, setValgteByer] = useState<string[]>([])
+    setValgteFag(prev =>
       prev.includes(fag) ? prev.filter(f => f !== fag) : [...prev, fag]
+    )
+  }
+
+  function toggleBy(by: string) {
+    setValgteByer(prev =>
+      prev.includes(by) ? prev.filter(b => b !== by) : [...prev, by]
     )
   }
 
@@ -49,8 +55,8 @@ export default function Home() {
     if (valgteFag.length > 0) {
       query = query.in('fagomraade', valgteFag)
     }
-    if (valgtBy !== 'Alle byer') {
-      query = query.eq('location', valgtBy)
+    if (valgteByer.length > 0) {
+      query = query.in('location', valgteByer)
     }
     const { data } = await query
     setResultater(data || [])
@@ -82,16 +88,31 @@ export default function Home() {
             </button>
           </div>
 
-          <label className="block text-gray-700 font-semibold mb-3">By</label>
-          <select
-            value={valgtBy}
-            onChange={e => setValgtBy(e.target.value)}
-            className="border border-gray-200 rounded-xl px-4 py-3 w-full text-gray-900 mb-6 focus:outline-none focus:ring-2 focus:ring-blue-400"
-          >
+          <label className="block text-gray-700 font-semibold mb-3">
+            By {valgteByer.length > 0 && <span className="text-blue-500 font-normal text-sm">({valgteByer.length} valgt)</span>}
+          </label>
+          <div className="flex flex-wrap gap-2 mb-6">
             {byer.map(by => (
-              <option key={by} value={by}>{by}</option>
+              <button
+                key={by}
+                onClick={() => toggleBy(by)}
+                className={valgteByer.includes(by)
+                  ? 'px-4 py-2 rounded-full text-sm font-medium bg-green-500 text-white'
+                  : 'px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-600 hover:bg-green-50'
+                }
+              >
+                {by}
+              </button>
             ))}
-          </select>
+          </div>
+          {valgteByer.length > 0 && (
+            <button
+              onClick={() => setValgteByer([])}
+              className="mb-4 text-sm text-gray-400 hover:text-red-400"
+            >
+              Nullstill byer
+            </button>
+          )}
 
           <label className="block text-gray-700 font-semibold mb-3">
             Fagområde {valgteFag.length > 0 && <span className="text-blue-500 font-normal text-sm">({valgteFag.length} valgt)</span>}
@@ -115,7 +136,7 @@ export default function Home() {
               onClick={() => setValgteFag([])}
               className="mt-3 text-sm text-gray-400 hover:text-red-400"
             >
-              Nullstill filter
+              Nullstill fagområder
             </button>
           )}
         </div>
@@ -126,7 +147,7 @@ export default function Home() {
         )}
         <div className="space-y-3">
           {resultater.map(s => (
-            <a
+            
               key={s.id}
               href={s.url}
               target="_blank"
