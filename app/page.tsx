@@ -3,7 +3,6 @@ import { useState } from 'react'
 import { supabase } from '../lib/supabase'
 
 const fagomraader = [
-  'Alle',
   'Medisin',
   'Psykologi',
   'Sykepleie',
@@ -37,23 +36,30 @@ const fagomraader = [
 
 export default function Home() {
   const [snitt, setSnitt] = useState('')
-  const [valgtFag, setValgtFag] = useState('Alle')
+  const [valgteFag, setValgteFag] = useState<string[]>([])
   const [resultater, setResultater] = useState<any[]>([])
   const [laster, setLaster] = useState(false)
   const [sokt, setSokt] = useState(false)
+
+  function toggleFag(fag: string) {
+    setValgteFag(prev =>
+      prev.includes(fag) ? prev.filter(f => f !== fag) : [...prev, fag]
+    )
+  }
 
   async function finnStudier() {
     if (!snitt) return
     setLaster(true)
     setSokt(true)
+
     let query = supabase
       .from('studier')
       .select('*')
       .lte('cutoff_score', parseFloat(snitt))
       .order('cutoff_score', { ascending: false })
 
-    if (valgtFag !== 'Alle') {
-      query = query.eq('fagomraade', valgtFag)
+    if (valgteFag.length > 0) {
+      query = query.in('fagomraade', valgteFag)
     }
 
     const { data } = await query
@@ -89,14 +95,16 @@ export default function Home() {
             </button>
           </div>
 
-          <label className="block text-gray-700 font-semibold mb-3">Fagområde</label>
+          <label className="block text-gray-700 font-semibold mb-3">
+            Fagområde {valgteFag.length > 0 && <span className="text-blue-500 font-normal text-sm">({valgteFag.length} valgt)</span>}
+          </label>
           <div className="flex flex-wrap gap-2">
             {fagomraader.map(fag => (
               <button
                 key={fag}
-                onClick={() => setValgtFag(fag)}
+                onClick={() => toggleFag(fag)}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition ${
-                  valgtFag === fag
+                  valgteFag.includes(fag)
                     ? 'bg-blue-600 text-white'
                     : 'bg-gray-100 text-gray-600 hover:bg-blue-50'
                 }`}
@@ -105,6 +113,15 @@ export default function Home() {
               </button>
             ))}
           </div>
+
+          {valgteFag.length > 0 && (
+            <button
+              onClick={() => setValgteFag([])}
+              className="mt-3 text-sm text-gray-400 hover:text-red-400 transition"
+            >
+              Nullstill filter
+            </button>
+          )}
         </div>
 
         {laster && (
