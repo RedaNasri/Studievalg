@@ -115,7 +115,13 @@ export default function Home() {
   const sorterteAlle = sortering === 'beste' ? [...filtrerte].sort((a, b) => b.margin - a.margin) : filtrerte
   const viste = sorterteAlle.slice(0, visAntall)
   const godSjanseAntall = resultater.filter(s => s.status.label === 'God sjanse').length
-  const snittMargin = viste.length > 0 ? (viste.reduce((sum, s) => sum + s.margin, 0) / viste.length).toFixed(1) : null
+  const snittMarginTall = viste.length > 0 ? viste.reduce((sum, s) => sum + s.margin, 0) / viste.length : null
+
+  function marginTekst(m: number) {
+    if (m >= 3) return `Du ligger i snitt ${m.toFixed(1)} poeng over studiene som vises`
+    if (m >= 0) return `Du ligger i snitt ${m.toFixed(1)} poeng over – det er tett!`
+    return `Du ligger i snitt ${Math.abs(m).toFixed(1)} poeng under mange av disse studiene`
+  }
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
@@ -140,7 +146,7 @@ export default function Home() {
           <div>
             <div className="bg-blue-50 border border-blue-200 rounded-xl px-5 py-4 mb-3">
               <p className="text-blue-800 font-bold text-lg">Basert på snittet ditt ({snitttall}), har du gode muligheter på {godSjanseAntall} studier</p>
-              {snittMargin && <p className="text-blue-600 text-sm mt-1">Du ligger i snitt {snittMargin} poeng over studiene som vises</p>}
+              {snittMarginTall !== null && <p className="text-blue-600 text-sm mt-1">{marginTekst(snittMarginTall)}</p>}
             </div>
 
             <div className="bg-yellow-50 border border-yellow-200 rounded-xl px-4 py-3 mb-4 text-yellow-800 text-sm">
