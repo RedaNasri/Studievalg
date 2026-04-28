@@ -87,6 +87,13 @@ function Dropdown({ label, options, valgte, toggle, nullstill }: {
   )
 }
 
+function getStatus(snitt: number, grense: number) {
+  const margin = snitt - grense
+  if (margin >= 3) return { label: 'God sjanse', color: 'bg-green-100 text-green-700', order: 0 }
+  if (margin >= 0) return { label: 'Mulig', color: 'bg-yellow-100 text-yellow-700', order: 1 }
+  return { label: 'Under grensen', color: 'bg-red-100 text-red-600', order: 2 }
+}
+
 export default function Home() {
   const [snitt, setSnitt] = useState('')
   const [valgteFag, setValgteFag] = useState<string[]>([])
@@ -114,7 +121,6 @@ export default function Home() {
     let query = supabase
       .from('studier')
       .select('*')
-      .lte('cutoff_score', parseFloat(snitt))
       .order('cutoff_score', { ascending: false })
     if (valgteFag.length > 0) {
       query = query.in('fagomraade', valgteFag)
@@ -123,16 +129,22 @@ export default function Home() {
       query = query.in('location', valgteByer)
     }
     const { data } = await query
-    setResultater(data || [])
+    const snitttall = parseFloat(snitt)
+    const sorted = (data || [])
+      .map(s => ({ ...s, status: getStatus(snitttall, s.cutoff_score) }))
+      .sort((a, b) => a.status.order - b.status.order)
+    setResultater(sorted)
     setLaster(false)
   }
+
+  const snitttall = parseFloat(snitt)
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
       <div className="max-w-4xl mx-auto px-6 py-16">
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold text-blue-700 mb-3">Studievalg</h1>
-          <p className="text-xl text-gray-500">Finn studier du kommer inn på</p>
+          <p className="text-xl text-gray-500">Finn studier basert på karaktersnittet ditt</p>
         </div>
         <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
           <div className="flex flex-wrap gap-3 items-center">
@@ -166,23 +178,53 @@ export default function Home() {
             </button>
           </div>
         </div>
+
         {laster && <div className="text-center text-gray-400 py-8">Laster...</div>}
+
         {sokt && !laster && (
-          <p className="text-gray-500 mb-4 text-sm">{resultater.length} studier funnet</p>
+          <>
+            <div className="bg-yellow-50 border border-yellow-200 rounded-xl px-4 py-3 mb-4 text-yellow-800 text-sm">
+              Dette er basert på tidligere poenggrenser. Poenggrenser varierer fra år til år og er ikke en garanti.
+            </div>
+            <p className="text-gray-500 mb-4 text-sm">{resultater.length} studier funnet</p>
+          </>
         )}
+
         <div className="space-y-3">
-          {resultater.map(s => (
-            <a key={s.id} href={s.url} target="_blank" rel="noopener noreferrer" className="block bg-white rounded-xl shadow-sm border border-gray-100 p-5 hover:shadow-md transition">
-              <div className="flex justify-between items-start">
-                <div>
-                  <h2 className="font-semibold text-lg text-gray-800">{s.study_name}</h2>
-                  <p className="text-gray-400 text-sm mt-1">{s.university} – {s.location}</p>
-                  <span className="inline-block mt-2 bg-indigo-50 text-indigo-600 text-xs px-2 py-1 rounded-full">{s.fagomraade}</span>
+          {resultater.map(s => {
+            const margin = snitttall - s.cutoff_score
+            return (
+              <div key={s.id} className="bg-white rounded-xl shadow-sm border border-gray-100 p-5 hover:shadow-md transition">
+                <div className="flex justify-between items-start">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-1">
+                      <h2 className="font-semibold text-lg text-gray-800">{s.study_name}</h2>
+                      <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${s.status.color}`}>
+                        {s.status.label}
+                      </span>
+                    </div>
+                    <p className="text-gray-400 text-sm">{s.university} – {s.location}</p>
+                    <div className="flex items-center gap-4 mt-2 text-sm">
+                      <span className="text-gray-500">Poenggrense: <strong className="text-gray-700">{s.cutoff_score}</strong></span>
+                      <span className="text-gray-500">Dine poeng: <strong className="text-gray-700">{snitttall}</strong></span>
+                      <span className={margin >= 0 ? 'text-green-600 font-medium' : 'text-red-500 font-medium'}>
+                        {margin >= 0 ? '+' : ''}{margin.toFixed(1)} poeng
+                      </span>
+                    </div>
+                    <span className="inline-block mt-2 bg-indigo-50 text-indigo-600 text-xs px-2 py-1 rounded-full">{s.fagomraade}</span>
+                  </div>
+                  
+                    href={s.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="ml-4 bg-blue-600 text-white px-4 py-2 rounded-xl text-sm font-medium hover:bg-blue-700 transition whitespace-nowrap"
+                  >
+                    Les mer →
+                  </a>
                 </div>
-                <span className="bg-blue-50 text-blue-700 font-bold px-3 py-1 rounded-lg text-sm whitespace-nowrap">Poenggrense: {s.cutoff_score}</span>
               </div>
-            </a>
-          ))}
+            )
+          })}
         </div>
       </div>
     </main>
