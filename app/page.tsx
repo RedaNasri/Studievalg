@@ -63,6 +63,15 @@ const masterFagomraader = [
 
 const masterByer = ['Oslo', 'Bergen', 'Trondheim', 'Tromsø', 'Stavanger', 'Kristiansand']
 
+function Label({ text, hint }: { text: string, hint: string }) {
+  return (
+    <div className="mb-3">
+      <p className="text-gray-800 font-semibold text-sm">{text}</p>
+      <p className="text-gray-600 text-sm mt-1">{hint}</p>
+    </div>
+  )
+}
+
 function Dropdown({ label, options, valgte, toggle, nullstill, color = 'blue' }: {
   label: string
   options: string[]
@@ -117,15 +126,6 @@ function getStatus(snitt: number, grense: number) {
 }
 
 const BATCH = 30
-
-function Label({ text, hint }: { text: string, hint: string }) {
-  return (
-    <div className="mb-2">
-      <p className="text-gray-700 font-semibold text-sm">{text}</p>
-      <p className="text-gray-400 text-xs mt-0.5">{hint}</p>
-    </div>
-  )
-}
 
 function VGSSide({ tilbake }: { tilbake: () => void }) {
   const [snitt, setSnitt] = useState('')
@@ -192,7 +192,7 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
         </div>
 
         <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
-          <div className="flex flex-wrap gap-6 items-start">
+          <div className="flex flex-wrap gap-8 items-start">
             <div>
               <Label text="Karaktersnitt" hint="Skriv inn karaktergjennomsnittet ditt" />
               <div className="flex gap-3">
@@ -435,7 +435,7 @@ function BachelorSide({ tilbake }: { tilbake: () => void }) {
         </div>
 
         <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
-          <div className="flex flex-wrap gap-6 items-start mb-4">
+          <div className="flex flex-wrap gap-8 items-start mb-6">
             <div>
               <Label text="Hva har du studert?" hint="Velg bachelorutdanningen din fra listen" />
               <select value={bachelor} onChange={e => setBachelor(e.target.value)} className="border border-gray-200 rounded-xl px-4 py-2 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 w-72">
@@ -454,11 +454,11 @@ function BachelorSide({ tilbake }: { tilbake: () => void }) {
                 <option value="E">E</option>
               </select>
             </div>
-            <div className="flex items-end">
+            <div className="flex items-end pb-0.5">
               <button onClick={() => { if (bachelor && karakter) setSokt(true) }} className="bg-indigo-600 text-white px-6 py-2 rounded-xl font-semibold hover:bg-indigo-700 transition text-sm">Finn mastere</button>
             </div>
           </div>
-          <div className="flex flex-wrap gap-6 items-start">
+          <div className="flex flex-wrap gap-8 items-start">
             <div>
               <Label text="By" hint="Hvilken by ønsker du å studere i?" />
               <Dropdown label="Velg by" options={masterByer} valgte={valgteByer} toggle={toggleBy} nullstill={() => setValgteByer([])} color="indigo" />
