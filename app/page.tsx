@@ -219,7 +219,7 @@ export default function Home() {
                     rel="noopener noreferrer"
                     className="ml-4 bg-blue-600 text-white px-4 py-2 rounded-xl text-sm font-medium hover:bg-blue-700 transition whitespace-nowrap"
                   >
-                    Les mer →
+                    &rarr;
                   </a>
                 </div>
               </div>
