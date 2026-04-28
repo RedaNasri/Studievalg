@@ -23,6 +23,9 @@ const byer = [
   'Ringerike', 'Sør-Varanger', 'Stord', 'Sunnfjord', 'Volda'
 ]
 
+const populaere = ['Medisin, Oslo, høst', 'Rettsvitenskap (jus), høst', 'Psykologi, høst', 'Datateknologi', 'Sykepleie, Trondheim', 'Økonomi og administrasjon, siviløkonom']
+const hoyEtterspørsel = ['Kybernetikk og robotikk', 'Informatikk: maskinlæring og kunstig intelligens', 'Industriell økonomi og teknologiledelse', 'Kunstig intelligens']
+
 function Dropdown({ label, options, valgte, toggle, nullstill }: {
   label: string
   options: string[]
@@ -35,9 +38,7 @@ function Dropdown({ label, options, valgte, toggle, nullstill }: {
 
   useEffect(() => {
     function handleClick(e: MouseEvent) {
-      if (ref.current && !ref.current.contains(e.target as Node)) {
-        setOpen(false)
-      }
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false)
     }
     document.addEventListener('mousedown', handleClick)
     return () => document.removeEventListener('mousedown', handleClick)
@@ -78,6 +79,8 @@ export default function Home() {
   const [resultater, setResultater] = useState<any[]>([])
   const [laster, setLaster] = useState(false)
   const [sokt, setSokt] = useState(false)
+  const [kunGodSjanse, setKunGodSjanse] = useState(false)
+  const [sortering, setSortering] = useState<'standard' | 'beste'>('standard')
 
   function toggleFag(fag: string) {
     setValgteFag(prev => prev.includes(fag) ? prev.filter(f => f !== fag) : [...prev, fag])
@@ -96,14 +99,16 @@ export default function Home() {
     if (valgteByer.length > 0) query = query.in('location', valgteByer)
     const { data } = await query
     const snitttall = parseFloat(snitt)
-    const sorted = (data || [])
-      .map(s => ({ ...s, status: getStatus(snitttall, s.cutoff_score) }))
-      .sort((a, b) => a.status.order - b.status.order)
+    const mapped = (data || []).map(s => ({ ...s, status: getStatus(snitttall, s.cutoff_score), margin: snitttall - s.cutoff_score }))
+    const sorted = mapped.sort((a, b) => a.status.order - b.status.order)
     setResultater(sorted)
     setLaster(false)
   }
 
   const snitttall = parseFloat(snitt)
+  const viste = kunGodSjanse ? resultater.filter(s => s.status.label === 'God sjanse') : resultater
+  const sorterteViste = sortering === 'beste' ? [...viste].sort((a, b) => b.margin - a.margin) : viste
+  const godSjanseAntall = resultater.filter(s => s.status.label === 'God sjanse').length
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
@@ -112,6 +117,7 @@ export default function Home() {
           <h1 className="text-5xl font-bold text-blue-700 mb-3">Studievalg</h1>
           <p className="text-xl text-gray-500">Finn studier basert på karaktersnittet ditt</p>
         </div>
+
         <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
           <div className="flex flex-wrap gap-3 items-center">
             <input type="number" placeholder="Karaktersnitt, f.eks. 52.4" value={snitt} onChange={e => setSnitt(e.target.value)} onKeyDown={e => e.key === 'Enter' && finnStudier()} className="border border-gray-200 rounded-xl px-4 py-2 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 w-56" />
@@ -120,35 +126,55 @@ export default function Home() {
             <button onClick={finnStudier} className="bg-blue-600 text-white px-6 py-2 rounded-xl font-semibold hover:bg-blue-700 transition text-sm">Søk</button>
           </div>
         </div>
+
         {laster && <div className="text-center text-gray-400 py-8">Laster...</div>}
+
         {sokt && !laster && (
           <div>
+            <div className="bg-blue-50 border border-blue-200 rounded-xl px-5 py-4 mb-4">
+              <p className="text-blue-800 font-semibold text-lg">Basert på snittet ditt ({snitttall}), har du gode muligheter på {godSjanseAntall} studier</p>
+              <p className="text-blue-600 text-sm mt-1">Totalt {resultater.length} studier funnet</p>
+            </div>
+
             <div className="bg-yellow-50 border border-yellow-200 rounded-xl px-4 py-3 mb-4 text-yellow-800 text-sm">
               Dette er basert på tidligere poenggrenser. Poenggrenser varierer fra år til år og er ikke en garanti.
             </div>
-            <p className="text-gray-500 mb-4 text-sm">{resultater.length} studier funnet</p>
+
+            <div className="flex flex-wrap gap-3 mb-4 items-center">
+              <button onClick={() => setKunGodSjanse(!kunGodSjanse)} className={`px-4 py-2 rounded-xl text-sm font-medium border transition ${kunGodSjanse ? 'bg-green-600 text-white border-green-600' : 'bg-white text-gray-600 border-gray-200 hover:border-green-400'}`}>
+                Vis kun god sjanse
+              </button>
+              <button onClick={() => setSortering(sortering === 'standard' ? 'beste' : 'standard')} className={`px-4 py-2 rounded-xl text-sm font-medium border transition ${sortering === 'beste' ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-gray-600 border-gray-200 hover:border-blue-400'}`}>
+                {sortering === 'beste' ? 'Sortert: beste match' : 'Sorter etter beste match'}
+              </button>
+              <p className="text-gray-400 text-sm ml-auto">{sorterteViste.length} studier vises</p>
+            </div>
           </div>
         )}
+
         <div className="space-y-3">
-          {resultater.map(s => {
-            const margin = snitttall - s.cutoff_score
+          {sorterteViste.map(s => {
+            const erPopulaer = populaere.includes(s.study_name)
+            const erHoyEtterspørsel = hoyEtterspørsel.includes(s.study_name)
             return (
               <div key={s.id} className="bg-white rounded-xl shadow-sm border border-gray-100 p-5 hover:shadow-md transition">
                 <div className="flex justify-between items-start">
                   <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-1">
+                    <div className="flex items-center gap-2 mb-1 flex-wrap">
                       <h2 className="font-semibold text-lg text-gray-800">{s.study_name}</h2>
                       <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${s.status.color}`}>{s.status.label}</span>
+                      {erPopulaer && <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-orange-100 text-orange-600">🔥 Populært</span>}
+                      {erHoyEtterspørsel && <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-purple-100 text-purple-600">⭐ Høy etterspørsel</span>}
                     </div>
                     <p className="text-gray-400 text-sm">{s.university} – {s.location}</p>
-                    <div className="flex items-center gap-4 mt-2 text-sm">
+                    <div className="flex items-center gap-4 mt-2 text-sm flex-wrap">
                       <span className="text-gray-500">Poenggrense: <strong className="text-gray-700">{s.cutoff_score}</strong></span>
                       <span className="text-gray-500">Dine poeng: <strong className="text-gray-700">{snitttall}</strong></span>
-                      <span className={margin >= 0 ? 'text-green-600 font-medium' : 'text-red-500 font-medium'}>{margin >= 0 ? '+' : ''}{margin.toFixed(1)} poeng</span>
+                      <span className={s.margin >= 0 ? 'text-green-600 font-medium' : 'text-red-500 font-medium'}>{s.margin >= 0 ? '+' : ''}{s.margin.toFixed(1)} poeng</span>
                     </div>
                     <span className="inline-block mt-2 bg-indigo-50 text-indigo-600 text-xs px-2 py-1 rounded-full">{s.fagomraade}</span>
                   </div>
-                  <a href={s.url} target="_blank" rel="noopener noreferrer" className="ml-4 bg-blue-600 text-white px-4 py-2 rounded-xl text-sm font-medium hover:bg-blue-700 transition whitespace-nowrap">Les mer</a>
+                  <a href={s.url} target="_blank" rel="noopener noreferrer" className="ml-4 bg-blue-600 text-white px-4 py-2 rounded-xl text-sm font-medium hover:bg-blue-700 transition whitespace-nowrap">Sjekk opptakskrav</a>
                 </div>
               </div>
             )
