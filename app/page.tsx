@@ -8,34 +8,28 @@ export default function Home() {
   if (valg === 'bachelor') return <BachelorSide tilbake={() => setValg('start')} />
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 flex items-center justify-center">
-      <div className="max-w-2xl w-full mx-auto px-6 py-16 text-center">
+    <main className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 flex flex-col items-center justify-center px-6">
+      <div className="max-w-2xl w-full mx-auto py-16 text-center">
         <h1 className="text-5xl font-bold text-blue-700 mb-3">StudieMatch</h1>
-        <p className="text-xl text-gray-500 mb-12">Finn studier du kommer inn på – på sekunder</p>
-
+        <p className="text-xl text-gray-500 mb-12">Finn ut hvilke studier du kan være kvalifisert for – på sekunder</p>
         <p className="text-gray-600 font-semibold mb-6 text-lg">Hva passer deg best?</p>
-
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <button
-            onClick={() => setValg('vgs')}
-            className="bg-white border-2 border-blue-200 rounded-2xl p-8 hover:border-blue-500 hover:shadow-lg transition text-left group"
-          >
-            <div className="text-4xl mb-3">🎒</div>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 mb-12">
+          <button onClick={() => setValg('vgs')} className="bg-white border-2 border-blue-200 rounded-2xl p-8 hover:border-blue-500 hover:shadow-lg transition text-left group">
+            <div className="text-4xl mb-3">📋</div>
             <h2 className="text-xl font-bold text-gray-800 mb-2">Jeg går på VGS</h2>
-            <p className="text-gray-500 text-sm">Finn bachelorstudier basert på karaktersnittet ditt</p>
+            <p className="text-gray-500 text-sm">Se hvilke bachelorstudier du kan komme inn på med snittet ditt</p>
             <div className="mt-4 text-blue-600 text-sm font-medium group-hover:translate-x-1 transition-transform">Kom i gang →</div>
           </button>
-
-          <button
-            onClick={() => setValg('bachelor')}
-            className="bg-white border-2 border-indigo-200 rounded-2xl p-8 hover:border-indigo-500 hover:shadow-lg transition text-left group"
-          >
+          <button onClick={() => setValg('bachelor')} className="bg-white border-2 border-indigo-200 rounded-2xl p-8 hover:border-indigo-500 hover:shadow-lg transition text-left group">
             <div className="text-4xl mb-3">🎓</div>
             <h2 className="text-xl font-bold text-gray-800 mb-2">Jeg har en bachelor</h2>
-            <p className="text-gray-500 text-sm">Finn masterstudier basert på bacheloren og karakterene dine</p>
+            <p className="text-gray-500 text-sm">Se hvilke masterprogram bacheloren din kan kvalifisere deg til</p>
             <div className="mt-4 text-indigo-600 text-sm font-medium group-hover:translate-x-1 transition-transform">Kom i gang →</div>
           </button>
         </div>
+        <p className="text-gray-400 text-xs max-w-md mx-auto">
+          Resultatene er veiledende og basert på tidligere poenggrenser og tilgjengelige opptakskrav. Sjekk alltid lærestedets egne sider før du søker.
+        </p>
       </div>
     </main>
   )
@@ -56,10 +50,7 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
     if (!snitt) return
     setLaster(true)
     setSokt(true)
-    const { data } = await supabase
-      .from('studier')
-      .select('*')
-      .order('cutoff_score', { ascending: false })
+    const { data } = await supabase.from('studier').select('*').order('cutoff_score', { ascending: false })
     const snitttall = parseFloat(snitt)
     const mapped = (data || [])
       .map((s: any) => ({
@@ -87,23 +78,13 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
           <h1 className="text-4xl font-bold text-blue-700 mb-2">StudieMatch</h1>
           <p className="text-gray-500">Finn bachelorstudier basert på karaktersnittet ditt</p>
         </div>
-
         <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
           <div className="flex gap-3 items-center">
-            <input
-              type="number"
-              placeholder="Karaktersnitt, f.eks. 52.4"
-              value={snitt}
-              onChange={e => setSnitt(e.target.value)}
-              onKeyDown={e => e.key === 'Enter' && finnStudier()}
-              className="border border-gray-200 rounded-xl px-4 py-2 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 w-56"
-            />
+            <input type="number" placeholder="Karaktersnitt, f.eks. 52.4" value={snitt} onChange={e => setSnitt(e.target.value)} onKeyDown={e => e.key === 'Enter' && finnStudier()} className="border border-gray-200 rounded-xl px-4 py-2 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 w-56" />
             <button onClick={finnStudier} className="bg-blue-600 text-white px-6 py-2 rounded-xl font-semibold hover:bg-blue-700 transition text-sm">Søk</button>
           </div>
         </div>
-
         {laster && <div className="text-center text-gray-400 py-8">Laster...</div>}
-
         {sokt && !laster && (
           <div>
             <div className="bg-blue-50 border border-blue-200 rounded-xl px-5 py-4 mb-4">
@@ -114,7 +95,6 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
             </div>
           </div>
         )}
-
         <div className="space-y-3">
           {resultater.map(s => (
             <div key={s.id} className="bg-white rounded-xl shadow-sm border border-gray-100 p-5 hover:shadow-md transition">
@@ -145,31 +125,178 @@ function BachelorSide({ tilbake }: { tilbake: () => void }) {
   const [karakter, setKarakter] = useState('')
   const [sokt, setSokt] = useState(false)
 
+  const bachelorStudier = [
+    'Bachelor i økonomi og administrasjon',
+    'Bachelor i regnskap og revisjon',
+    'Bachelor i markedsføring og ledelse',
+    'Bachelor i internasjonal business',
+    'Bachelor i finans',
+    'Bachelor i rettsvitenskap / jus',
+    'Bachelor i psykologi',
+    'Bachelor i sosiologi',
+    'Bachelor i statsvitenskap',
+    'Bachelor i samfunnsøkonomi',
+    'Bachelor i filosofi',
+    'Bachelor i pedagogikk',
+    'Bachelor i informatikk',
+    'Bachelor i datateknologi',
+    'Bachelor i kunstig intelligens',
+    'Bachelor i cybersikkerhet',
+    'Bachelor i ingeniør – data',
+    'Bachelor i ingeniør – maskin',
+    'Bachelor i ingeniør – bygg',
+    'Bachelor i ingeniør – elektronikk',
+    'Bachelor i ingeniør – energi',
+    'Bachelor i matematikk',
+    'Bachelor i fysikk',
+    'Bachelor i kjemi',
+    'Bachelor i biologi',
+    'Bachelor i bioteknologi',
+    'Bachelor i sykepleie',
+    'Bachelor i ergoterapi',
+    'Bachelor i fysioterapi',
+    'Bachelor i bioingeniør',
+    'Bachelor i radiografi',
+    'Bachelor i paramedisin',
+    'Bachelor i farmasi',
+    'Bachelor i tannpleie',
+    'Bachelor i folkehelse',
+    'Bachelor i barnevern',
+    'Bachelor i sosialt arbeid',
+    'Bachelor i vernepleie',
+    'Bachelor i journalistikk',
+    'Bachelor i medievitenskap',
+    'Bachelor i kommunikasjon',
+    'Bachelor i film og TV-produksjon',
+    'Bachelor i kunst og design',
+    'Bachelor i arkitektur',
+    'Bachelor i musikkvitenskap',
+    'Bachelor i idrettsvitenskap',
+    'Bachelor i friluftsliv',
+    'Bachelor i lærerutdanning 1–7',
+    'Bachelor i lærerutdanning 5–10',
+    'Bachelor i historie',
+    'Bachelor i geografi',
+    'Bachelor i nordisk språk og litteratur',
+    'Bachelor i engelsk',
+    'Bachelor i fransk',
+    'Bachelor i tysk',
+    'Bachelor i spansk',
+    'Bachelor i arabisk',
+    'Bachelor i kinesisk',
+    'Bachelor i russisk',
+    'Bachelor i landbruk',
+    'Bachelor i havbruk',
+    'Bachelor i veterinærmedisin',
+    'Bachelor i miljøvitenskap',
+    'Bachelor i geologi',
+    'Bachelor i nanoteknologi',
+  ]
+
+  const bachelorTilKategori: any = {
+    'Bachelor i økonomi og administrasjon': 'Økonomi',
+    'Bachelor i regnskap og revisjon': 'Økonomi',
+    'Bachelor i markedsføring og ledelse': 'Økonomi',
+    'Bachelor i internasjonal business': 'Økonomi',
+    'Bachelor i finans': 'Økonomi',
+    'Bachelor i rettsvitenskap / jus': 'Jus',
+    'Bachelor i psykologi': 'Psykologi',
+    'Bachelor i sosiologi': 'Samfunnsfag',
+    'Bachelor i statsvitenskap': 'Statsvitenskap',
+    'Bachelor i samfunnsøkonomi': 'Økonomi',
+    'Bachelor i filosofi': 'Samfunnsfag',
+    'Bachelor i pedagogikk': 'Pedagogikk',
+    'Bachelor i informatikk': 'Informatikk',
+    'Bachelor i datateknologi': 'Informatikk',
+    'Bachelor i kunstig intelligens': 'Informatikk',
+    'Bachelor i cybersikkerhet': 'Informatikk',
+    'Bachelor i ingeniør – data': 'Ingeniør',
+    'Bachelor i ingeniør – maskin': 'Ingeniør',
+    'Bachelor i ingeniør – bygg': 'Ingeniør',
+    'Bachelor i ingeniør – elektronikk': 'Ingeniør',
+    'Bachelor i ingeniør – energi': 'Ingeniør',
+    'Bachelor i matematikk': 'Matematikk',
+    'Bachelor i fysikk': 'Fysikk',
+    'Bachelor i kjemi': 'Realfag',
+    'Bachelor i biologi': 'Realfag',
+    'Bachelor i bioteknologi': 'Realfag',
+    'Bachelor i sykepleie': 'Sykepleie',
+    'Bachelor i ergoterapi': 'Helse',
+    'Bachelor i fysioterapi': 'Helse',
+    'Bachelor i bioingeniør': 'Helse',
+    'Bachelor i radiografi': 'Helse',
+    'Bachelor i paramedisin': 'Helse',
+    'Bachelor i farmasi': 'Helse',
+    'Bachelor i tannpleie': 'Helse',
+    'Bachelor i folkehelse': 'Helse',
+    'Bachelor i barnevern': 'Helse',
+    'Bachelor i sosialt arbeid': 'Helse',
+    'Bachelor i vernepleie': 'Helse',
+    'Bachelor i journalistikk': 'Media',
+    'Bachelor i medievitenskap': 'Media',
+    'Bachelor i kommunikasjon': 'Media',
+    'Bachelor i film og TV-produksjon': 'Media',
+    'Bachelor i kunst og design': 'Kunst',
+    'Bachelor i arkitektur': 'Kunst',
+    'Bachelor i musikkvitenskap': 'Kunst',
+    'Bachelor i idrettsvitenskap': 'Idrett',
+    'Bachelor i friluftsliv': 'Idrett',
+    'Bachelor i lærerutdanning 1–7': 'Lærer',
+    'Bachelor i lærerutdanning 5–10': 'Lærer',
+    'Bachelor i historie': 'Samfunnsfag',
+    'Bachelor i geografi': 'Samfunnsfag',
+    'Bachelor i nordisk språk og litteratur': 'Språk',
+    'Bachelor i engelsk': 'Språk',
+    'Bachelor i fransk': 'Språk',
+    'Bachelor i tysk': 'Språk',
+    'Bachelor i spansk': 'Språk',
+    'Bachelor i arabisk': 'Språk',
+    'Bachelor i kinesisk': 'Språk',
+    'Bachelor i russisk': 'Språk',
+    'Bachelor i landbruk': 'Realfag',
+    'Bachelor i havbruk': 'Realfag',
+    'Bachelor i veterinærmedisin': 'Helse',
+    'Bachelor i miljøvitenskap': 'Realfag',
+    'Bachelor i geologi': 'Realfag',
+    'Bachelor i nanoteknologi': 'Realfag',
+  }
+
   const mastere = [
-    { name: 'Master i økonomi og administrasjon', school: 'UiO', location: 'Oslo', url: 'https://www.uio.no/studier/program/master-okonomi', requires: { bachelor: ['Økonomi', 'Finans', 'Regnskap'], min_grade: 'C' } },
-    { name: 'Master i finansiell økonomi', school: 'NHH', location: 'Bergen', url: 'https://www.nhh.no/studier/master', requires: { bachelor: ['Økonomi', 'Finans'], min_grade: 'B' } },
-    { name: 'Master i psykologi', school: 'UiO', location: 'Oslo', url: 'https://www.uio.no/studier/program/psykologi-master', requires: { bachelor: ['Psykologi'], min_grade: 'B' } },
-    { name: 'Master i klinisk psykologi', school: 'NTNU', location: 'Trondheim', url: 'https://www.ntnu.no/studier/mpsyk', requires: { bachelor: ['Psykologi'], min_grade: 'A' } },
-    { name: 'Master i informatikk', school: 'UiO', location: 'Oslo', url: 'https://www.uio.no/studier/program/informatikk-master', requires: { bachelor: ['Informatikk', 'Data og IT', 'Ingeniør'], min_grade: 'C' } },
-    { name: 'Master i kunstig intelligens', school: 'NTNU', location: 'Trondheim', url: 'https://www.ntnu.no/studier/msit', requires: { bachelor: ['Informatikk', 'Data og IT', 'Matematikk'], min_grade: 'B' } },
-    { name: 'Master i rettsvitenskap', school: 'UiO', location: 'Oslo', url: 'https://www.uio.no/studier/program/rettsvitenskap', requires: { bachelor: ['Jus', 'Rettsvitenskap'], min_grade: 'C' } },
-    { name: 'Master i samfunnsøkonomi', school: 'UiO', location: 'Oslo', url: 'https://www.uio.no/studier/program/samfunnsokonomi-master', requires: { bachelor: ['Økonomi', 'Samfunnsfag', 'Matematikk'], min_grade: 'C' } },
-    { name: 'Master i sosiologi', school: 'UiO', location: 'Oslo', url: 'https://www.uio.no/studier/program/sosiologi-master', requires: { bachelor: ['Sosiologi', 'Samfunnsfag'], min_grade: 'C' } },
-    { name: 'Master i statsvitenskap', school: 'UiO', location: 'Oslo', url: 'https://www.uio.no/studier/program/statsvitenskap-master', requires: { bachelor: ['Statsvitenskap', 'Samfunnsfag'], min_grade: 'C' } },
-    { name: 'Master i sykepleie', school: 'UiO', location: 'Oslo', url: 'https://www.uio.no/studier/program/sykepleievitenskap-master', requires: { bachelor: ['Sykepleie', 'Helse'], min_grade: 'C' } },
-    { name: 'Master i folkehelsevitenskap', school: 'NTNU', location: 'Trondheim', url: 'https://www.ntnu.no/studier/mfolkehelse', requires: { bachelor: ['Helse', 'Sykepleie', 'Idrett', 'Samfunnsfag'], min_grade: 'C' } },
-    { name: 'Master i idrettsvitenskap', school: 'NIH', location: 'Oslo', url: 'https://www.nih.no/studier/master', requires: { bachelor: ['Idrett', 'Helse'], min_grade: 'C' } },
-    { name: 'Master i business', school: 'BI', location: 'Oslo', url: 'https://www.bi.no/studier/master', requires: { bachelor: ['Økonomi', 'Samfunnsfag', 'Markedsføring'], min_grade: 'C' } },
-    { name: 'Master i ledelse', school: 'BI', location: 'Oslo', url: 'https://www.bi.no/studier/master/ledelse', requires: { bachelor: ['Økonomi', 'Samfunnsfag', 'Psykologi', 'Idrett'], min_grade: 'C' } },
-    { name: 'Master i ingeniørvitenskap', school: 'NTNU', location: 'Trondheim', url: 'https://www.ntnu.no/studier/master-ingeniør', requires: { bachelor: ['Ingeniør', 'Matematikk', 'Fysikk'], min_grade: 'C' } },
-    { name: 'Master i pedagogikk', school: 'UiO', location: 'Oslo', url: 'https://www.uio.no/studier/program/pedagogikk-master', requires: { bachelor: ['Pedagogikk', 'Lærer', 'Samfunnsfag'], min_grade: 'C' } },
-    { name: 'Master i journalistikk', school: 'OsloMet', location: 'Oslo', url: 'https://www.oslomet.no/studier/master/journalistikk', requires: { bachelor: ['Journalistikk', 'Media', 'Samfunnsfag'], min_grade: 'C' } },
+    { name: 'Master i økonomi og administrasjon', school: 'UiO', location: 'Oslo', url: 'https://www.uio.no/studier/program/master-okonomi', requires: { kategorier: ['Økonomi'], min_grade: 'C' } },
+    { name: 'Master i finansiell økonomi', school: 'NHH', location: 'Bergen', url: 'https://www.nhh.no/studier/master', requires: { kategorier: ['Økonomi'], min_grade: 'B' } },
+    { name: 'Master i regnskap og revisjon', school: 'NHH', location: 'Bergen', url: 'https://www.nhh.no/studier/master/regnskap', requires: { kategorier: ['Økonomi'], min_grade: 'C' } },
+    { name: 'Master i psykologi', school: 'UiO', location: 'Oslo', url: 'https://www.uio.no/studier/program/psykologi-master', requires: { kategorier: ['Psykologi'], min_grade: 'B' } },
+    { name: 'Master i klinisk psykologi', school: 'NTNU', location: 'Trondheim', url: 'https://www.ntnu.no/studier/mpsyk', requires: { kategorier: ['Psykologi'], min_grade: 'A' } },
+    { name: 'Master i informatikk', school: 'UiO', location: 'Oslo', url: 'https://www.uio.no/studier/program/informatikk-master', requires: { kategorier: ['Informatikk', 'Ingeniør', 'Matematikk'], min_grade: 'C' } },
+    { name: 'Master i kunstig intelligens', school: 'NTNU', location: 'Trondheim', url: 'https://www.ntnu.no/studier/msit', requires: { kategorier: ['Informatikk', 'Matematikk'], min_grade: 'B' } },
+    { name: 'Master i cybersikkerhet', school: 'NTNU', location: 'Trondheim', url: 'https://www.ntnu.no/studier/msc-cybersecurity', requires: { kategorier: ['Informatikk', 'Ingeniør'], min_grade: 'C' } },
+    { name: 'Master i rettsvitenskap', school: 'UiO', location: 'Oslo', url: 'https://www.uio.no/studier/program/rettsvitenskap', requires: { kategorier: ['Jus'], min_grade: 'C' } },
+    { name: 'Master i samfunnsøkonomi', school: 'UiO', location: 'Oslo', url: 'https://www.uio.no/studier/program/samfunnsokonomi-master', requires: { kategorier: ['Økonomi', 'Samfunnsfag', 'Matematikk'], min_grade: 'C' } },
+    { name: 'Master i sosiologi', school: 'UiO', location: 'Oslo', url: 'https://www.uio.no/studier/program/sosiologi-master', requires: { kategorier: ['Samfunnsfag'], min_grade: 'C' } },
+    { name: 'Master i statsvitenskap', school: 'UiO', location: 'Oslo', url: 'https://www.uio.no/studier/program/statsvitenskap-master', requires: { kategorier: ['Statsvitenskap', 'Samfunnsfag'], min_grade: 'C' } },
+    { name: 'Master i sykepleievitenskap', school: 'UiO', location: 'Oslo', url: 'https://www.uio.no/studier/program/sykepleievitenskap-master', requires: { kategorier: ['Sykepleie', 'Helse'], min_grade: 'C' } },
+    { name: 'Master i folkehelsevitenskap', school: 'NTNU', location: 'Trondheim', url: 'https://www.ntnu.no/studier/mfolkehelse', requires: { kategorier: ['Helse', 'Sykepleie', 'Idrett', 'Samfunnsfag'], min_grade: 'C' } },
+    { name: 'Master i idrettsvitenskap', school: 'NIH', location: 'Oslo', url: 'https://www.nih.no/studier/master', requires: { kategorier: ['Idrett', 'Helse'], min_grade: 'C' } },
+    { name: 'Master i business', school: 'BI', location: 'Oslo', url: 'https://www.bi.no/studier/master', requires: { kategorier: ['Økonomi', 'Samfunnsfag'], min_grade: 'C' } },
+    { name: 'Master i ledelse', school: 'BI', location: 'Oslo', url: 'https://www.bi.no/studier/master/ledelse', requires: { kategorier: ['Økonomi', 'Samfunnsfag', 'Psykologi', 'Idrett'], min_grade: 'C' } },
+    { name: 'Master i ingeniørvitenskap', school: 'NTNU', location: 'Trondheim', url: 'https://www.ntnu.no/studier/master-ingeniør', requires: { kategorier: ['Ingeniør', 'Matematikk', 'Fysikk'], min_grade: 'C' } },
+    { name: 'Master i pedagogikk', school: 'UiO', location: 'Oslo', url: 'https://www.uio.no/studier/program/pedagogikk-master', requires: { kategorier: ['Pedagogikk', 'Lærer', 'Samfunnsfag'], min_grade: 'C' } },
+    { name: 'Master i journalistikk', school: 'OsloMet', location: 'Oslo', url: 'https://www.oslomet.no/studier/master/journalistikk', requires: { kategorier: ['Media', 'Samfunnsfag'], min_grade: 'C' } },
+    { name: 'Master i medievitenskap', school: 'UiO', location: 'Oslo', url: 'https://www.uio.no/studier/program/medievitenskap-master', requires: { kategorier: ['Media', 'Samfunnsfag'], min_grade: 'C' } },
+    { name: 'Master i arkitektur', school: 'NTNU', location: 'Trondheim', url: 'https://www.ntnu.no/studier/march', requires: { kategorier: ['Kunst', 'Ingeniør'], min_grade: 'B' } },
+    { name: 'Master i biologi', school: 'UiO', location: 'Oslo', url: 'https://www.uio.no/studier/program/biologi-master', requires: { kategorier: ['Realfag'], min_grade: 'C' } },
+    { name: 'Master i kjemi', school: 'UiO', location: 'Oslo', url: 'https://www.uio.no/studier/program/kjemi-master', requires: { kategorier: ['Realfag'], min_grade: 'C' } },
+    { name: 'Master i matematikk', school: 'UiO', location: 'Oslo', url: 'https://www.uio.no/studier/program/matematikk-master', requires: { kategorier: ['Matematikk', 'Realfag'], min_grade: 'C' } },
+    { name: 'Master i spesialpedagogikk', school: 'UiO', location: 'Oslo', url: 'https://www.uio.no/studier/program/spesialpedagogikk-master', requires: { kategorier: ['Pedagogikk', 'Lærer', 'Helse'], min_grade: 'C' } },
+    { name: 'Master i språkvitenskap', school: 'UiO', location: 'Oslo', url: 'https://www.uio.no/studier/program/spraakvitenskap-master', requires: { kategorier: ['Språk'], min_grade: 'C' } },
+    { name: 'Master i historie', school: 'UiO', location: 'Oslo', url: 'https://www.uio.no/studier/program/historie-master', requires: { kategorier: ['Samfunnsfag'], min_grade: 'C' } },
   ]
 
   const gradeOrder: any = { 'A': 5, 'B': 4, 'C': 3, 'D': 2, 'E': 1, 'F': 0 }
 
   function getStatus(m: any) {
-    const bachelorMatch = m.requires.bachelor.includes(bachelor)
+    const kategori = bachelorTilKategori[bachelor]
+    const bachelorMatch = kategori && m.requires.kategorier.includes(kategori)
     const gradeMatch = gradeOrder[karakter] >= gradeOrder[m.requires.min_grade]
     if (bachelorMatch && gradeMatch) return { label: '✔ Oppfyller krav', color: 'bg-green-100 text-green-700', order: 0 }
     if (bachelorMatch && !gradeMatch) return { label: '⚠ Kanskje – sjekk krav', color: 'bg-yellow-100 text-yellow-700', order: 1 }
@@ -190,35 +317,13 @@ function BachelorSide({ tilbake }: { tilbake: () => void }) {
           <h1 className="text-4xl font-bold text-indigo-700 mb-2">StudieMatch</h1>
           <p className="text-gray-500">Finn masterstudier basert på bacheloren og karakterene dine</p>
         </div>
-
         <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
           <div className="flex flex-wrap gap-4 items-end">
             <div>
               <label className="block text-gray-700 font-semibold mb-2 text-sm">Hva har du studert?</label>
-              <select value={bachelor} onChange={e => setBachelor(e.target.value)} className="border border-gray-200 rounded-xl px-4 py-2 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 w-56">
-                <option value="">Velg bachelor</option>
-                <option value="Økonomi">Økonomi</option>
-                <option value="Finans">Finans</option>
-                <option value="Regnskap">Regnskap</option>
-                <option value="Markedsføring">Markedsføring</option>
-                <option value="Psykologi">Psykologi</option>
-                <option value="Informatikk">Informatikk</option>
-                <option value="Data og IT">Data og IT</option>
-                <option value="Ingeniør">Ingeniør</option>
-                <option value="Matematikk">Matematikk</option>
-                <option value="Fysikk">Fysikk</option>
-                <option value="Jus">Jus</option>
-                <option value="Rettsvitenskap">Rettsvitenskap</option>
-                <option value="Samfunnsfag">Samfunnsfag</option>
-                <option value="Statsvitenskap">Statsvitenskap</option>
-                <option value="Sosiologi">Sosiologi</option>
-                <option value="Sykepleie">Sykepleie</option>
-                <option value="Helse">Helse</option>
-                <option value="Idrett">Idrett</option>
-                <option value="Pedagogikk">Pedagogikk</option>
-                <option value="Lærer">Lærer</option>
-                <option value="Journalistikk">Journalistikk</option>
-                <option value="Media">Media</option>
+              <select value={bachelor} onChange={e => setBachelor(e.target.value)} className="border border-gray-200 rounded-xl px-4 py-2 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 w-72">
+                <option value="">Velg bachelorutdanning</option>
+                {bachelorStudier.map(b => <option key={b} value={b}>{b}</option>)}
               </select>
             </div>
             <div>
@@ -265,6 +370,10 @@ function BachelorSide({ tilbake }: { tilbake: () => void }) {
             </div>
           ))}
         </div>
+
+        <p className="text-gray-400 text-xs text-center mt-8 max-w-md mx-auto">
+          Resultatene er veiledende og basert på tidligere poenggrenser og tilgjengelige opptakskrav. Sjekk alltid lærestedets egne sider før du søker.
+        </p>
       </div>
     </main>
   )
