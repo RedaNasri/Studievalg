@@ -72,6 +72,8 @@ function getStatus(snitt: number, grense: number) {
   return { label: 'Under grensen', color: 'bg-red-100 text-red-600', order: 2 }
 }
 
+const BATCH = 30
+
 export default function Home() {
   const [snitt, setSnitt] = useState('')
   const [valgteFag, setValgteFag] = useState<string[]>([])
@@ -81,6 +83,7 @@ export default function Home() {
   const [sokt, setSokt] = useState(false)
   const [kunGodSjanse, setKunGodSjanse] = useState(false)
   const [sortering, setSortering] = useState<'standard' | 'beste'>('standard')
+  const [visAntall, setVisAntall] = useState(BATCH)
 
   function toggleFag(fag: string) {
     setValgteFag(prev => prev.includes(fag) ? prev.filter(f => f !== fag) : [...prev, fag])
@@ -94,21 +97,25 @@ export default function Home() {
     if (!snitt) return
     setLaster(true)
     setSokt(true)
+    setVisAntall(BATCH)
     let query = supabase.from('studier').select('*').order('cutoff_score', { ascending: false })
     if (valgteFag.length > 0) query = query.in('fagomraade', valgteFag)
     if (valgteByer.length > 0) query = query.in('location', valgteByer)
     const { data } = await query
     const snitttall = parseFloat(snitt)
-    const mapped = (data || []).map(s => ({ ...s, status: getStatus(snitttall, s.cutoff_score), margin: snitttall - s.cutoff_score }))
-    const sorted = mapped.sort((a, b) => a.status.order - b.status.order)
-    setResultater(sorted)
+    const mapped = (data || [])
+      .map(s => ({ ...s, status: getStatus(snitttall, s.cutoff_score), margin: snitttall - s.cutoff_score }))
+      .sort((a, b) => a.status.order - b.status.order)
+    setResultater(mapped)
     setLaster(false)
   }
 
   const snitttall = parseFloat(snitt)
-  const viste = kunGodSjanse ? resultater.filter(s => s.status.label === 'God sjanse') : resultater
-  const sorterteViste = sortering === 'beste' ? [...viste].sort((a, b) => b.margin - a.margin) : viste
+  const filtrerte = kunGodSjanse ? resultater.filter(s => s.status.label === 'God sjanse') : resultater
+  const sorterteAlle = sortering === 'beste' ? [...filtrerte].sort((a, b) => b.margin - a.margin) : filtrerte
+  const viste = sorterteAlle.slice(0, visAntall)
   const godSjanseAntall = resultater.filter(s => s.status.label === 'God sjanse').length
+  const snittMargin = viste.length > 0 ? (viste.reduce((sum, s) => sum + s.margin, 0) / viste.length).toFixed(1) : null
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
@@ -131,34 +138,33 @@ export default function Home() {
 
         {sokt && !laster && (
           <div>
-            <div className="bg-blue-50 border border-blue-200 rounded-xl px-5 py-4 mb-4">
-              <p className="text-blue-800 font-semibold text-lg">Basert på snittet ditt ({snitttall}), har du gode muligheter på {godSjanseAntall} studier</p>
-              <p className="text-blue-600 text-sm mt-1">Totalt {resultater.length} studier funnet</p>
+            <div className="bg-blue-50 border border-blue-200 rounded-xl px-5 py-4 mb-3">
+              <p className="text-blue-800 font-bold text-lg">Basert på snittet ditt ({snitttall}), har du gode muligheter på {godSjanseAntall} studier</p>
+              {snittMargin && <p className="text-blue-600 text-sm mt-1">Du ligger i snitt {snittMargin} poeng over studiene som vises</p>}
             </div>
 
             <div className="bg-yellow-50 border border-yellow-200 rounded-xl px-4 py-3 mb-4 text-yellow-800 text-sm">
               Dette er basert på tidligere poenggrenser. Poenggrenser varierer fra år til år og er ikke en garanti.
             </div>
 
-            <div className="flex flex-wrap gap-3 mb-4 items-center">
-              <button onClick={() => setKunGodSjanse(!kunGodSjanse)} className={`px-4 py-2 rounded-xl text-sm font-medium border transition ${kunGodSjanse ? 'bg-green-600 text-white border-green-600' : 'bg-white text-gray-600 border-gray-200 hover:border-green-400'}`}>
-                Vis kun god sjanse
-              </button>
-              <button onClick={() => setSortering(sortering === 'standard' ? 'beste' : 'standard')} className={`px-4 py-2 rounded-xl text-sm font-medium border transition ${sortering === 'beste' ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-gray-600 border-gray-200 hover:border-blue-400'}`}>
-                {sortering === 'beste' ? 'Sortert: beste match' : 'Sorter etter beste match'}
-              </button>
-              <p className="text-gray-400 text-sm ml-auto">{sorterteViste.length} studier vises</p>
+            <div className="flex flex-wrap gap-3 mb-5 items-center">
+              <button onClick={() => setKunGodSjanse(!kunGodSjanse)} className={`px-4 py-2 rounded-xl text-sm font-medium border transition ${kunGodSjanse ? 'bg-green-600 text-white border-green-600' : 'bg-white text-gray-600 border-gray-200 hover:border-green-400'}`}>Vis kun god sjanse</button>
+              <button onClick={() => setSortering(sortering === 'standard' ? 'beste' : 'standard')} className={`px-4 py-2 rounded-xl text-sm font-medium border transition ${sortering === 'beste' ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-gray-600 border-gray-200 hover:border-blue-400'}`}>{sortering === 'beste' ? 'Sortert: beste match' : 'Sorter etter beste match'}</button>
+              <p className="text-gray-400 text-sm ml-auto">{viste.length} av {sorterteAlle.length} studier vises</p>
             </div>
+
+            <p className="text-gray-600 font-semibold mb-3">Disse studiene passer deg best basert på snittet ditt</p>
           </div>
         )}
 
-        <div className="space-y-3">
-          {sorterteViste.map(s => {
+        <div className="space-y-4">
+          {viste.map((s, i) => {
             const erPopulaer = populaere.includes(s.study_name)
             const erHoyEtterspørsel = hoyEtterspørsel.includes(s.study_name)
+            const erForst = i === 0
             return (
-              <div key={s.id} className="bg-white rounded-xl shadow-sm border border-gray-100 p-5 hover:shadow-md transition">
-                <div className="flex justify-between items-start">
+              <div key={s.id} className={`bg-white rounded-xl border p-5 hover:shadow-md transition ${erForst ? 'shadow-md border-blue-200 ring-1 ring-blue-100' : 'shadow-sm border-gray-100'}`}>
+                <div className="flex justify-between items-start gap-4">
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-1 flex-wrap">
                       <h2 className="font-semibold text-lg text-gray-800">{s.study_name}</h2>
@@ -174,12 +180,18 @@ export default function Home() {
                     </div>
                     <span className="inline-block mt-2 bg-indigo-50 text-indigo-600 text-xs px-2 py-1 rounded-full">{s.fagomraade}</span>
                   </div>
-                  <a href={s.url} target="_blank" rel="noopener noreferrer" className="ml-4 bg-blue-600 text-white px-4 py-2 rounded-xl text-sm font-medium hover:bg-blue-700 transition whitespace-nowrap">Sjekk opptakskrav</a>
+                  <a href={s.url} target="_blank" rel="noopener noreferrer" className="bg-blue-600 text-white px-4 py-2 rounded-xl text-sm font-semibold hover:bg-blue-700 transition whitespace-nowrap">Gå til studie</a>
                 </div>
               </div>
             )
           })}
         </div>
+
+        {sokt && !laster && visAntall < sorterteAlle.length && (
+          <div className="text-center mt-6">
+            <button onClick={() => setVisAntall(v => v + BATCH)} className="bg-white border border-gray-200 text-gray-600 px-8 py-3 rounded-xl font-medium hover:border-blue-400 hover:text-blue-600 transition">Vis flere studier</button>
+          </div>
+        )}
       </div>
     </main>
   )
