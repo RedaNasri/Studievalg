@@ -45,39 +45,16 @@ function Dropdown({ label, options, valgte, toggle, nullstill }: {
 
   return (
     <div className="relative" ref={ref}>
-      <button
-        onClick={() => setOpen(!open)}
-        className={`flex items-center gap-2 px-4 py-2 rounded-xl border text-sm font-medium transition ${
-          valgte.length > 0
-            ? 'border-blue-500 bg-blue-50 text-blue-700'
-            : 'border-gray-200 bg-white text-gray-600 hover:border-blue-300'
-        }`}
-      >
+      <button onClick={() => setOpen(!open)} className={`flex items-center gap-2 px-4 py-2 rounded-xl border text-sm font-medium transition ${valgte.length > 0 ? 'border-blue-500 bg-blue-50 text-blue-700' : 'border-gray-200 bg-white text-gray-600 hover:border-blue-300'}`}>
         {label} {valgte.length > 0 && <span className="bg-blue-600 text-white text-xs rounded-full px-2 py-0.5">{valgte.length}</span>}
         <span className="text-xs">{open ? '▲' : '▼'}</span>
       </button>
       {open && (
         <div className="absolute top-12 left-0 z-50 bg-white border border-gray-200 rounded-2xl shadow-xl p-3 w-64 max-h-72 overflow-y-auto">
-          {valgte.length > 0 && (
-            <button onClick={nullstill} className="text-xs text-red-400 hover:text-red-600 mb-2 block">
-              Nullstill
-            </button>
-          )}
+          {valgte.length > 0 && <button onClick={nullstill} className="text-xs text-red-400 hover:text-red-600 mb-2 block">Nullstill</button>}
           {options.map(opt => (
-            <button
-              key={opt}
-              onClick={() => toggle(opt)}
-              className={`flex items-center gap-2 w-full text-left px-3 py-2 rounded-lg text-sm transition ${
-                valgte.includes(opt)
-                  ? 'bg-blue-50 text-blue-700 font-medium'
-                  : 'text-gray-600 hover:bg-gray-50'
-              }`}
-            >
-              <span className={`w-4 h-4 rounded border flex items-center justify-center text-xs ${
-                valgte.includes(opt) ? 'bg-blue-600 border-blue-600 text-white' : 'border-gray-300'
-              }`}>
-                {valgte.includes(opt) ? '✓' : ''}
-              </span>
+            <button key={opt} onClick={() => toggle(opt)} className={`flex items-center gap-2 w-full text-left px-3 py-2 rounded-lg text-sm transition ${valgte.includes(opt) ? 'bg-blue-50 text-blue-700 font-medium' : 'text-gray-600 hover:bg-gray-50'}`}>
+              <span className={`w-4 h-4 rounded border flex items-center justify-center text-xs ${valgte.includes(opt) ? 'bg-blue-600 border-blue-600 text-white' : 'border-gray-300'}`}>{valgte.includes(opt) ? '✓' : ''}</span>
               {opt}
             </button>
           ))}
@@ -103,31 +80,20 @@ export default function Home() {
   const [sokt, setSokt] = useState(false)
 
   function toggleFag(fag: string) {
-    setValgteFag(prev =>
-      prev.includes(fag) ? prev.filter(f => f !== fag) : [...prev, fag]
-    )
+    setValgteFag(prev => prev.includes(fag) ? prev.filter(f => f !== fag) : [...prev, fag])
   }
 
   function toggleBy(by: string) {
-    setValgteByer(prev =>
-      prev.includes(by) ? prev.filter(b => b !== by) : [...prev, by]
-    )
+    setValgteByer(prev => prev.includes(by) ? prev.filter(b => b !== by) : [...prev, by])
   }
 
   async function finnStudier() {
     if (!snitt) return
     setLaster(true)
     setSokt(true)
-    let query = supabase
-      .from('studier')
-      .select('*')
-      .order('cutoff_score', { ascending: false })
-    if (valgteFag.length > 0) {
-      query = query.in('fagomraade', valgteFag)
-    }
-    if (valgteByer.length > 0) {
-      query = query.in('location', valgteByer)
-    }
+    let query = supabase.from('studier').select('*').order('cutoff_score', { ascending: false })
+    if (valgteFag.length > 0) query = query.in('fagomraade', valgteFag)
+    if (valgteByer.length > 0) query = query.in('location', valgteByer)
     const { data } = await query
     const snitttall = parseFloat(snitt)
     const sorted = (data || [])
@@ -148,48 +114,21 @@ export default function Home() {
         </div>
         <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
           <div className="flex flex-wrap gap-3 items-center">
-            <input
-              type="number"
-              placeholder="Karaktersnitt, f.eks. 52.4"
-              value={snitt}
-              onChange={e => setSnitt(e.target.value)}
-              onKeyDown={e => e.key === 'Enter' && finnStudier()}
-              className="border border-gray-200 rounded-xl px-4 py-2 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 w-56"
-            />
-            <Dropdown
-              label="By"
-              options={byer}
-              valgte={valgteByer}
-              toggle={toggleBy}
-              nullstill={() => setValgteByer([])}
-            />
-            <Dropdown
-              label="Fagområde"
-              options={fagomraader}
-              valgte={valgteFag}
-              toggle={toggleFag}
-              nullstill={() => setValgteFag([])}
-            />
-            <button
-              onClick={finnStudier}
-              className="bg-blue-600 text-white px-6 py-2 rounded-xl font-semibold hover:bg-blue-700 transition text-sm"
-            >
-              Søk
-            </button>
+            <input type="number" placeholder="Karaktersnitt, f.eks. 52.4" value={snitt} onChange={e => setSnitt(e.target.value)} onKeyDown={e => e.key === 'Enter' && finnStudier()} className="border border-gray-200 rounded-xl px-4 py-2 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 w-56" />
+            <Dropdown label="By" options={byer} valgte={valgteByer} toggle={toggleBy} nullstill={() => setValgteByer([])} />
+            <Dropdown label="Fagområde" options={fagomraader} valgte={valgteFag} toggle={toggleFag} nullstill={() => setValgteFag([])} />
+            <button onClick={finnStudier} className="bg-blue-600 text-white px-6 py-2 rounded-xl font-semibold hover:bg-blue-700 transition text-sm">Søk</button>
           </div>
         </div>
-
         {laster && <div className="text-center text-gray-400 py-8">Laster...</div>}
-
         {sokt && !laster && (
-          <>
+          <div>
             <div className="bg-yellow-50 border border-yellow-200 rounded-xl px-4 py-3 mb-4 text-yellow-800 text-sm">
               Dette er basert på tidligere poenggrenser. Poenggrenser varierer fra år til år og er ikke en garanti.
             </div>
             <p className="text-gray-500 mb-4 text-sm">{resultater.length} studier funnet</p>
-          </>
+          </div>
         )}
-
         <div className="space-y-3">
           {resultater.map(s => {
             const margin = snitttall - s.cutoff_score
@@ -199,28 +138,17 @@ export default function Home() {
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-1">
                       <h2 className="font-semibold text-lg text-gray-800">{s.study_name}</h2>
-                      <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${s.status.color}`}>
-                        {s.status.label}
-                      </span>
+                      <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${s.status.color}`}>{s.status.label}</span>
                     </div>
                     <p className="text-gray-400 text-sm">{s.university} – {s.location}</p>
                     <div className="flex items-center gap-4 mt-2 text-sm">
                       <span className="text-gray-500">Poenggrense: <strong className="text-gray-700">{s.cutoff_score}</strong></span>
                       <span className="text-gray-500">Dine poeng: <strong className="text-gray-700">{snitttall}</strong></span>
-                      <span className={margin >= 0 ? 'text-green-600 font-medium' : 'text-red-500 font-medium'}>
-                        {margin >= 0 ? '+' : ''}{margin.toFixed(1)} poeng
-                      </span>
+                      <span className={margin >= 0 ? 'text-green-600 font-medium' : 'text-red-500 font-medium'}>{margin >= 0 ? '+' : ''}{margin.toFixed(1)} poeng</span>
                     </div>
                     <span className="inline-block mt-2 bg-indigo-50 text-indigo-600 text-xs px-2 py-1 rounded-full">{s.fagomraade}</span>
                   </div>
-                  
-                    href={s.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="ml-4 bg-blue-600 text-white px-4 py-2 rounded-xl text-sm font-medium hover:bg-blue-700 transition whitespace-nowrap"
-                  >
-                    &rarr;
-                  </a>
+                  <a href={s.url} target="_blank" rel="noopener noreferrer" className="ml-4 bg-blue-600 text-white px-4 py-2 rounded-xl text-sm font-medium hover:bg-blue-700 transition whitespace-nowrap">Les mer</a>
                 </div>
               </div>
             )
