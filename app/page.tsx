@@ -127,8 +127,8 @@ export default function Home() {
     <main className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
       <div className="max-w-4xl mx-auto px-6 py-16">
         <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold text-blue-700 mb-3">Studievalg</h1>
-          <p className="text-xl text-gray-500">Finn studier basert på karaktersnittet ditt</p>
+          <h1 className="text-5xl font-bold text-blue-700 mb-3">StudieMatch</h1>
+          <p className="text-xl text-gray-500">Finn studier du kommer inn på – på sekunder</p>
         </div>
 
         <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
@@ -148,17 +148,14 @@ export default function Home() {
               <p className="text-blue-800 font-bold text-lg">Basert på snittet ditt ({snitttall}), har du gode muligheter på {godSjanseAntall} studier</p>
               {snittMarginTall !== null && <p className="text-blue-600 text-sm mt-1">{marginTekst(snittMarginTall)}</p>}
             </div>
-
             <div className="bg-yellow-50 border border-yellow-200 rounded-xl px-4 py-3 mb-4 text-yellow-800 text-sm">
               Dette er basert på tidligere poenggrenser. Poenggrenser varierer fra år til år og er ikke en garanti.
             </div>
-
             <div className="flex flex-wrap gap-3 mb-5 items-center">
               <button onClick={() => setKunGodSjanse(!kunGodSjanse)} className={`px-4 py-2 rounded-xl text-sm font-medium border transition ${kunGodSjanse ? 'bg-green-600 text-white border-green-600' : 'bg-white text-gray-600 border-gray-200 hover:border-green-400'}`}>Vis kun god sjanse</button>
               <button onClick={() => setSortering(sortering === 'standard' ? 'beste' : 'standard')} className={`px-4 py-2 rounded-xl text-sm font-medium border transition ${sortering === 'beste' ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-gray-600 border-gray-200 hover:border-blue-400'}`}>{sortering === 'beste' ? 'Sortert: beste match' : 'Sorter etter beste match'}</button>
               <p className="text-gray-400 text-sm ml-auto">{viste.length} av {sorterteAlle.length} studier vises</p>
             </div>
-
             <p className="text-gray-600 font-semibold mb-3">Disse studiene passer deg best basert på snittet ditt</p>
           </div>
         )}
