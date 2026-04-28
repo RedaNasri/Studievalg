@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { supabase } from '../lib/supabase'
 
 const fagomraader = [
@@ -22,6 +22,70 @@ const byer = [
   'Mo i Rana', 'Namsos', 'Notodden', 'Orkland', 'Porsgrunn',
   'Ringerike', 'Sør-Varanger', 'Stord', 'Sunnfjord', 'Volda'
 ]
+
+function Dropdown({ label, options, valgte, toggle, nullstill }: {
+  label: string
+  options: string[]
+  valgte: string[]
+  toggle: (v: string) => void
+  nullstill: () => void
+}) {
+  const [open, setOpen] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClick)
+    return () => document.removeEventListener('mousedown', handleClick)
+  }, [])
+
+  return (
+    <div className="relative" ref={ref}>
+      <button
+        onClick={() => setOpen(!open)}
+        className={`flex items-center gap-2 px-4 py-2 rounded-xl border text-sm font-medium transition ${
+          valgte.length > 0
+            ? 'border-blue-500 bg-blue-50 text-blue-700'
+            : 'border-gray-200 bg-white text-gray-600 hover:border-blue-300'
+        }`}
+      >
+        {label} {valgte.length > 0 && <span className="bg-blue-600 text-white text-xs rounded-full px-2 py-0.5">{valgte.length}</span>}
+        <span className="text-xs">{open ? '▲' : '▼'}</span>
+      </button>
+      {open && (
+        <div className="absolute top-12 left-0 z-50 bg-white border border-gray-200 rounded-2xl shadow-xl p-3 w-64 max-h-72 overflow-y-auto">
+          {valgte.length > 0 && (
+            <button onClick={nullstill} className="text-xs text-red-400 hover:text-red-600 mb-2 block">
+              Nullstill
+            </button>
+          )}
+          {options.map(opt => (
+            <button
+              key={opt}
+              onClick={() => toggle(opt)}
+              className={`flex items-center gap-2 w-full text-left px-3 py-2 rounded-lg text-sm transition ${
+                valgte.includes(opt)
+                  ? 'bg-blue-50 text-blue-700 font-medium'
+                  : 'text-gray-600 hover:bg-gray-50'
+              }`}
+            >
+              <span className={`w-4 h-4 rounded border flex items-center justify-center text-xs ${
+                valgte.includes(opt) ? 'bg-blue-600 border-blue-600 text-white' : 'border-gray-300'
+              }`}>
+                {valgte.includes(opt) ? '✓' : ''}
+              </span>
+              {opt}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
 
 export default function Home() {
   const [snitt, setSnitt] = useState('')
@@ -70,101 +134,52 @@ export default function Home() {
           <h1 className="text-5xl font-bold text-blue-700 mb-3">Studievalg</h1>
           <p className="text-xl text-gray-500">Finn studier du kommer inn på</p>
         </div>
-        <div className="bg-white rounded-2xl shadow-lg p-8 mb-6">
-          <label className="block text-gray-700 font-semibold mb-2">Karaktersnitt</label>
-          <div className="flex gap-3 mb-6">
+        <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
+          <div className="flex flex-wrap gap-3 items-center">
             <input
               type="number"
-              placeholder="F.eks. 52.4"
+              placeholder="Karaktersnitt, f.eks. 52.4"
               value={snitt}
               onChange={e => setSnitt(e.target.value)}
-              className="border border-gray-200 rounded-xl px-4 py-3 w-full text-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              onKeyDown={e => e.key === 'Enter' && finnStudier()}
+              className="border border-gray-200 rounded-xl px-4 py-2 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 w-56"
+            />
+            <Dropdown
+              label="By"
+              options={byer}
+              valgte={valgteByer}
+              toggle={toggleBy}
+              nullstill={() => setValgteByer([])}
+            />
+            <Dropdown
+              label="Fagområde"
+              options={fagomraader}
+              valgte={valgteFag}
+              toggle={toggleFag}
+              nullstill={() => setValgteFag([])}
             />
             <button
               onClick={finnStudier}
-              className="bg-blue-600 text-white px-8 py-3 rounded-xl font-semibold hover:bg-blue-700 transition whitespace-nowrap"
+              className="bg-blue-600 text-white px-6 py-2 rounded-xl font-semibold hover:bg-blue-700 transition text-sm"
             >
               Søk
             </button>
           </div>
-
-          <label className="block text-gray-700 font-semibold mb-3">
-            By {valgteByer.length > 0 && <span className="text-blue-500 font-normal text-sm">({valgteByer.length} valgt)</span>}
-          </label>
-          <div className="flex flex-wrap gap-2 mb-6">
-            {byer.map(by => (
-              <button
-                key={by}
-                onClick={() => toggleBy(by)}
-                className={valgteByer.includes(by)
-                  ? 'px-4 py-2 rounded-full text-sm font-medium bg-green-500 text-white'
-                  : 'px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-600 hover:bg-green-50'
-                }
-              >
-                {by}
-              </button>
-            ))}
-          </div>
-          {valgteByer.length > 0 && (
-            <button
-              onClick={() => setValgteByer([])}
-              className="mb-4 text-sm text-gray-400 hover:text-red-400"
-            >
-              Nullstill byer
-            </button>
-          )}
-
-          <label className="block text-gray-700 font-semibold mb-3">
-            Fagområde {valgteFag.length > 0 && <span className="text-blue-500 font-normal text-sm">({valgteFag.length} valgt)</span>}
-          </label>
-          <div className="flex flex-wrap gap-2">
-            {fagomraader.map(fag => (
-              <button
-                key={fag}
-                onClick={() => toggleFag(fag)}
-                className={valgteFag.includes(fag)
-                  ? 'px-4 py-2 rounded-full text-sm font-medium bg-blue-600 text-white'
-                  : 'px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-600 hover:bg-blue-50'
-                }
-              >
-                {fag}
-              </button>
-            ))}
-          </div>
-          {valgteFag.length > 0 && (
-            <button
-              onClick={() => setValgteFag([])}
-              className="mt-3 text-sm text-gray-400 hover:text-red-400"
-            >
-              Nullstill fagområder
-            </button>
-          )}
         </div>
-
         {laster && <div className="text-center text-gray-400 py-8">Laster...</div>}
         {sokt && !laster && (
           <p className="text-gray-500 mb-4 text-sm">{resultater.length} studier funnet</p>
         )}
         <div className="space-y-3">
           {resultater.map(s => (
-            <a
-              key={s.id}
-              href={s.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block bg-white rounded-xl shadow-sm border border-gray-100 p-5 hover:shadow-md transition"
-            >
+            <a key={s.id} href={s.url} target="_blank" rel="noopener noreferrer" className="block bg-white rounded-xl shadow-sm border border-gray-100 p-5 hover:shadow-md transition">
               <div className="flex justify-between items-start">
                 <div>
                   <h2 className="font-semibold text-lg text-gray-800">{s.study_name}</h2>
                   <p className="text-gray-400 text-sm mt-1">{s.university} – {s.location}</p>
-                  <span className="inline-block mt-2 bg-indigo-50 text-indigo-600 text-xs px-2 py-1 rounded-full">
-                    {s.fagomraade}
-                  </span>
+                  <span className="inline-block mt-2 bg-indigo-50 text-indigo-600 text-xs px-2 py-1 rounded-full">{s.fagomraade}</span>
                 </div>
-                <span className="bg-blue-50 text-blue-700 font-bold px-3 py-1 rounded-lg text-sm whitespace-nowrap">
-                  Poenggrense: {s.cutoff_score}
-                </span>
+                <span className="bg-blue-50 text-blue-700 font-bold px-3 py-1 rounded-lg text-sm whitespace-nowrap">Poenggrense: {s.cutoff_score}</span>
               </div>
             </a>
           ))}
