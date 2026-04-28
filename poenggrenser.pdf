@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="no" lang="no">
+  <head>
+  <meta name="robots" content="noindex, nofollow" />
+
+  
+    <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1" />
+  
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" /><!-- hindre emulering av IE7 -->
+   <meta charset="utf-8" />
+   <meta name="generator" content="Vortex" />
+
+   <title>404: Denne siden finnes ikke / 404: this page does not exist</title>
+
+    
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <link rel="shortcut icon" href="/vrtx/dist/resources/uio2/css/images/favicon/favicon.png">
+  
+
+
+    
+  
+  
+
+  <script><!--
+    var uioPageInfo = {};
+
+    uioPageInfo.readRestricted = false;
+    uioPageInfo.cloudAllowed = true;
+    uioPageInfo.authenticated = "anonymous";
+  // -->
+  </script>
+
+
+    
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  <script><!--
+    if (/googlebot/i.test(navigator.userAgent)) {
+      document.addEventListener("DOMContentLoaded", function(event) {
+        var css = '@media only screen and (max-width: 1070px) { * { max-width: 420px; } }';
+        var head = document.getElementsByTagName('head')[0];
+        var s = document.createElement('style');
+        s.setAttribute('type', 'text/css');
+        if (s.styleSheet) {
+          s.styleSheet.cssText = css;
+        } else {
+          s.appendChild(document.createTextNode(css));
+        }
+        head.appendChild(s);
+      });
+    }
+    
+  // -->
+  </script>
+
+  
+    <link rel="stylesheet" type="text/css" href="/vrtx/dist/resources/x1/css/local.css" />
+  
+  
+  
+
+ <!--script id="consent-script" src="/vrtx/dist/resources/js/consent.js" data-variant="A"></script!-->
+
+  
+
+   
+   <script async src="https://siteimproveanalytics.com/js/siteanalyze_6253897.js"></script>
+
+
+    
+  
+
+  </head>
+
+  <body class='www.samordnaopptak.no no'  id="error">
+  <!--stopindex-->
+
+    <header id="head-wrapper">
+      <div id="head">
+        <div id="header">
+          <a class="logo" aria-label="Samordna opptak, forsiden" href="/"></a>
+<div class="sokeportal"><a class="button-loud" href="https://sok.samordnaopptak.no/#/">Til søkerportalen</a></div>
+
+        </div>
+      </div>
+    </header>
+
+    <div id="main">
+      <!--startindex-->
+      
+  <div class="error-404">
+    <!-- lang = no -->
+    <div lang="no">
+      <h1>404: Denne siden finnes ikke</h1>
+      <p>Siden du ser etter ble dessverre ikke funnet.</p>
+      <p>Innholdet kan ha blitt flyttet, eller du kan ha skrevet inn en nettadresse som ikke eksisterer.</p>
+      <p>Du kan prøve å søke.</p>
+      <form action="/" method="get" class="search-form">
+        <label for="searchstring">Søk</label>
+        <input type="hidden" value="search" name="vrtx"/>
+        <input type="text" value="" name="query" id="searchstring"/>
+        <button type="submit">Søk</button>
+      </form>
+      <p>Fortell oss gjerne hva du ikke fant.</p>
+      <p><strong><a href="/">Gå til forsiden</a></strong></p>
+    </div>
+    <!-- lang = en -->
+    <div lang="en">
+      <h1>404: This page does not exist</h1>
+      <p>Unfortunately the page you are looking for could not be found.</p>
+      <p>The content may have been moved, or you may have entered an incorrect URL.</p>
+      <p>You can try searching.</p>
+      <form action="/english/" method="get" class="search-form">
+        <label for="searchstring2">Search</label>
+        <input type="hidden" value="search" name="vrtx"/>
+        <input type="text" value="" name="query" id="searchstring2"/>
+        <button type="submit">Search</button>
+      </form>
+      <p>Please let us know what you were looking for.</p>
+      <p><strong><a href="/english/">Go to the home page</a></strong></p>
+    </div>
+  </div>
+
+      <!--stopindex-->
+    </div>
+
+    <!-- Page footer start -->
+    <footer id="footer-wrapper" class="grid-container">
+      <div id="footers" class="row">
+        <div class="footer-content">
+          <div>
+    <p><a href="/om/kontakt/">Kontakt</a><br/>
+    
+    <a href="/om/personvernerklaring.html">Personvernerklæring</a><br />
+    <a href="https://uustatus.no/nb/erklaringer/publisert/3410369d-d47e-4cde-bb4f-575ca94f0cb3">Tilgjengelighetserklæring</a></p>
+</div>
+
+<div>
+  <div class="content kd"><a aria-label="Kunnskapsdepartementet, til forsiden" class="logo-kd" href="https://www.regjeringen.no/no/dep/kd/id586/"><img alt="Logo, Kunnskapsdepartementet" width="346" height="77" src="/vrtx/dist/resources/x1/images/kd-logo.svg"/></a>
+  </div>
+</div>
+
+<div>
+  <div class="content unit"><a aria-label="Direktoratet for høyere utdanning og kompetanse, til forsiden" class="logo-hkdir" href="https://hkdir.no/"><img alt="Logo, HKDIR" width="264" height="60" src="/vrtx/dist/resources/x1/images/hkdir-logo.svg"/></a> 
+  </div>
+</div>
+        </div>
+      </div>
+    </footer>
+
+    
+  
+  
+  
+  
+  
+  
+
+  
+    <script type="module" src='/vrtx/dist/resources/x1/js/local.js'></script>
+  
+
+  
+
+    
+  </body>
+</html>

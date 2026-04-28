@@ -1,0 +1,27 @@
+name: Oppdater poenggrenser
+
+on:
+  schedule:
+    - cron: '0 8 1 8 *'  # Kjører 1. august hvert år kl 08:00
+  workflow_dispatch:  # Kan også kjøres manuelt
+
+jobs:
+  oppdater:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sjekk ut kode
+        uses: actions/checkout@v3
+
+      - name: Sett opp Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Installer pakker
+        run: pip install pdfplumber requests python-dotenv
+
+      - name: Kjør oppdatering
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+        run: python oppdater_studier.py

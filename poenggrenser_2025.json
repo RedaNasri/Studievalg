@@ -1,0 +1,2696 @@
+[
+  {
+    "study_name": "Design",
+    "university": "AHO",
+    "location": "Oslo",
+    "cutoff_score": 149.2
+  },
+  {
+    "study_name": "Arkitekt",
+    "university": "AHO",
+    "location": "Oslo",
+    "cutoff_score": 148.6
+  },
+  {
+    "study_name": "Landskapsarkitektur",
+    "university": "AHO",
+    "location": "Oslo",
+    "cutoff_score": 144.7
+  },
+  {
+    "study_name": "Medisin, Oslo, høst",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 69.6
+  },
+  {
+    "study_name": "Medisin, Trondheim",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 68.5
+  },
+  {
+    "study_name": "Industriell økonomi og teknologiledelse",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 68.4
+  },
+  {
+    "study_name": "Medisin, Oslo/Kristiansand, høst",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 68.3
+  },
+  {
+    "study_name": "Psykologi, høst",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 68.1
+  },
+  {
+    "study_name": "Medisin, Oslo, vår",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 68.1
+  },
+  {
+    "study_name": "Medisin, Oslo/Innlandet, høst",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 68.0
+  },
+  {
+    "study_name": "Medisin, Oslo/Kristiansand, vår",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 67.8
+  },
+  {
+    "study_name": "Medisin, Bergen",
+    "university": "UIB",
+    "location": "Bergen",
+    "cutoff_score": 67.2
+  },
+  {
+    "study_name": "Medisin, Trondheim/Levanger",
+    "university": "NTNU",
+    "location": "Levanger",
+    "cutoff_score": 67.0
+  },
+  {
+    "study_name": "Psykologi, vår",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 67.0
+  },
+  {
+    "study_name": "Medisin, Trondheim/Ålesund",
+    "university": "NTNU",
+    "location": "Ålesund",
+    "cutoff_score": 66.9
+  },
+  {
+    "study_name": "Medisin, Trondheim/Gjøvik",
+    "university": "NTNU",
+    "location": "Gjøvik",
+    "cutoff_score": 66.6
+  },
+  {
+    "study_name": "Filosofi, politikk og økonomi",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 66.5
+  },
+  {
+    "study_name": "Medisin, Bergen/Stavanger",
+    "university": "UIB",
+    "location": "Bergen",
+    "cutoff_score": 66.3
+  },
+  {
+    "study_name": "Medisin, Bergen/Førde",
+    "university": "UIB",
+    "location": "Bergen",
+    "cutoff_score": 66.1
+  },
+  {
+    "study_name": "Medisin",
+    "university": "UIT",
+    "location": "Tromsø",
+    "cutoff_score": 66.0
+  },
+  {
+    "study_name": "Psykologi, profesjonsstudium",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 65.7
+  },
+  {
+    "study_name": "Odontologi",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 65.7
+  },
+  {
+    "study_name": "Psykologi, profesjonsstudium",
+    "university": "UIB",
+    "location": "Bergen",
+    "cutoff_score": 65.7
+  },
+  {
+    "study_name": "Psykologi, profesjonsstudium",
+    "university": "UIT",
+    "location": "Tromsø",
+    "cutoff_score": 65.6
+  },
+  {
+    "study_name": "Odontologi",
+    "university": "UIB",
+    "location": "Bergen",
+    "cutoff_score": 65.1
+  },
+  {
+    "study_name": "Rettsvitenskap (jus), høst",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 64.7
+  },
+  {
+    "study_name": "Filosofi, årsstudium",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 64.2
+  },
+  {
+    "study_name": "Odontologi",
+    "university": "UIT",
+    "location": "Tromsø",
+    "cutoff_score": 64.0
+  },
+  {
+    "study_name": "Økonomi og ledelse",
+    "university": "OSLOMET",
+    "location": "Oslo",
+    "cutoff_score": 63.9
+  },
+  {
+    "study_name": "Rettsvitenskap (jus), vår",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 63.6
+  },
+  {
+    "study_name": "Regnskap og økonomirådgivning, nettbasert",
+    "university": "INN",
+    "location": "Åmot",
+    "cutoff_score": 63.5
+  },
+  {
+    "study_name": "Business, economics and datascience siviløkonom",
+    "university": "NHH",
+    "location": "Bergen",
+    "cutoff_score": 63.5
+  },
+  {
+    "study_name": "Samfunnsøkonomi, årsstudium",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 63.5
+  },
+  {
+    "study_name": "Økonomi og administrasjon, årsstudium",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 62.7
+  },
+  {
+    "study_name": "Informasjonsteknologi og økonomi (sivilingeniør)",
+    "university": "UIB",
+    "location": "Bergen",
+    "cutoff_score": 62.6
+  },
+  {
+    "study_name": "Rettsvitenskap",
+    "university": "UIB",
+    "location": "Bergen",
+    "cutoff_score": 62.2
+  },
+  {
+    "study_name": "Datateknologi",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 62.1
+  },
+  {
+    "study_name": "Veterinærmedisin",
+    "university": "NMBU",
+    "location": "Ås",
+    "cutoff_score": 62.1
+  },
+  {
+    "study_name": "Honours program, Samfunnsvitenskap",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 62.1
+  },
+  {
+    "study_name": "Økonomi og datavitenskap",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 62.0
+  },
+  {
+    "study_name": "Medier og kommunikasjon, årsstudium",
+    "university": "OSLOMET",
+    "location": "Oslo",
+    "cutoff_score": 62.0
+  },
+  {
+    "study_name": "Rettsvitenskap",
+    "university": "UIT",
+    "location": "Tromsø",
+    "cutoff_score": 61.8
+  },
+  {
+    "study_name": "Kybernetikk og robotikk",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 61.8
+  },
+  {
+    "study_name": "Industriell design",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 61.5
+  },
+  {
+    "study_name": "Økonomi og ledelse, deltid, årsstudium",
+    "university": "NTNU",
+    "location": "Gjøvik",
+    "cutoff_score": 61.5
+  },
+  {
+    "study_name": "Ingeniør, flyingeniør",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 61.5
+  },
+  {
+    "study_name": "Kriminologi, årsstudium",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 61.4
+  },
+  {
+    "study_name": "Paramedisin",
+    "university": "UIS",
+    "location": "Stavanger",
+    "cutoff_score": 61.4
+  },
+  {
+    "study_name": "Psykologi, årsstudium",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 61.3
+  },
+  {
+    "study_name": "Økonomi og administrasjon, siviløkonom",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 60.8
+  },
+  {
+    "study_name": "Økonomi og administrasjon, Rena, bachelor, nettbasert",
+    "university": "INN",
+    "location": "Åmot",
+    "cutoff_score": 60.7
+  },
+  {
+    "study_name": "Samfunnsfag",
+    "university": "HVL",
+    "location": "Sogndal",
+    "cutoff_score": 60.6
+  },
+  {
+    "study_name": "Kriminologi, bachelor",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 60.5
+  },
+  {
+    "study_name": "Ortopediingeniør",
+    "university": "OSLOMET",
+    "location": "Oslo",
+    "cutoff_score": 60.5
+  },
+  {
+    "study_name": "Samfunnsøkonomi, bachelor",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 60.5
+  },
+  {
+    "study_name": "Internasjonale studier",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 60.0
+  },
+  {
+    "study_name": "Rettsvitenskap",
+    "university": "UIS",
+    "location": "Stavanger",
+    "cutoff_score": 59.9
+  },
+  {
+    "study_name": "Økonomi og administrasjon - siviløkonom",
+    "university": "NHH",
+    "location": "Bergen",
+    "cutoff_score": 59.9
+  },
+  {
+    "study_name": "Honours program, Realfag",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 59.5
+  },
+  {
+    "study_name": "Kunsthistorie og visuelle studier, årsstudium",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 59.4
+  },
+  {
+    "study_name": "Bioteknologi, Trondheim",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 59.2
+  },
+  {
+    "study_name": "Fysioterapi",
+    "university": "UIT",
+    "location": "Tromsø",
+    "cutoff_score": 59.1
+  },
+  {
+    "study_name": "Maskin- og energiteknologi",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 59.1
+  },
+  {
+    "study_name": "Informatikk: maskinlæring og kunstig intelligens",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 59.0
+  },
+  {
+    "study_name": "Rettsvitenskap",
+    "university": "UIA",
+    "location": "Kristiansand",
+    "cutoff_score": 59.0
+  },
+  {
+    "study_name": "Fysioterapi",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 58.8
+  },
+  {
+    "study_name": "Medisinsk teknologi (sivilingeniør)",
+    "university": "UIB",
+    "location": "Bergen",
+    "cutoff_score": 58.7
+  },
+  {
+    "study_name": "Informasjonsteknologi, årsstudium",
+    "university": "OSLOMET",
+    "location": "Oslo",
+    "cutoff_score": 58.6
+  },
+  {
+    "study_name": "Tverrfaglige kjønnsstudier, årsstudium",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 58.5
+  },
+  {
+    "study_name": "Sykepleie, deltid, Orkland",
+    "university": "NORD",
+    "location": "Orkland",
+    "cutoff_score": 58.3
+  },
+  {
+    "study_name": "Film- og videoproduksjon",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 58.3
+  },
+  {
+    "study_name": "Journalistikk",
+    "university": "UIB",
+    "location": "Bergen",
+    "cutoff_score": 58.2
+  },
+  {
+    "study_name": "Økonomi og administrasjon, bachelor",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 58.2
+  },
+  {
+    "study_name": "Frie realfag",
+    "university": "NMBU",
+    "location": "Ås",
+    "cutoff_score": 58.1
+  },
+  {
+    "study_name": "Toll, vareførsel og grensekontroll",
+    "university": "UIS",
+    "location": "Stavanger",
+    "cutoff_score": 58.0
+  },
+  {
+    "study_name": "Cybersikkerhet og datakommunikasjon",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 58.0
+  },
+  {
+    "study_name": "Informatikk: digital økonomi og ledelse",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 57.8
+  },
+  {
+    "study_name": "Kunst og design i samfunn - digital mediedesign",
+    "university": "USN",
+    "location": "Notodden",
+    "cutoff_score": 57.8
+  },
+  {
+    "study_name": "Marin teknikk",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 57.8
+  },
+  {
+    "study_name": "Fysikk og matematikk",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 57.8
+  },
+  {
+    "study_name": "Film- og TV-produksjon",
+    "university": "UIB",
+    "location": "Bergen",
+    "cutoff_score": 57.5
+  },
+  {
+    "study_name": "Psykologi, bachelor",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 57.5
+  },
+  {
+    "study_name": "Samfunnsøkonomisk analyse",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 57.4
+  },
+  {
+    "study_name": "Pedagogikk, årsstudium",
+    "university": "UIB",
+    "location": "Bergen",
+    "cutoff_score": 57.3
+  },
+  {
+    "study_name": "Samfunnsøkonomi, årsstudium",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 57.3
+  },
+  {
+    "study_name": "Helse ledelse og helseøkonomi",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 57.3
+  },
+  {
+    "study_name": "Arbeids- og organisasjonspsykologi",
+    "university": "UIB",
+    "location": "Bergen",
+    "cutoff_score": 57.2
+  },
+  {
+    "study_name": "Informatikk: design, bruk og interaksjon",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 57.1
+  },
+  {
+    "study_name": "Nanoteknologi",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 57.1
+  },
+  {
+    "study_name": "Industriell økonomi",
+    "university": "NMBU",
+    "location": "Ås",
+    "cutoff_score": 57.0
+  },
+  {
+    "study_name": "Samfunnsøkonomi, bachelor",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 56.9
+  },
+  {
+    "study_name": "Generell psykologi",
+    "university": "UIB",
+    "location": "Bergen",
+    "cutoff_score": 56.8
+  },
+  {
+    "study_name": "Politiutdanning, Alta",
+    "university": "PHS",
+    "location": "Alta",
+    "cutoff_score": 56.8
+  },
+  {
+    "study_name": "Paramedisin",
+    "university": "OSLOMET",
+    "location": "Oslo",
+    "cutoff_score": 56.8
+  },
+  {
+    "study_name": "Matematikk: finans, forsikring og økonomi",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 56.8
+  },
+  {
+    "study_name": "Statsvitenskap, årsstudium",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 56.7
+  },
+  {
+    "study_name": "HRM og ledelse",
+    "university": "HVL",
+    "location": "Bergen",
+    "cutoff_score": 56.7
+  },
+  {
+    "study_name": "Ingeniørgeologi",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 56.7
+  },
+  {
+    "study_name": "Ingeniør, maskin",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 56.7
+  },
+  {
+    "study_name": "Sosiologi, årsstudium",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 56.5
+  },
+  {
+    "study_name": "Digital forretningsutvikling",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 56.5
+  },
+  {
+    "study_name": "Økonomi og ledelse, deltid, bachelor",
+    "university": "NTNU",
+    "location": "Gjøvik",
+    "cutoff_score": 56.4
+  },
+  {
+    "study_name": "Matematikk: teoretisk og anvendt matematikk",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 56.3
+  },
+  {
+    "study_name": "Anvendt psykologi",
+    "university": "VID",
+    "location": "Oslo",
+    "cutoff_score": 56.3
+  },
+  {
+    "study_name": "Georessurser og geoteknologi",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 56.3
+  },
+  {
+    "study_name": "Landskapsarkitektur",
+    "university": "NMBU",
+    "location": "Ås",
+    "cutoff_score": 56.3
+  },
+  {
+    "study_name": "Statsvitenskap, bachelor",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 56.3
+  },
+  {
+    "study_name": "Fiskehelse- akvamedisin",
+    "university": "UIB",
+    "location": "Bergen",
+    "cutoff_score": 56.2
+  },
+  {
+    "study_name": "Rettsvitenskap",
+    "university": "INN",
+    "location": "Lillehammer",
+    "cutoff_score": 56.2
+  },
+  {
+    "study_name": "Paramedisin, deltid",
+    "university": "NORD",
+    "location": "Bodø",
+    "cutoff_score": 56.2
+  },
+  {
+    "study_name": "Digital økonomi og ledelse",
+    "university": "HVL",
+    "location": "Bergen",
+    "cutoff_score": 56.0
+  },
+  {
+    "study_name": "Ingeniør, automatisering og intelligente systemer, Trondheim",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 55.9
+  },
+  {
+    "study_name": "Antikkens kultur",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 55.9
+  },
+  {
+    "study_name": "Medie- og interaksjonsdesign",
+    "university": "UIB",
+    "location": "Bergen",
+    "cutoff_score": 55.8
+  },
+  {
+    "study_name": "Økonomi og administrasjon, Bergen",
+    "university": "HVL",
+    "location": "Bergen",
+    "cutoff_score": 55.7
+  },
+  {
+    "study_name": "Fysioterapi",
+    "university": "HVL",
+    "location": "Bergen",
+    "cutoff_score": 55.7
+  },
+  {
+    "study_name": "Tannpleie",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 55.6
+  },
+  {
+    "study_name": "Organisasjon og idrettsledelse, deltid",
+    "university": "NIH",
+    "location": "Oslo",
+    "cutoff_score": 55.5
+  },
+  {
+    "study_name": "Sosialt arbeid, Bergen",
+    "university": "HVL",
+    "location": "Bergen",
+    "cutoff_score": 55.5
+  },
+  {
+    "study_name": "Offentlig administrasjon og ledelse",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 55.5
+  },
+  {
+    "study_name": "Data science (sivilingeniør)",
+    "university": "UIB",
+    "location": "Bergen",
+    "cutoff_score": 55.4
+  },
+  {
+    "study_name": "Kunst og design - mote og produksjon",
+    "university": "OSLOMET",
+    "location": "Oslo",
+    "cutoff_score": 55.3
+  },
+  {
+    "study_name": "Ettårig grunnstudium",
+    "university": "NMBU",
+    "location": "Ås",
+    "cutoff_score": 55.2
+  },
+  {
+    "study_name": "Radiografi",
+    "university": "OSLOMET",
+    "location": "Oslo",
+    "cutoff_score": 55.2
+  },
+  {
+    "study_name": "Økonomi og administrasjon - siviløkonom",
+    "university": "OSLOMET",
+    "location": "Oslo",
+    "cutoff_score": 55.2
+  },
+  {
+    "study_name": "Ingeniørvitenskap og IKT",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 55.2
+  },
+  {
+    "study_name": "Arkitektur",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 55.1
+  },
+  {
+    "study_name": "Økonomi og teknologiledelse",
+    "university": "NORD",
+    "location": "Mo i Rana",
+    "cutoff_score": 55.1
+  },
+  {
+    "study_name": "Geologi",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 55.0
+  },
+  {
+    "study_name": "Psykologi, årsstudium",
+    "university": "UIS",
+    "location": "Stavanger",
+    "cutoff_score": 55.0
+  },
+  {
+    "study_name": "Dokumentasjonsforvaltning, deltid",
+    "university": "OSLOMET",
+    "location": "Oslo",
+    "cutoff_score": 54.9
+  },
+  {
+    "study_name": "Samfunnsøkonomi, master",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 54.9
+  },
+  {
+    "study_name": "Informatikk: bioinformatikk",
+    "university": "UIB",
+    "location": "Bergen",
+    "cutoff_score": 54.7
+  },
+  {
+    "study_name": "Digital infrastruktur og cybersikkerhet, Trondheim",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 54.7
+  },
+  {
+    "study_name": "Energi (sivilingeniør)",
+    "university": "UIB",
+    "location": "Bergen",
+    "cutoff_score": 54.6
+  },
+  {
+    "study_name": "Jus",
+    "university": "USN",
+    "location": "Ringerike",
+    "cutoff_score": 54.6
+  },
+  {
+    "study_name": "Økonomi og ledelse",
+    "university": "UIS",
+    "location": "Stavanger",
+    "cutoff_score": 54.6
+  },
+  {
+    "study_name": "Bevegelsesvitenskap, årsstudium",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 54.5
+  },
+  {
+    "study_name": "Design og kommunikasjon i digitale medier, deltid",
+    "university": "OSLOMET",
+    "location": "Oslo",
+    "cutoff_score": 54.5
+  },
+  {
+    "study_name": "Økonomi og administrasjon, deltid",
+    "university": "INN",
+    "location": "Åmot",
+    "cutoff_score": 54.5
+  },
+  {
+    "study_name": "Medier og kommunikasjon, årsstudium",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 54.4
+  },
+  {
+    "study_name": "Rettsvitenskap",
+    "university": "HIM",
+    "location": "Molde",
+    "cutoff_score": 54.4
+  },
+  {
+    "study_name": "Psykologi, bachelor",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 54.4
+  },
+  {
+    "study_name": "Idéhistorie, årsstudium",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 54.3
+  },
+  {
+    "study_name": "Kognitiv vitenskap",
+    "university": "UIB",
+    "location": "Bergen",
+    "cutoff_score": 54.3
+  },
+  {
+    "study_name": "Regnskap og økonomirådgivning, deltid",
+    "university": "INN",
+    "location": "Åmot",
+    "cutoff_score": 54.3
+  },
+  {
+    "study_name": "Bioingeniør, Trondheim",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 54.3
+  },
+  {
+    "study_name": "Paramedisin",
+    "university": "NTNU",
+    "location": "Gjøvik",
+    "cutoff_score": 54.3
+  },
+  {
+    "study_name": "Samfunnsvitenskapelige fag, emnestudier",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 54.2
+  },
+  {
+    "study_name": "Journalistikk",
+    "university": "OSLOMET",
+    "location": "Oslo",
+    "cutoff_score": 54.2
+  },
+  {
+    "study_name": "Havteknologi (sivilingeniør)",
+    "university": "UIB",
+    "location": "Bergen",
+    "cutoff_score": 54.2
+  },
+  {
+    "study_name": "Samfunnsøkonomi, årsstudium",
+    "university": "UIB",
+    "location": "Bergen",
+    "cutoff_score": 54.1
+  },
+  {
+    "study_name": "Ingeniør, bygg, Trondheim",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 54.0
+  },
+  {
+    "study_name": "Lektor i kroppsøving og idrettsfag, 8.-13. trinn",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 53.9
+  },
+  {
+    "study_name": "Sykepleie, Tromsø",
+    "university": "UIT",
+    "location": "Tromsø",
+    "cutoff_score": 53.8
+  },
+  {
+    "study_name": "Bedriftsøkonomi, deltid",
+    "university": "INN",
+    "location": "Åmot",
+    "cutoff_score": 53.7
+  },
+  {
+    "study_name": "Ingeniør, elektronisk systemingeniør",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 53.6
+  },
+  {
+    "study_name": "Sykepleie",
+    "university": "LDH",
+    "location": "Oslo",
+    "cutoff_score": 53.6
+  },
+  {
+    "study_name": "Psykologi, årsstudium",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 53.5
+  },
+  {
+    "study_name": "Fysioterapi",
+    "university": "OSLOMET",
+    "location": "Oslo",
+    "cutoff_score": 53.5
+  },
+  {
+    "study_name": "Organisasjon og ledelse, deltid, nettbasert",
+    "university": "INN",
+    "location": "Åmot",
+    "cutoff_score": 53.5
+  },
+  {
+    "study_name": "Sykepleie, fleksibelt",
+    "university": "NTNU",
+    "location": "Gjøvik",
+    "cutoff_score": 53.5
+  },
+  {
+    "study_name": "Sosialt arbeid",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 53.4
+  },
+  {
+    "study_name": "Sosialt arbeid",
+    "university": "OSLOMET",
+    "location": "Oslo",
+    "cutoff_score": 53.4
+  },
+  {
+    "study_name": "Paramedisin",
+    "university": "HIM",
+    "location": "Molde",
+    "cutoff_score": 53.4
+  },
+  {
+    "study_name": "Statsvitenskap, bachelor",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 53.4
+  },
+  {
+    "study_name": "Geofysikk - meteorologi og oseanografi (siv.ing.)",
+    "university": "UIB",
+    "location": "Bergen",
+    "cutoff_score": 53.4
+  },
+  {
+    "study_name": "Informasjonsvitenskap, årsstudium",
+    "university": "UIB",
+    "location": "Bergen",
+    "cutoff_score": 53.2
+  },
+  {
+    "study_name": "Elektronisk systemdesign og innovasjon",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 53.2
+  },
+  {
+    "study_name": "Landskapsingeniør",
+    "university": "NMBU",
+    "location": "Ås",
+    "cutoff_score": 53.2
+  },
+  {
+    "study_name": "Kunstig intelligens",
+    "university": "UIB",
+    "location": "Bergen",
+    "cutoff_score": 53.1
+  },
+  {
+    "study_name": "Bygg og infrastruktur",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 53.1
+  },
+  {
+    "study_name": "Statsvitenskap, årsstudium",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 53.1
+  },
+  {
+    "study_name": "Samfunnsøkonomi, master",
+    "university": "UIB",
+    "location": "Bergen",
+    "cutoff_score": 53.0
+  },
+  {
+    "study_name": "Farmasi",
+    "university": "OSLOMET",
+    "location": "Oslo",
+    "cutoff_score": 53.0
+  },
+  {
+    "study_name": "Bibliotek- og informasjonsvitenskap, årsstudium",
+    "university": "OSLOMET",
+    "location": "Oslo",
+    "cutoff_score": 52.9
+  },
+  {
+    "study_name": "Historie, årsstudium",
+    "university": "HVL",
+    "location": "Sogndal",
+    "cutoff_score": 52.8
+  },
+  {
+    "study_name": "Geografi, årsstudium",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 52.8
+  },
+  {
+    "study_name": "Matematiske fag, bachelor",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 52.7
+  },
+  {
+    "study_name": "Sykepleie, Trondheim",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 52.7
+  },
+  {
+    "study_name": "Økonomi og administrasjon",
+    "university": "OSLOMET",
+    "location": "Oslo",
+    "cutoff_score": 52.7
+  },
+  {
+    "study_name": "Fysioterapi",
+    "university": "INN",
+    "location": "Elverum",
+    "cutoff_score": 52.6
+  },
+  {
+    "study_name": "Politiutdanning, Oslo",
+    "university": "PHS",
+    "location": "Oslo",
+    "cutoff_score": 52.5
+  },
+  {
+    "study_name": "Europa studier med statsvitenskap",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 52.5
+  },
+  {
+    "study_name": "Shipping management",
+    "university": "NTNU",
+    "location": "Ålesund",
+    "cutoff_score": 52.5
+  },
+  {
+    "study_name": "Informatikk: programmering og systemarkitektur",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 52.4
+  },
+  {
+    "study_name": "Sykepleie, deltid, Hallingdal",
+    "university": "USN",
+    "location": "Gol",
+    "cutoff_score": 52.4
+  },
+  {
+    "study_name": "Anvendt datateknologi",
+    "university": "OSLOMET",
+    "location": "Oslo",
+    "cutoff_score": 52.4
+  },
+  {
+    "study_name": "Samfunnsgeografi",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 52.4
+  },
+  {
+    "study_name": "Samfunnsøkonomi, bachelor",
+    "university": "UIB",
+    "location": "Bergen",
+    "cutoff_score": 52.4
+  },
+  {
+    "study_name": "Medier og kommunikasjon, bachelor",
+    "university": "OSLOMET",
+    "location": "Oslo",
+    "cutoff_score": 52.4
+  },
+  {
+    "study_name": "Allmennlitteraturvitenskap, årsstudium",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 52.2
+  },
+  {
+    "study_name": "Geovitenskap, retning geofysikk",
+    "university": "UIB",
+    "location": "Bergen",
+    "cutoff_score": 52.2
+  },
+  {
+    "study_name": "Havbruk (sivilingeniør)",
+    "university": "UIB",
+    "location": "Bergen",
+    "cutoff_score": 52.1
+  },
+  {
+    "study_name": "Pedagogikk, årsstudium",
+    "university": "UIA",
+    "location": "Kristiansand",
+    "cutoff_score": 52.1
+  },
+  {
+    "study_name": "Radiografi, Trondheim",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 52.0
+  },
+  {
+    "study_name": "Sykepleie, deltid",
+    "university": "OSLOMET",
+    "location": "Lillestrøm",
+    "cutoff_score": 51.8
+  },
+  {
+    "study_name": "Mat, ernæring og helse",
+    "university": "INN",
+    "location": "Elverum",
+    "cutoff_score": 51.8
+  },
+  {
+    "study_name": "Biologi",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 51.8
+  },
+  {
+    "study_name": "Klinisk ernæring",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 51.8
+  },
+  {
+    "study_name": "Informatikk: datateknologi",
+    "university": "UIB",
+    "location": "Bergen",
+    "cutoff_score": 51.7
+  },
+  {
+    "study_name": "Sosialt arbeid",
+    "university": "UIA",
+    "location": "Kristiansand",
+    "cutoff_score": 51.6
+  },
+  {
+    "study_name": "Bioingeniør",
+    "university": "OSLOMET",
+    "location": "Oslo",
+    "cutoff_score": 51.6
+  },
+  {
+    "study_name": "Ingeniør, elektrifisering og digitalisering",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 51.6
+  },
+  {
+    "study_name": "Musikkvitenskap, årsstudium",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 51.6
+  },
+  {
+    "study_name": "Miljøfysikk og fornybar energi",
+    "university": "NMBU",
+    "location": "Ås",
+    "cutoff_score": 51.5
+  },
+  {
+    "study_name": "Sykepleie, Bergen, høst",
+    "university": "HVL",
+    "location": "Bergen",
+    "cutoff_score": 51.5
+  },
+  {
+    "study_name": "Informatikk",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 51.5
+  },
+  {
+    "study_name": "Informatikk: datasikkerhet",
+    "university": "UIB",
+    "location": "Bergen",
+    "cutoff_score": 51.5
+  },
+  {
+    "study_name": "Reiselivsendring",
+    "university": "UIS",
+    "location": "Stavanger",
+    "cutoff_score": 51.3
+  },
+  {
+    "study_name": "Informatikk: matematikk-økonomi",
+    "university": "UIB",
+    "location": "Bergen",
+    "cutoff_score": 51.2
+  },
+  {
+    "study_name": "Energi og miljø",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 51.1
+  },
+  {
+    "study_name": "Psykologi, bachelor",
+    "university": "UIS",
+    "location": "Stavanger",
+    "cutoff_score": 51.0
+  },
+  {
+    "study_name": "Sosialt arbeid",
+    "university": "VID",
+    "location": "Oslo",
+    "cutoff_score": 51.0
+  },
+  {
+    "study_name": "Radiografi",
+    "university": "USN",
+    "location": "Drammen",
+    "cutoff_score": 50.9
+  },
+  {
+    "study_name": "Politiutdanning, Stavern",
+    "university": "PHS",
+    "location": "Larvik",
+    "cutoff_score": 50.8
+  },
+  {
+    "study_name": "Fysikk",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 50.8
+  },
+  {
+    "study_name": "Filosofi, bachelor",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 50.7
+  },
+  {
+    "study_name": "Sykepleie, deltid, Vestfold og Telemark",
+    "university": "USN",
+    "location": "Notodden",
+    "cutoff_score": 50.7
+  },
+  {
+    "study_name": "Friluftsliv",
+    "university": "NIH",
+    "location": "Oslo",
+    "cutoff_score": 50.6
+  },
+  {
+    "study_name": "Ingeniør, maskin, Bergen",
+    "university": "HVL",
+    "location": "Bergen",
+    "cutoff_score": 50.5
+  },
+  {
+    "study_name": "Administrasjon og ledelse i offentlig virksomhet",
+    "university": "OSLOMET",
+    "location": "Oslo",
+    "cutoff_score": 50.5
+  },
+  {
+    "study_name": "Industriell kjemi, materialer og bioteknologi",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 50.5
+  },
+  {
+    "study_name": "Ingeniør, data-systemutvikling",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 50.5
+  },
+  {
+    "study_name": "Bioteknologi",
+    "university": "NMBU",
+    "location": "Ås",
+    "cutoff_score": 50.5
+  },
+  {
+    "study_name": "Utviklingsstudier og bærekraft",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 50.5
+  },
+  {
+    "study_name": "Geovitenskap, retning geologi",
+    "university": "UIB",
+    "location": "Bergen",
+    "cutoff_score": 50.4
+  },
+  {
+    "study_name": "Sosiologi, årsstudium",
+    "university": "HVL",
+    "location": "Sogndal",
+    "cutoff_score": 50.4
+  },
+  {
+    "study_name": "Ingeniør, fornybar energi, Trondheim",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 50.4
+  },
+  {
+    "study_name": "Musikkteknologi",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 50.4
+  },
+  {
+    "study_name": "Ingeniør, logistikk",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 50.2
+  },
+  {
+    "study_name": "Bioingeniør",
+    "university": "HVL",
+    "location": "Bergen",
+    "cutoff_score": 50.1
+  },
+  {
+    "study_name": "Sport Management",
+    "university": "NIH",
+    "location": "Oslo",
+    "cutoff_score": 50.0
+  },
+  {
+    "study_name": "Krisehåndtering, deltid",
+    "university": "INN",
+    "location": "Åmot",
+    "cutoff_score": 50.0
+  },
+  {
+    "study_name": "Vernepleie, Bergen",
+    "university": "HVL",
+    "location": "Bergen",
+    "cutoff_score": 50.0
+  },
+  {
+    "study_name": "Økonomi og administrasjon",
+    "university": "UIA",
+    "location": "Kristiansand",
+    "cutoff_score": 50.0
+  },
+  {
+    "study_name": "Internasjonal beredskap",
+    "university": "UIT",
+    "location": "Harstad",
+    "cutoff_score": 50.0
+  },
+  {
+    "study_name": "Medier og kommunikasjon, årsstudium",
+    "university": "UIB",
+    "location": "Bergen",
+    "cutoff_score": 49.8
+  },
+  {
+    "study_name": "Nautikk",
+    "university": "NTNU",
+    "location": "Ålesund",
+    "cutoff_score": 49.8
+  },
+  {
+    "study_name": "Sosiologi, årsstudium",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 49.7
+  },
+  {
+    "study_name": "Lektor i samfunnsfag, 8.-13.trinn",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 49.6
+  },
+  {
+    "study_name": "Ingeniør, elektroteknologi, deltid",
+    "university": "HVL",
+    "location": "Sunnfjord",
+    "cutoff_score": 49.6
+  },
+  {
+    "study_name": "Eiendom",
+    "university": "NMBU",
+    "location": "Ås",
+    "cutoff_score": 49.5
+  },
+  {
+    "study_name": "Sykepleie, deltid, Namsos",
+    "university": "NORD",
+    "location": "Namsos",
+    "cutoff_score": 49.5
+  },
+  {
+    "study_name": "Lærer, 1.-13. trinn, kroppsøving og idrettsfag",
+    "university": "HVL",
+    "location": "Bergen",
+    "cutoff_score": 49.5
+  },
+  {
+    "study_name": "Ingeniør, havteknologi",
+    "university": "HVL",
+    "location": "Bergen",
+    "cutoff_score": 49.5
+  },
+  {
+    "study_name": "Sykepleie, Kristiansand",
+    "university": "UIA",
+    "location": "Kristiansand",
+    "cutoff_score": 49.5
+  },
+  {
+    "study_name": "Ingeniør, havbruk",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 49.5
+  },
+  {
+    "study_name": "By- og regionplanlegging",
+    "university": "NMBU",
+    "location": "Ås",
+    "cutoff_score": 49.5
+  },
+  {
+    "study_name": "Økonomi og administrasjon",
+    "university": "NMBU",
+    "location": "Ås",
+    "cutoff_score": 49.5
+  },
+  {
+    "study_name": "Farmasi",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 49.5
+  },
+  {
+    "study_name": "Spesialpedagogikk",
+    "university": "UIB",
+    "location": "Bergen",
+    "cutoff_score": 49.4
+  },
+  {
+    "study_name": "Ingeniør, kjemi og materialteknologi",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 49.4
+  },
+  {
+    "study_name": "Farmasi",
+    "university": "UIB",
+    "location": "Bergen",
+    "cutoff_score": 49.3
+  },
+  {
+    "study_name": "Ingeniør, datateknikk, Narvik",
+    "university": "UIT",
+    "location": "Narvik",
+    "cutoff_score": 49.2
+  },
+  {
+    "study_name": "Kultur og kommunikasjon",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 49.1
+  },
+  {
+    "study_name": "Barnevern",
+    "university": "OSLOMET",
+    "location": "Oslo",
+    "cutoff_score": 49.1
+  },
+  {
+    "study_name": "Økonomi, administrasjon og internasjonal business",
+    "university": "NTNU",
+    "location": "Ålesund",
+    "cutoff_score": 49.1
+  },
+  {
+    "study_name": "Sammenliknende politikk, bachelor",
+    "university": "UIB",
+    "location": "Bergen",
+    "cutoff_score": 49.1
+  },
+  {
+    "study_name": "Psykologi, årsstudium",
+    "university": "UIB",
+    "location": "Bergen",
+    "cutoff_score": 49.0
+  },
+  {
+    "study_name": "Radiografi",
+    "university": "HVL",
+    "location": "Bergen",
+    "cutoff_score": 49.0
+  },
+  {
+    "study_name": "Sykepleie, deltid, Bergen",
+    "university": "HVL",
+    "location": "Bergen",
+    "cutoff_score": 49.0
+  },
+  {
+    "study_name": "Bevegelsesvitenskap, bachelor",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 49.0
+  },
+  {
+    "study_name": "Informasjonsvitenskap, bachelor",
+    "university": "UIB",
+    "location": "Bergen",
+    "cutoff_score": 48.9
+  },
+  {
+    "study_name": "Lektor i historie, 8.-13. trinn",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 48.9
+  },
+  {
+    "study_name": "Bereskap og krisehåndtering",
+    "university": "INN",
+    "location": "Åmot",
+    "cutoff_score": 48.8
+  },
+  {
+    "study_name": "Nautikk med integrert praksis",
+    "university": "HVL",
+    "location": "Haugesund",
+    "cutoff_score": 48.8
+  },
+  {
+    "study_name": "Medier og kommunikasjon, bachelor",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 48.8
+  },
+  {
+    "study_name": "Sosialt arbeid, Tromsø",
+    "university": "UIT",
+    "location": "Tromsø",
+    "cutoff_score": 48.6
+  },
+  {
+    "study_name": "Tannpleie",
+    "university": "UIB",
+    "location": "Bergen",
+    "cutoff_score": 48.6
+  },
+  {
+    "study_name": "Skipsfart og logistikk",
+    "university": "USN",
+    "location": "Horten",
+    "cutoff_score": 48.6
+  },
+  {
+    "study_name": "IT, nettbasert",
+    "university": "HIM",
+    "location": "Molde",
+    "cutoff_score": 48.6
+  },
+  {
+    "study_name": "Kommunikasjon, medieproduksjon, årsstudium",
+    "university": "UIA",
+    "location": "Kristiansand",
+    "cutoff_score": 48.6
+  },
+  {
+    "study_name": "Barnevern",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 48.6
+  },
+  {
+    "study_name": "Sammenliknende politikk, årsstudium",
+    "university": "UIB",
+    "location": "Bergen",
+    "cutoff_score": 48.5
+  },
+  {
+    "study_name": "Lektor, 8.-13. trinn, m/idrett i første studieår",
+    "university": "UIA",
+    "location": "Kristiansand",
+    "cutoff_score": 48.5
+  },
+  {
+    "study_name": "Midtøsten-studier med arabisk",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 48.5
+  },
+  {
+    "study_name": "Musikkvitenskap",
+    "university": "UIB",
+    "location": "Bergen",
+    "cutoff_score": 48.4
+  },
+  {
+    "study_name": "Økonomi og administrasjon, Bergen",
+    "university": "NLA",
+    "location": "Bergen",
+    "cutoff_score": 48.4
+  },
+  {
+    "study_name": "Kjemi og bioteknologi",
+    "university": "NMBU",
+    "location": "Ås",
+    "cutoff_score": 48.3
+  },
+  {
+    "study_name": "Journalistikk",
+    "university": "HVO",
+    "location": "Volda",
+    "cutoff_score": 48.2
+  },
+  {
+    "study_name": "Sosiologi, bachelor",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 48.1
+  },
+  {
+    "study_name": "Radiografi, Gjøvik",
+    "university": "NTNU",
+    "location": "Gjøvik",
+    "cutoff_score": 48.1
+  },
+  {
+    "study_name": "Pedagogikk, årsstudium",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 48.0
+  },
+  {
+    "study_name": "Sosialt arbeid",
+    "university": "HIØ",
+    "location": "Fredrikstad",
+    "cutoff_score": 48.0
+  },
+  {
+    "study_name": "Drama og teaterkommunikasjon, årsstudium",
+    "university": "OSLOMET",
+    "location": "Oslo",
+    "cutoff_score": 48.0
+  },
+  {
+    "study_name": "Lektor, 8.-13. trinn, historie",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 47.9
+  },
+  {
+    "study_name": "Psykologi med vekt på adferdsanalyse",
+    "university": "OSLOMET",
+    "location": "Lillestrøm",
+    "cutoff_score": 47.9
+  },
+  {
+    "study_name": "Vernepleie",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 47.8
+  },
+  {
+    "study_name": "Lektor, 8.-13. trinn, m/historie i første studieår",
+    "university": "UIA",
+    "location": "Kristiansand",
+    "cutoff_score": 47.8
+  },
+  {
+    "study_name": "Europastudier",
+    "university": "UIB",
+    "location": "Bergen",
+    "cutoff_score": 47.8
+  },
+  {
+    "study_name": "Politiutdanning, Bodø",
+    "university": "PHS",
+    "location": "Bodø",
+    "cutoff_score": 47.7
+  },
+  {
+    "study_name": "Spesialpedagogikk",
+    "university": "UIA",
+    "location": "Kristiansand",
+    "cutoff_score": 47.7
+  },
+  {
+    "study_name": "Lærer, 1.-13. trinn, kroppsøving og idrettsfag",
+    "university": "NIH",
+    "location": "Oslo",
+    "cutoff_score": 47.7
+  },
+  {
+    "study_name": "Vernepleie, deltid, Lillehammer",
+    "university": "INN",
+    "location": "Lillehammer",
+    "cutoff_score": 47.6
+  },
+  {
+    "study_name": "Digital mediedesign, Notodden",
+    "university": "USN",
+    "location": "Notodden",
+    "cutoff_score": 47.5
+  },
+  {
+    "study_name": "Byplanlegging og samfunnssikkerhet",
+    "university": "UIS",
+    "location": "Stavanger",
+    "cutoff_score": 47.5
+  },
+  {
+    "study_name": "Kjemi",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 47.5
+  },
+  {
+    "study_name": "Samfunnsøkonomi",
+    "university": "NMBU",
+    "location": "Ås",
+    "cutoff_score": 47.5
+  },
+  {
+    "study_name": "Arkeologi",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 47.5
+  },
+  {
+    "study_name": "Idéhistorie, bachelor",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 47.4
+  },
+  {
+    "study_name": "Treningslære",
+    "university": "NIH",
+    "location": "Oslo",
+    "cutoff_score": 47.3
+  },
+  {
+    "study_name": "Vernepleie",
+    "university": "UIA",
+    "location": "Grimstad",
+    "cutoff_score": 47.2
+  },
+  {
+    "study_name": "Digital mediedesign, Hallingdal",
+    "university": "USN",
+    "location": "Gol",
+    "cutoff_score": 47.1
+  },
+  {
+    "study_name": "Sykepleie, deltid, Sandvika",
+    "university": "VID",
+    "location": "Bærum",
+    "cutoff_score": 47.1
+  },
+  {
+    "study_name": "Sosialt arbeid",
+    "university": "UIS",
+    "location": "Stavanger",
+    "cutoff_score": 47.1
+  },
+  {
+    "study_name": "Ergoterapi",
+    "university": "HVL",
+    "location": "Bergen",
+    "cutoff_score": 47.1
+  },
+  {
+    "study_name": "Klima, miljø og menneske",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 47.0
+  },
+  {
+    "study_name": "Økonomi og administrasjon, Alta",
+    "university": "UIT",
+    "location": "Alta",
+    "cutoff_score": 47.0
+  },
+  {
+    "study_name": "Nordisk, særlig norsk, språk og litteratur",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 46.9
+  },
+  {
+    "study_name": "Vernepleie, deltid, Sandvika",
+    "university": "VID",
+    "location": "Bærum",
+    "cutoff_score": 46.9
+  },
+  {
+    "study_name": "Læring og psykologi",
+    "university": "UIS",
+    "location": "Stavanger",
+    "cutoff_score": 46.9
+  },
+  {
+    "study_name": "Trening, helse og prestasjon",
+    "university": "NIH",
+    "location": "Oslo",
+    "cutoff_score": 46.8
+  },
+  {
+    "study_name": "Film- og tv produksjon",
+    "university": "UIS",
+    "location": "Stavanger",
+    "cutoff_score": 46.8
+  },
+  {
+    "study_name": "Ingeniør, data",
+    "university": "OSLOMET",
+    "location": "Oslo",
+    "cutoff_score": 46.8
+  },
+  {
+    "study_name": "Ingeniør, automatisering og intelligente systemer, Ålesund",
+    "university": "NTNU",
+    "location": "Ålesund",
+    "cutoff_score": 46.8
+  },
+  {
+    "study_name": "Psykologi, bachelor",
+    "university": "UIT",
+    "location": "Tromsø",
+    "cutoff_score": 46.6
+  },
+  {
+    "study_name": "Medier og kommunikasjon, bachelor",
+    "university": "UIB",
+    "location": "Bergen",
+    "cutoff_score": 46.5
+  },
+  {
+    "study_name": "Sykepleie, Bergen",
+    "university": "VID",
+    "location": "Bergen",
+    "cutoff_score": 46.5
+  },
+  {
+    "study_name": "Sykepleie, Oslo",
+    "university": "OSLOMET",
+    "location": "Oslo",
+    "cutoff_score": 46.3
+  },
+  {
+    "study_name": "Biologi og kjemi, realfag",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 46.2
+  },
+  {
+    "study_name": "Ergoterapi",
+    "university": "OSLOMET",
+    "location": "Oslo",
+    "cutoff_score": 46.2
+  },
+  {
+    "study_name": "Ledelse, deltid",
+    "university": "UIT",
+    "location": "Alta",
+    "cutoff_score": 46.1
+  },
+  {
+    "study_name": "Psykologi",
+    "university": "INN",
+    "location": "Lillehammer",
+    "cutoff_score": 46.1
+  },
+  {
+    "study_name": "Biomarint innovasjon",
+    "university": "NTNU",
+    "location": "Ålesund",
+    "cutoff_score": 46.1
+  },
+  {
+    "study_name": "Japan-studier med japansk",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 46.0
+  },
+  {
+    "study_name": "Sykepleie, Drammen",
+    "university": "USN",
+    "location": "Drammen",
+    "cutoff_score": 45.9
+  },
+  {
+    "study_name": "Sosiologi, bachelor",
+    "university": "HVL",
+    "location": "Sogndal",
+    "cutoff_score": 45.9
+  },
+  {
+    "study_name": "Økonomi og administrasjon - siviløkonom",
+    "university": "UIA",
+    "location": "Kristiansand",
+    "cutoff_score": 45.9
+  },
+  {
+    "study_name": "Barnevern",
+    "university": "UIA",
+    "location": "Kristiansand",
+    "cutoff_score": 45.8
+  },
+  {
+    "study_name": "Skogfag",
+    "university": "NMBU",
+    "location": "Ås",
+    "cutoff_score": 45.8
+  },
+  {
+    "study_name": "Spesialpedagogikk",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 45.8
+  },
+  {
+    "study_name": "Honours program, Humaniora, Filosofi og lingvistikk",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 45.7
+  },
+  {
+    "study_name": "Sykepleie, Porsgrunn",
+    "university": "USN",
+    "location": "Porsgrunn",
+    "cutoff_score": 45.6
+  },
+  {
+    "study_name": "Innovasjon, markedsføring og ledelse, Bergen",
+    "university": "NLA",
+    "location": "Bergen",
+    "cutoff_score": 45.6
+  },
+  {
+    "study_name": "Audiologi",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 45.6
+  },
+  {
+    "study_name": "Matvitenskap, teknologi og bærekraft",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 45.6
+  },
+  {
+    "study_name": "Norsk som andrespråk",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 45.5
+  },
+  {
+    "study_name": "Psykologi, årsstudium",
+    "university": "AHS",
+    "location": "Kristiansand",
+    "cutoff_score": 45.5
+  },
+  {
+    "study_name": "Nautikk",
+    "university": "USN",
+    "location": "Horten",
+    "cutoff_score": 45.5
+  },
+  {
+    "study_name": "Ingeniør, skipsingeniør",
+    "university": "NTNU",
+    "location": "Ålesund",
+    "cutoff_score": 45.4
+  },
+  {
+    "study_name": "Sykepleie, Levanger",
+    "university": "NORD",
+    "location": "Levanger",
+    "cutoff_score": 45.4
+  },
+  {
+    "study_name": "Bioingeniør",
+    "university": "UIA",
+    "location": "Kristiansand",
+    "cutoff_score": 45.4
+  },
+  {
+    "study_name": "Tannpleie",
+    "university": "UIT",
+    "location": "Tromsø",
+    "cutoff_score": 45.4
+  },
+  {
+    "study_name": "Lektor, 8.-13. trinn, samfunnsfag",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 45.3
+  },
+  {
+    "study_name": "Arkivvitenskap",
+    "university": "OSLOMET",
+    "location": "Oslo",
+    "cutoff_score": 45.3
+  },
+  {
+    "study_name": "Vernepleie, deltid, Kongsvinger",
+    "university": "INN",
+    "location": "Kongsvinger",
+    "cutoff_score": 45.3
+  },
+  {
+    "study_name": "Sykepleie, Grimstad",
+    "university": "UIA",
+    "location": "Grimstad",
+    "cutoff_score": 45.2
+  },
+  {
+    "study_name": "Sykepleie, Vestfold",
+    "university": "USN",
+    "location": "Horten",
+    "cutoff_score": 45.2
+  },
+  {
+    "study_name": "Statsvitenskap, bachelor",
+    "university": "UIA",
+    "location": "Kristiansand",
+    "cutoff_score": 45.2
+  },
+  {
+    "study_name": "Markedsføring og ledelse",
+    "university": "UIA",
+    "location": "Kristiansand",
+    "cutoff_score": 45.2
+  },
+  {
+    "study_name": "Ergoterapi",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 45.1
+  },
+  {
+    "study_name": "Visuell kommunikasjon",
+    "university": "USN",
+    "location": "Drammen",
+    "cutoff_score": 45.1
+  },
+  {
+    "study_name": "Landmåling og eiendomsdesign",
+    "university": "HVL",
+    "location": "Bergen",
+    "cutoff_score": 45.1
+  },
+  {
+    "study_name": "Sikkerhet og beredskap",
+    "university": "UIT",
+    "location": "Sør-Varanger",
+    "cutoff_score": 45.0
+  },
+  {
+    "study_name": "Sykepleie, Kjeller",
+    "university": "OSLOMET",
+    "location": "Lillestrøm",
+    "cutoff_score": 44.8
+  },
+  {
+    "study_name": "Barnevern",
+    "university": "HIØ",
+    "location": "Fredrikstad",
+    "cutoff_score": 44.5
+  },
+  {
+    "study_name": "Verdibasert ledelse og administrasjon",
+    "university": "VID",
+    "location": "Stavanger",
+    "cutoff_score": 44.5
+  },
+  {
+    "study_name": "Kommunikasjon, medieproduksjon, bachelor",
+    "university": "UIA",
+    "location": "Kristiansand",
+    "cutoff_score": 44.4
+  },
+  {
+    "study_name": "Sykepleie, deltid, Mo i Rana",
+    "university": "NORD",
+    "location": "Mo i Rana",
+    "cutoff_score": 44.4
+  },
+  {
+    "study_name": "Grunnskolelærer, 1.-7. trinn, kroppsøving",
+    "university": "HVL",
+    "location": "Bergen",
+    "cutoff_score": 44.3
+  },
+  {
+    "study_name": "Matematikk: data, modellering og beregninger",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 44.2
+  },
+  {
+    "study_name": "Sykepleie, deltid, Haugesund",
+    "university": "HVL",
+    "location": "Haugesund",
+    "cutoff_score": 44.1
+  },
+  {
+    "study_name": "Folkehelsearbeid",
+    "university": "HVL",
+    "location": "Bergen",
+    "cutoff_score": 44.1
+  },
+  {
+    "study_name": "Samfunns- og idrettsvitenskap",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 44.1
+  },
+  {
+    "study_name": "Lingvistikk",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 44.0
+  },
+  {
+    "study_name": "Sosialt arbeid, deltid",
+    "university": "VID",
+    "location": "Oslo",
+    "cutoff_score": 44.0
+  },
+  {
+    "study_name": "Sykepleie, Indre Østfold",
+    "university": "HIØ",
+    "location": "Indre Østfold",
+    "cutoff_score": 44.0
+  },
+  {
+    "study_name": "Sykepleie, Fredrikstad",
+    "university": "HIØ",
+    "location": "Fredrikstad",
+    "cutoff_score": 44.0
+  },
+  {
+    "study_name": "Vernepleie",
+    "university": "USN",
+    "location": "Porsgrunn",
+    "cutoff_score": 44.0
+  },
+  {
+    "study_name": "Informasjonsteknologi, bachelor",
+    "university": "OSLOMET",
+    "location": "Oslo",
+    "cutoff_score": 44.0
+  },
+  {
+    "study_name": "Ingeniør, mekatronikk og produktdesign",
+    "university": "NTNU",
+    "location": "Ålesund",
+    "cutoff_score": 43.9
+  },
+  {
+    "study_name": "Sosiologi, årsstudium",
+    "university": "UIB",
+    "location": "Bergen",
+    "cutoff_score": 43.8
+  },
+  {
+    "study_name": "Kunst og design - kunst og formidling",
+    "university": "OSLOMET",
+    "location": "Oslo",
+    "cutoff_score": 43.8
+  },
+  {
+    "study_name": "Tannpleie",
+    "university": "INN",
+    "location": "Elverum",
+    "cutoff_score": 43.8
+  },
+  {
+    "study_name": "Europa studier med engelsk",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 43.8
+  },
+  {
+    "study_name": "Logistikkledelse",
+    "university": "NTNU",
+    "location": "Gjøvik",
+    "cutoff_score": 43.8
+  },
+  {
+    "study_name": "Arkiv, museum og dokumentasjonsforvaltning",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 43.7
+  },
+  {
+    "study_name": "Økonomi og ledelse, Drammen",
+    "university": "USN",
+    "location": "Drammen",
+    "cutoff_score": 43.7
+  },
+  {
+    "study_name": "Sosiologi, bachelor",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 43.6
+  },
+  {
+    "study_name": "Psykologi, bachelor",
+    "university": "AHS",
+    "location": "Kristiansand",
+    "cutoff_score": 43.6
+  },
+  {
+    "study_name": "Statsvitenskap, bachelor",
+    "university": "UIS",
+    "location": "Stavanger",
+    "cutoff_score": 43.5
+  },
+  {
+    "study_name": "Sykepleie, Oslo",
+    "university": "VID",
+    "location": "Oslo",
+    "cutoff_score": 43.5
+  },
+  {
+    "study_name": "Sykepleie",
+    "university": "UIS",
+    "location": "Stavanger",
+    "cutoff_score": 43.5
+  },
+  {
+    "study_name": "Visuell kunst og formidling, årsstudium",
+    "university": "UIA",
+    "location": "Kristiansand",
+    "cutoff_score": 43.5
+  },
+  {
+    "study_name": "Digital infrastruktur og cybersikkerhet, Gjøvik",
+    "university": "NTNU",
+    "location": "Gjøvik",
+    "cutoff_score": 43.5
+  },
+  {
+    "study_name": "Sosialantropologi",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 43.3
+  },
+  {
+    "study_name": "Teater, skuespill og regi, årsstudium",
+    "university": "UIA",
+    "location": "Kristiansand",
+    "cutoff_score": 43.3
+  },
+  {
+    "study_name": "Radiografi",
+    "university": "UIT",
+    "location": "Tromsø",
+    "cutoff_score": 43.3
+  },
+  {
+    "study_name": "Kunst og håndverk",
+    "university": "UIS",
+    "location": "Stavanger",
+    "cutoff_score": 43.1
+  },
+  {
+    "study_name": "Vernepleie",
+    "university": "OSLOMET",
+    "location": "Lillestrøm",
+    "cutoff_score": 43.1
+  },
+  {
+    "study_name": "IT og informasjonssystemer, bachelor",
+    "university": "UIA",
+    "location": "Kristiansand",
+    "cutoff_score": 42.8
+  },
+  {
+    "study_name": "Sosialt arbeid",
+    "university": "INN",
+    "location": "Lillehammer",
+    "cutoff_score": 42.5
+  },
+  {
+    "study_name": "IT og ledelse",
+    "university": "USN",
+    "location": "Horten",
+    "cutoff_score": 42.5
+  },
+  {
+    "study_name": "Sykepleie, Kongsvinger",
+    "university": "INN",
+    "location": "Kongsvinger",
+    "cutoff_score": 42.4
+  },
+  {
+    "study_name": "Journalistikk",
+    "university": "UIS",
+    "location": "Stavanger",
+    "cutoff_score": 42.4
+  },
+  {
+    "study_name": "Økonomi og ledelse, Vestfold",
+    "university": "USN",
+    "location": "Horten",
+    "cutoff_score": 42.2
+  },
+  {
+    "study_name": "Teater, skuespill og regi, bachelor",
+    "university": "UIA",
+    "location": "Kristiansand",
+    "cutoff_score": 42.0
+  },
+  {
+    "study_name": "Vernepleie",
+    "university": "HIØ",
+    "location": "Fredrikstad",
+    "cutoff_score": 42.0
+  },
+  {
+    "study_name": "Barnevern",
+    "university": "USN",
+    "location": "Porsgrunn",
+    "cutoff_score": 42.0
+  },
+  {
+    "study_name": "IT og digitalisering",
+    "university": "HIM",
+    "location": "Molde",
+    "cutoff_score": 42.0
+  },
+  {
+    "study_name": "Musikkvitenskap",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 41.8
+  },
+  {
+    "study_name": "Økonomi og administrasjon, Lillehammer, bachelor",
+    "university": "INN",
+    "location": "Lillehammer",
+    "cutoff_score": 41.8
+  },
+  {
+    "study_name": "Økonomi og ledelse, bachelor",
+    "university": "NTNU",
+    "location": "Gjøvik",
+    "cutoff_score": 41.7
+  },
+  {
+    "study_name": "Vernepleie, deltid",
+    "university": "HVL",
+    "location": "Sogndal",
+    "cutoff_score": 41.7
+  },
+  {
+    "study_name": "Byggeteknikk og arkitektur",
+    "university": "NMBU",
+    "location": "Ås",
+    "cutoff_score": 41.7
+  },
+  {
+    "study_name": "Pedagogikk",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 41.6
+  },
+  {
+    "study_name": "Vernepleie, deltid, Stavanger",
+    "university": "VID",
+    "location": "Stavanger",
+    "cutoff_score": 41.6
+  },
+  {
+    "study_name": "Medievitenskap, bachelor",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 41.5
+  },
+  {
+    "study_name": "Kunstig intelligens",
+    "university": "INN",
+    "location": "Hamar",
+    "cutoff_score": 41.5
+  },
+  {
+    "study_name": "Pedagogikk, bachelor",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 41.5
+  },
+  {
+    "study_name": "Ingeniør, elektro",
+    "university": "NTNU",
+    "location": "Gjøvik",
+    "cutoff_score": 41.1
+  },
+  {
+    "study_name": "Ingeniør, maskin",
+    "university": "UIS",
+    "location": "Stavanger",
+    "cutoff_score": 41.1
+  },
+  {
+    "study_name": "Markedsføring, innovasjon og ledelse",
+    "university": "NTNU",
+    "location": "Ålesund",
+    "cutoff_score": 41.0
+  },
+  {
+    "study_name": "Statsvitenskap, årsstudium",
+    "university": "UIS",
+    "location": "Stavanger",
+    "cutoff_score": 41.0
+  },
+  {
+    "study_name": "Sykepleie, Elverum",
+    "university": "INN",
+    "location": "Elverum",
+    "cutoff_score": 41.0
+  },
+  {
+    "study_name": "Sosialantropologi, årsstudium",
+    "university": "NTNU",
+    "location": "Trondheim",
+    "cutoff_score": 41.0
+  },
+  {
+    "study_name": "Sykepleie, Gjøvik",
+    "university": "NTNU",
+    "location": "Gjøvik",
+    "cutoff_score": 41.0
+  },
+  {
+    "study_name": "Kunsthistorie og visuelle studier, bachelor",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 40.9
+  },
+  {
+    "study_name": "Sykepleie, Ålesund",
+    "university": "NTNU",
+    "location": "Ålesund",
+    "cutoff_score": 40.8
+  },
+  {
+    "study_name": "Sykepleie, Stord, høst",
+    "university": "HVL",
+    "location": "Stord",
+    "cutoff_score": 40.3
+  },
+  {
+    "study_name": "Sykepleie, Haugesund, høst",
+    "university": "HVL",
+    "location": "Haugesund",
+    "cutoff_score": 40.2
+  },
+  {
+    "study_name": "Sosiologi",
+    "university": "UIA",
+    "location": "Kristiansand",
+    "cutoff_score": 40.0
+  },
+  {
+    "study_name": "Økonomi og ledelse, årsstudium",
+    "university": "NTNU",
+    "location": "Gjøvik",
+    "cutoff_score": 39.9
+  },
+  {
+    "study_name": "Sosialt arbeid, Levanger",
+    "university": "NORD",
+    "location": "Levanger",
+    "cutoff_score": 39.9
+  },
+  {
+    "study_name": "Grafisk design",
+    "university": "NTNU",
+    "location": "Gjøvik",
+    "cutoff_score": 39.8
+  },
+  {
+    "study_name": "Sykepleie, deltid, Elverum",
+    "university": "INN",
+    "location": "Elverum",
+    "cutoff_score": 39.8
+  },
+  {
+    "study_name": "Grunnskolelærer, 5.-10. trinn, samfunnsfag",
+    "university": "HVL",
+    "location": "Bergen",
+    "cutoff_score": 39.8
+  },
+  {
+    "study_name": "Administrasjon og ledelse",
+    "university": "HVL",
+    "location": "Haugesund",
+    "cutoff_score": 39.7
+  },
+  {
+    "study_name": "Økonomi og administrasjon, Oslo",
+    "university": "NLA",
+    "location": "Oslo",
+    "cutoff_score": 39.5
+  },
+  {
+    "study_name": "Statsvitenskap",
+    "university": "USN",
+    "location": "Drammen",
+    "cutoff_score": 39.4
+  },
+  {
+    "study_name": "Pedagogikk, bachelor",
+    "university": "UIA",
+    "location": "Kristiansand",
+    "cutoff_score": 39.4
+  },
+  {
+    "study_name": "Matematikk",
+    "university": "UIO",
+    "location": "Oslo",
+    "cutoff_score": 39.2
+  },
+  {
+    "study_name": "Digital service ledelse - dataanalyse",
+    "university": "UIS",
+    "location": "Stavanger",
+    "cutoff_score": 39.2
+  },
+  {
+    "study_name": "Film, litteratur og teater",
+    "university": "UIA",
+    "location": "Kristiansand",
+    "cutoff_score": 39.2
+  },
+  {
+    "study_name": "Ingeniør, bygg, Ålesund",
+    "university": "NTNU",
+    "location": "Ålesund",
+    "cutoff_score": 39.2
+  },
+  {
+    "study_name": "Sosialt arbeid, Sogndal",
+    "university": "HVL",
+    "location": "Sogndal",
+    "cutoff_score": 36.3
+  },
+  {
+    "study_name": "Sykepleie, Bodø",
+    "university": "NORD",
+    "location": "Bodø",
+    "cutoff_score": 36.2
+  },
+  {
+    "study_name": "Statsvitenskap, årsstudium",
+    "university": "UIA",
+    "location": "Kristiansand",
+    "cutoff_score": 36.0
+  },
+  {
+    "study_name": "Økonomi og administrasjon, Tromsø",
+    "university": "UIT",
+    "location": "Tromsø",
+    "cutoff_score": 35.8
+  },
+  {
+    "study_name": "Barnevern",
+    "university": "UIS",
+    "location": "Stavanger",
+    "cutoff_score": 35.7
+  },
+  {
+    "study_name": "HRM, Levanger",
+    "university": "NORD",
+    "location": "Levanger",
+    "cutoff_score": 35.4
+  },
+  {
+    "study_name": "Utviklingsstudier, bachelor",
+    "university": "OSLOMET",
+    "location": "Oslo",
+    "cutoff_score": 35.4
+  },
+  {
+    "study_name": "Eiendomsmegling, økonomi og jus",
+    "university": "HVL",
+    "location": "Sogndal",
+    "cutoff_score": 35.4
+  },
+  {
+    "study_name": "Kommunikasjon, kommunikasjon og medier, bachelor",
+    "university": "UIA",
+    "location": "Kristiansand",
+    "cutoff_score": 35.1
+  },
+  {
+    "study_name": "IT og informasjonssystemer, årsstudium",
+    "university": "UIA",
+    "location": "Kristiansand",
+    "cutoff_score": 31.6
+  },
+  {
+    "study_name": "Sykepleie, Førde, høst",
+    "university": "HVL",
+    "location": "Sunnfjord",
+    "cutoff_score": 30.4
+  },
+  {
+    "study_name": "Økonomi og administrasjon, Kristiansand",
+    "university": "NLA",
+    "location": "Kristiansand",
+    "cutoff_score": 29.6
+  },
+  {
+    "study_name": "Sykepleie, Harstad",
+    "university": "UIT",
+    "location": "Harstad",
+    "cutoff_score": 28.5
+  }
+]
