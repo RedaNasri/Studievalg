@@ -82,9 +82,7 @@ function Dropdown({ label, options, valgte, toggle, nullstill, color = 'blue' }:
     return () => document.removeEventListener('mousedown', handleClick)
   }, [])
 
-  const activeClass = color === 'indigo'
-    ? 'border-indigo-500 bg-indigo-50 text-indigo-700'
-    : 'border-blue-500 bg-blue-50 text-blue-700'
+  const activeClass = color === 'indigo' ? 'border-indigo-500 bg-indigo-50 text-indigo-700' : 'border-blue-500 bg-blue-50 text-blue-700'
   const badgeClass = color === 'indigo' ? 'bg-indigo-600' : 'bg-blue-600'
   const hoverClass = color === 'indigo' ? 'hover:border-indigo-300' : 'hover:border-blue-300'
   const itemActiveClass = color === 'indigo' ? 'bg-indigo-50 text-indigo-700' : 'bg-blue-50 text-blue-700'
@@ -119,6 +117,15 @@ function getStatus(snitt: number, grense: number) {
 }
 
 const BATCH = 30
+
+function Label({ text, hint }: { text: string, hint: string }) {
+  return (
+    <div className="mb-2">
+      <p className="text-gray-700 font-semibold text-sm">{text}</p>
+      <p className="text-gray-400 text-xs mt-0.5">{hint}</p>
+    </div>
+  )
+}
 
 function VGSSide({ tilbake }: { tilbake: () => void }) {
   const [snitt, setSnitt] = useState('')
@@ -183,12 +190,24 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
           <h1 className="text-4xl font-bold text-blue-700 mb-2">StudieMatch</h1>
           <p className="text-gray-500">Finn bachelorstudier basert på karaktersnittet ditt</p>
         </div>
+
         <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
-          <div className="flex flex-wrap gap-3 items-center">
-            <input type="number" placeholder="Karaktersnitt, f.eks. 52.4" value={snitt} onChange={e => setSnitt(e.target.value)} onKeyDown={e => e.key === 'Enter' && finnStudier()} className="border border-gray-200 rounded-xl px-4 py-2 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 w-56" />
-            <Dropdown label="By" options={byer} valgte={valgteByer} toggle={toggleBy} nullstill={() => setValgteByer([])} color="blue" />
-            <Dropdown label="Fagområde" options={fagomraader} valgte={valgteFag} toggle={toggleFag} nullstill={() => setValgteFag([])} color="blue" />
-            <button onClick={finnStudier} className="bg-blue-600 text-white px-6 py-2 rounded-xl font-semibold hover:bg-blue-700 transition text-sm">Søk</button>
+          <div className="flex flex-wrap gap-6 items-start">
+            <div>
+              <Label text="Karaktersnitt" hint="Skriv inn karaktergjennomsnittet ditt" />
+              <div className="flex gap-3">
+                <input type="number" placeholder="F.eks. 52.4" value={snitt} onChange={e => setSnitt(e.target.value)} onKeyDown={e => e.key === 'Enter' && finnStudier()} className="border border-gray-200 rounded-xl px-4 py-2 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 w-44" />
+                <button onClick={finnStudier} className="bg-blue-600 text-white px-6 py-2 rounded-xl font-semibold hover:bg-blue-700 transition text-sm">Søk</button>
+              </div>
+            </div>
+            <div>
+              <Label text="By" hint="Hvilken by ønsker du å studere i?" />
+              <Dropdown label="Velg by" options={byer} valgte={valgteByer} toggle={toggleBy} nullstill={() => setValgteByer([])} color="blue" />
+            </div>
+            <div>
+              <Label text="Fagområde" hint="Hvilke fagområder er du interessert i?" />
+              <Dropdown label="Velg fagområde" options={fagomraader} valgte={valgteFag} toggle={toggleFag} nullstill={() => setValgteFag([])} color="blue" />
+            </div>
           </div>
         </div>
 
@@ -414,17 +433,18 @@ function BachelorSide({ tilbake }: { tilbake: () => void }) {
           <h1 className="text-4xl font-bold text-indigo-700 mb-2">StudieMatch</h1>
           <p className="text-gray-500">Finn masterstudier basert på bacheloren og karakterene dine</p>
         </div>
+
         <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
-          <div className="flex flex-wrap gap-4 items-end mb-4">
+          <div className="flex flex-wrap gap-6 items-start mb-4">
             <div>
-              <label className="block text-gray-700 font-semibold mb-2 text-sm">Hva har du studert?</label>
+              <Label text="Hva har du studert?" hint="Velg bachelorutdanningen din fra listen" />
               <select value={bachelor} onChange={e => setBachelor(e.target.value)} className="border border-gray-200 rounded-xl px-4 py-2 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 w-72">
                 <option value="">Velg bachelorutdanning</option>
                 {bachelorStudier.map(b => <option key={b} value={b}>{b}</option>)}
               </select>
             </div>
             <div>
-              <label className="block text-gray-700 font-semibold mb-2 text-sm">Hva er snittet ditt?</label>
+              <Label text="Karakternivå" hint="Hva er karakternivået ditt?" />
               <select value={karakter} onChange={e => setKarakter(e.target.value)} className="border border-gray-200 rounded-xl px-4 py-2 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400">
                 <option value="">Velg karakter</option>
                 <option value="A">A</option>
@@ -434,11 +454,19 @@ function BachelorSide({ tilbake }: { tilbake: () => void }) {
                 <option value="E">E</option>
               </select>
             </div>
-            <button onClick={() => { if (bachelor && karakter) setSokt(true) }} className="bg-indigo-600 text-white px-6 py-2 rounded-xl font-semibold hover:bg-indigo-700 transition text-sm">Finn mastere</button>
+            <div className="flex items-end">
+              <button onClick={() => { if (bachelor && karakter) setSokt(true) }} className="bg-indigo-600 text-white px-6 py-2 rounded-xl font-semibold hover:bg-indigo-700 transition text-sm">Finn mastere</button>
+            </div>
           </div>
-          <div className="flex flex-wrap gap-3">
-            <Dropdown label="By" options={masterByer} valgte={valgteByer} toggle={toggleBy} nullstill={() => setValgteByer([])} color="indigo" />
-            <Dropdown label="Fagområde" options={masterFagomraader} valgte={valgteFag} toggle={toggleFag} nullstill={() => setValgteFag([])} color="indigo" />
+          <div className="flex flex-wrap gap-6 items-start">
+            <div>
+              <Label text="By" hint="Hvilken by ønsker du å studere i?" />
+              <Dropdown label="Velg by" options={masterByer} valgte={valgteByer} toggle={toggleBy} nullstill={() => setValgteByer([])} color="indigo" />
+            </div>
+            <div>
+              <Label text="Fagområde" hint="Hvilke fagområder er du interessert i?" />
+              <Dropdown label="Velg fagområde" options={masterFagomraader} valgte={valgteFag} toggle={toggleFag} nullstill={() => setValgteFag([])} color="indigo" />
+            </div>
           </div>
         </div>
 
