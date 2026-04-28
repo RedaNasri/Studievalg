@@ -192,13 +192,17 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
         </div>
 
         <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
-          <div className="flex flex-wrap gap-8 items-start">
-            <div>
+          <div className="flex flex-wrap gap-8 items-start mb-6">
+            <div className="flex-1 min-w-48">
               <Label text="Karaktersnitt" hint="Skriv inn karaktergjennomsnittet ditt" />
-              <div className="flex gap-3">
-                <input type="number" placeholder="F.eks. 52.4" value={snitt} onChange={e => setSnitt(e.target.value)} onKeyDown={e => e.key === 'Enter' && finnStudier()} className="border border-gray-200 rounded-xl px-4 py-2 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 w-44" />
-                <button onClick={finnStudier} className="bg-blue-600 text-white px-6 py-2 rounded-xl font-semibold hover:bg-blue-700 transition text-sm">Søk</button>
-              </div>
+              <input
+                type="number"
+                placeholder="F.eks. 52.4"
+                value={snitt}
+                onChange={e => setSnitt(e.target.value)}
+                onKeyDown={e => e.key === 'Enter' && finnStudier()}
+                className="border border-gray-200 rounded-xl px-4 py-2 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 w-full"
+              />
             </div>
             <div>
               <Label text="By" hint="Hvilken by ønsker du å studere i?" />
@@ -209,6 +213,12 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
               <Dropdown label="Velg fagområde" options={fagomraader} valgte={valgteFag} toggle={toggleFag} nullstill={() => setValgteFag([])} color="blue" />
             </div>
           </div>
+          <button
+            onClick={finnStudier}
+            className="w-full bg-blue-600 text-white py-4 rounded-xl font-bold text-base hover:bg-blue-700 transition sticky bottom-4 shadow-lg"
+          >
+            Se hva jeg kan komme inn på
+          </button>
         </div>
 
         {laster && <div className="text-center text-gray-400 py-8">Laster...</div>}
@@ -436,9 +446,9 @@ function BachelorSide({ tilbake }: { tilbake: () => void }) {
 
         <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
           <div className="flex flex-wrap gap-8 items-start mb-6">
-            <div>
+            <div className="flex-1 min-w-64">
               <Label text="Hva har du studert?" hint="Velg bachelorutdanningen din fra listen" />
-              <select value={bachelor} onChange={e => setBachelor(e.target.value)} className="border border-gray-200 rounded-xl px-4 py-2 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 w-72">
+              <select value={bachelor} onChange={e => setBachelor(e.target.value)} className="border border-gray-200 rounded-xl px-4 py-2 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 w-full">
                 <option value="">Velg bachelorutdanning</option>
                 {bachelorStudier.map(b => <option key={b} value={b}>{b}</option>)}
               </select>
@@ -454,11 +464,8 @@ function BachelorSide({ tilbake }: { tilbake: () => void }) {
                 <option value="E">E</option>
               </select>
             </div>
-            <div className="flex items-end pb-0.5">
-              <button onClick={() => { if (bachelor && karakter) setSokt(true) }} className="bg-indigo-600 text-white px-6 py-2 rounded-xl font-semibold hover:bg-indigo-700 transition text-sm">Finn mastere</button>
-            </div>
           </div>
-          <div className="flex flex-wrap gap-8 items-start">
+          <div className="flex flex-wrap gap-8 items-start mb-6">
             <div>
               <Label text="By" hint="Hvilken by ønsker du å studere i?" />
               <Dropdown label="Velg by" options={masterByer} valgte={valgteByer} toggle={toggleBy} nullstill={() => setValgteByer([])} color="indigo" />
@@ -468,6 +475,12 @@ function BachelorSide({ tilbake }: { tilbake: () => void }) {
               <Dropdown label="Velg fagområde" options={masterFagomraader} valgte={valgteFag} toggle={toggleFag} nullstill={() => setValgteFag([])} color="indigo" />
             </div>
           </div>
+          <button
+            onClick={() => { if (bachelor && karakter) setSokt(true) }}
+            className="w-full bg-indigo-600 text-white py-4 rounded-xl font-bold text-base hover:bg-indigo-700 transition sticky bottom-4 shadow-lg"
+          >
+            Se hvilke masterprogram jeg kan ta
+          </button>
         </div>
 
         {sokt && (
