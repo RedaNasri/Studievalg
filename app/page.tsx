@@ -56,12 +56,20 @@ const byer = [
   'Ringerike', 'Sør-Varanger', 'Stord', 'Sunnfjord', 'Volda'
 ]
 
-function Dropdown({ label, options, valgte, toggle, nullstill }: {
+const masterFagomraader = [
+  'Økonomi', 'Jus', 'Psykologi', 'Informatikk', 'Ingeniør',
+  'Samfunnsfag', 'Helse', 'Pedagogikk', 'Media', 'Realfag', 'Idrett', 'Kunst', 'Språk'
+]
+
+const masterByer = ['Oslo', 'Bergen', 'Trondheim', 'Tromsø', 'Stavanger', 'Kristiansand']
+
+function Dropdown({ label, options, valgte, toggle, nullstill, color = 'blue' }: {
   label: string
   options: string[]
   valgte: string[]
   toggle: (v: string) => void
   nullstill: () => void
+  color?: string
 }) {
   const [open, setOpen] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
@@ -74,18 +82,26 @@ function Dropdown({ label, options, valgte, toggle, nullstill }: {
     return () => document.removeEventListener('mousedown', handleClick)
   }, [])
 
+  const activeClass = color === 'indigo'
+    ? 'border-indigo-500 bg-indigo-50 text-indigo-700'
+    : 'border-blue-500 bg-blue-50 text-blue-700'
+  const badgeClass = color === 'indigo' ? 'bg-indigo-600' : 'bg-blue-600'
+  const hoverClass = color === 'indigo' ? 'hover:border-indigo-300' : 'hover:border-blue-300'
+  const itemActiveClass = color === 'indigo' ? 'bg-indigo-50 text-indigo-700' : 'bg-blue-50 text-blue-700'
+  const checkClass = color === 'indigo' ? 'bg-indigo-600 border-indigo-600' : 'bg-blue-600 border-blue-600'
+
   return (
     <div className="relative" ref={ref}>
-      <button onClick={() => setOpen(!open)} className={`flex items-center gap-2 px-4 py-2 rounded-xl border text-sm font-medium transition ${valgte.length > 0 ? 'border-blue-500 bg-blue-50 text-blue-700' : 'border-gray-200 bg-white text-gray-600 hover:border-blue-300'}`}>
-        {label} {valgte.length > 0 && <span className="bg-blue-600 text-white text-xs rounded-full px-2 py-0.5">{valgte.length}</span>}
+      <button onClick={() => setOpen(!open)} className={`flex items-center gap-2 px-4 py-2 rounded-xl border text-sm font-medium transition ${valgte.length > 0 ? activeClass : `border-gray-200 bg-white text-gray-600 ${hoverClass}`}`}>
+        {label} {valgte.length > 0 && <span className={`${badgeClass} text-white text-xs rounded-full px-2 py-0.5`}>{valgte.length}</span>}
         <span className="text-xs">{open ? '▲' : '▼'}</span>
       </button>
       {open && (
         <div className="absolute top-12 left-0 z-50 bg-white border border-gray-200 rounded-2xl shadow-xl p-3 w-64 max-h-72 overflow-y-auto">
           {valgte.length > 0 && <button onClick={nullstill} className="text-xs text-red-400 hover:text-red-600 mb-2 block">Nullstill</button>}
           {options.map(opt => (
-            <button key={opt} onClick={() => toggle(opt)} className={`flex items-center gap-2 w-full text-left px-3 py-2 rounded-lg text-sm transition ${valgte.includes(opt) ? 'bg-blue-50 text-blue-700 font-medium' : 'text-gray-600 hover:bg-gray-50'}`}>
-              <span className={`w-4 h-4 rounded border flex items-center justify-center text-xs ${valgte.includes(opt) ? 'bg-blue-600 border-blue-600 text-white' : 'border-gray-300'}`}>{valgte.includes(opt) ? '✓' : ''}</span>
+            <button key={opt} onClick={() => toggle(opt)} className={`flex items-center gap-2 w-full text-left px-3 py-2 rounded-lg text-sm transition ${valgte.includes(opt) ? itemActiveClass + ' font-medium' : 'text-gray-600 hover:bg-gray-50'}`}>
+              <span className={`w-4 h-4 rounded border flex items-center justify-center text-xs ${valgte.includes(opt) ? checkClass + ' text-white' : 'border-gray-300'}`}>{valgte.includes(opt) ? '✓' : ''}</span>
               {opt}
             </button>
           ))}
@@ -170,8 +186,8 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
         <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
           <div className="flex flex-wrap gap-3 items-center">
             <input type="number" placeholder="Karaktersnitt, f.eks. 52.4" value={snitt} onChange={e => setSnitt(e.target.value)} onKeyDown={e => e.key === 'Enter' && finnStudier()} className="border border-gray-200 rounded-xl px-4 py-2 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 w-56" />
-            <Dropdown label="By" options={byer} valgte={valgteByer} toggle={toggleBy} nullstill={() => setValgteByer([])} />
-            <Dropdown label="Fagområde" options={fagomraader} valgte={valgteFag} toggle={toggleFag} nullstill={() => setValgteFag([])} />
+            <Dropdown label="By" options={byer} valgte={valgteByer} toggle={toggleBy} nullstill={() => setValgteByer([])} color="blue" />
+            <Dropdown label="Fagområde" options={fagomraader} valgte={valgteFag} toggle={toggleFag} nullstill={() => setValgteFag([])} color="blue" />
             <button onClick={finnStudier} className="bg-blue-600 text-white px-6 py-2 rounded-xl font-semibold hover:bg-blue-700 transition text-sm">Søk</button>
           </div>
         </div>
@@ -229,13 +245,6 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
   )
 }
 
-const masterFagomraader = [
-  'Økonomi', 'Jus', 'Psykologi', 'Informatikk', 'Ingeniør',
-  'Samfunnsfag', 'Helse', 'Pedagogikk', 'Media', 'Realfag', 'Idrett', 'Kunst', 'Språk'
-]
-
-const masterByer = ['Oslo', 'Bergen', 'Trondheim', 'Tromsø', 'Stavanger', 'Kristiansand']
-
 const bachelorStudier = [
   'Bachelor i økonomi og administrasjon', 'Bachelor i regnskap og revisjon',
   'Bachelor i markedsføring og ledelse', 'Bachelor i internasjonal business',
@@ -270,7 +279,7 @@ const bachelorTilKategori: any = {
   'Bachelor i rettsvitenskap / jus': 'Jus',
   'Bachelor i psykologi': 'Psykologi',
   'Bachelor i sosiologi': 'Samfunnsfag',
-  'Bachelor i statsvitenskap': 'Statsvitenskap',
+  'Bachelor i statsvitenskap': 'Samfunnsfag',
   'Bachelor i samfunnsøkonomi': 'Økonomi',
   'Bachelor i filosofi': 'Samfunnsfag',
   'Bachelor i pedagogikk': 'Pedagogikk',
@@ -360,45 +369,6 @@ const alleMastere = [
   { name: 'Master i historie', school: 'UiO', location: 'Oslo', url: 'https://www.uio.no/studier/program/historie-master', fagomraade: 'Samfunnsfag', requires: { kategorier: ['Samfunnsfag', 'Språk'], min_grade: 'C' } },
 ]
 
-function MasterDropdown({ label, options, valgte, toggle, nullstill }: {
-  label: string
-  options: string[]
-  valgte: string[]
-  toggle: (v: string) => void
-  nullstill: () => void
-}) {
-  const [open, setOpen] = useState(false)
-  const ref = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    function handleClick(e: MouseEvent) {
-      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false)
-    }
-    document.addEventListener('mousedown', handleClick)
-    return () => document.removeEventListener('mousedown', handleClick)
-  }, [])
-
-  return (
-    <div className="relative" ref={ref}>
-      <button onClick={() => setOpen(!open)} className={`flex items-center gap-2 px-4 py-2 rounded-xl border text-sm font-medium transition ${valgte.length > 0 ? 'border-indigo-500 bg-indigo-50 text-indigo-700' : 'border-gray-200 bg-white text-gray-600 hover:border-indigo-300'}`}>
-        {label} {valgte.length > 0 && <span className="bg-indigo-600 text-white text-xs rounded-full px-2 py-0.5">{valgte.length}</span>}
-        <span className="text-xs">{open ? '▲' : '▼'}</span>
-      </button>
-      {open && (
-        <div className="absolute top-12 left-0 z-50 bg-white border border-gray-200 rounded-2xl shadow-xl p-3 w-64 max-h-72 overflow-y-auto">
-          {valgte.length > 0 && <button onClick={nullstill} className="text-xs text-red-400 hover:text-red-600 mb-2 block">Nullstill</button>}
-          {options.map(opt => (
-            <button key={opt} onClick={() => toggle(opt)} className={`flex items-center gap-2 w-full text-left px-3 py-2 rounded-lg text-sm transition ${valgte.includes(opt) ? 'bg-indigo-50 text-indigo-700 font-medium' : 'text-gray-600 hover:bg-gray-50'}`}>
-              <span className={`w-4 h-4 rounded border flex items-center justify-center text-xs ${valgte.includes(opt) ? 'bg-indigo-600 border-indigo-600 text-white' : 'border-gray-300'}`}>{valgte.includes(opt) ? '✓' : ''}</span>
-              {opt}
-            </button>
-          ))}
-        </div>
-      )}
-    </div>
-  )
-}
-
 function BachelorSide({ tilbake }: { tilbake: () => void }) {
   const [bachelor, setBachelor] = useState('')
   const [karakter, setKarakter] = useState('')
@@ -444,7 +414,6 @@ function BachelorSide({ tilbake }: { tilbake: () => void }) {
           <h1 className="text-4xl font-bold text-indigo-700 mb-2">StudieMatch</h1>
           <p className="text-gray-500">Finn masterstudier basert på bacheloren og karakterene dine</p>
         </div>
-
         <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
           <div className="flex flex-wrap gap-4 items-end mb-4">
             <div>
@@ -467,9 +436,9 @@ function BachelorSide({ tilbake }: { tilbake: () => void }) {
             </div>
             <button onClick={() => { if (bachelor && karakter) setSokt(true) }} className="bg-indigo-600 text-white px-6 py-2 rounded-xl font-semibold hover:bg-indigo-700 transition text-sm">Finn mastere</button>
           </div>
-          <div className="flex flex-wrap gap-3 items-center">
-            <MasterDropdown label="By" options={masterByer} valgte={valgteByer} toggle={toggleBy} nullstill={() => setValgteByer([])} />
-            <MasterDropdown label="Fagområde" options={masterFagomraader} valgte={valgteFag} toggle={toggleFag} nullstill={() => setValgteFag([])} />
+          <div className="flex flex-wrap gap-3">
+            <Dropdown label="By" options={masterByer} valgte={valgteByer} toggle={toggleBy} nullstill={() => setValgteByer([])} color="indigo" />
+            <Dropdown label="Fagområde" options={masterFagomraader} valgte={valgteFag} toggle={toggleFag} nullstill={() => setValgteFag([])} color="indigo" />
           </div>
         </div>
 
