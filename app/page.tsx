@@ -11,7 +11,7 @@ export default function Home() {
     <main className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 flex flex-col items-center justify-center px-6">
       <div className="max-w-2xl w-full mx-auto py-16 text-center">
         <h1 className="text-5xl font-bold text-blue-700 mb-3">StudieMatch</h1>
-        <p className="text-xl text-gray-500 mb-12">Skriv inn snittet ditt eller bacheloren din – og se hvilke studier du kan være kvalifisert for. – på sekunder</p>
+        <p className="text-xl text-gray-500 mb-12">Skriv inn snittet ditt eller bacheloren din – og se hva du kan studere</p>
         <p className="text-gray-600 font-semibold mb-6 text-lg">Hva passer deg best?</p>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 mb-12">
           <button onClick={() => setValg('vgs')} className="bg-white border-2 border-blue-200 rounded-2xl p-8 hover:border-blue-500 hover:shadow-lg transition text-left group">
