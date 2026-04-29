@@ -8,28 +8,28 @@ export default function Home() {
   if (valg === 'bachelor') return <BachelorSide tilbake={() => setValg('start')} />
 
   return (
-    <main className="min-h-screen bg-[var(--bg)] flex flex-col items-center justify-center px-6">
+    <main className="min-h-screen flex flex-col items-center justify-center px-6" style={{background: '#F6F9FC'}}>
       <div className="max-w-2xl w-full mx-auto py-16 text-center">
-        <h1 className="text-5xl font-bold text-[var(--ink)] mb-4 tracking-tight">Studie<span className="text-[var(--accent)]">Match</span></h1>
-        <p className="text-lg text-[var(--ink-2)] mb-12 max-w-xl mx-auto leading-relaxed">
+        <h1 className="text-5xl font-bold mb-4" style={{color: '#0D1B2A'}}>Studie<span style={{color: '#1E3A8A'}}>Match</span></h1>
+        <p className="text-lg mb-12 max-w-xl mx-auto leading-relaxed" style={{color: '#475467'}}>
           Skriv inn snittet ditt eller bacheloren din – og se hva du kan studere
         </p>
-        <p className="text-[var(--ink)] font-semibold mb-6 text-lg">Hva passer deg best?</p>
+        <p className="font-semibold mb-6 text-lg" style={{color: '#0D1B2A'}}>Hva passer deg best?</p>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 mb-12">
-          <button onClick={() => setValg('vgs')} className="bg-white border border-[var(--border)] rounded-2xl p-8 hover:border-[var(--accent)] hover:shadow-[0_8px_24px_rgba(13,27,42,0.08)] hover:-translate-y-0.5 transition text-left group">
+          <button onClick={() => setValg('vgs')} className="bg-white rounded-2xl p-8 hover:-translate-y-0.5 transition text-left group" style={{border: '1px solid #E4E9F2'}}>
             <div className="text-4xl mb-3">📋</div>
-            <h2 className="text-xl font-bold text-[var(--ink)] mb-2">Jeg går på VGS</h2>
-            <p className="text-[var(--ink-2)] text-sm leading-relaxed">Se hvilke bachelorstudier du kan komme inn på med snittet ditt</p>
-            <div className="mt-4 text-[var(--accent)] text-sm font-semibold group-hover:translate-x-1 transition-transform">Kom i gang →</div>
+            <h2 className="text-xl font-bold mb-2" style={{color: '#0D1B2A'}}>Jeg går på VGS</h2>
+            <p className="text-sm leading-relaxed" style={{color: '#475467'}}>Se hvilke bachelorstudier du kan komme inn på med snittet ditt</p>
+            <div className="mt-4 text-sm font-semibold" style={{color: '#1E3A8A'}}>Kom i gang →</div>
           </button>
-          <button onClick={() => setValg('bachelor')} className="bg-white border border-[var(--border)] rounded-2xl p-8 hover:border-[var(--accent)] hover:shadow-[0_8px_24px_rgba(13,27,42,0.08)] hover:-translate-y-0.5 transition text-left group">
+          <button onClick={() => setValg('bachelor')} className="bg-white rounded-2xl p-8 hover:-translate-y-0.5 transition text-left group" style={{border: '1px solid #E4E9F2'}}>
             <div className="text-4xl mb-3">🎓</div>
-            <h2 className="text-xl font-bold text-[var(--ink)] mb-2">Jeg har en bachelor</h2>
-            <p className="text-[var(--ink-2)] text-sm leading-relaxed">Se hvilke masterprogram bacheloren din kan kvalifisere deg til</p>
-            <div className="mt-4 text-[var(--accent)] text-sm font-semibold group-hover:translate-x-1 transition-transform">Kom i gang →</div>
+            <h2 className="text-xl font-bold mb-2" style={{color: '#0D1B2A'}}>Jeg har en bachelor</h2>
+            <p className="text-sm leading-relaxed" style={{color: '#475467'}}>Se hvilke masterprogram bacheloren din kan kvalifisere deg til</p>
+            <div className="mt-4 text-sm font-semibold" style={{color: '#1E3A8A'}}>Kom i gang →</div>
           </button>
         </div>
-        <p className="text-[var(--ink-3)] text-xs max-w-md mx-auto leading-relaxed">
+        <p className="text-xs max-w-md mx-auto leading-relaxed" style={{color: '#98A2B3'}}>
           Resultatene er veiledende og basert på tidligere poenggrenser og tilgjengelige opptakskrav. Sjekk alltid lærestedets egne sider før du søker.
         </p>
       </div>
@@ -38,29 +38,15 @@ export default function Home() {
 }
 
 const fagomraader = ['Medisin','Psykologi','Sykepleie','Fysioterapi','Tannhelse','Farmasi','Bioingeniør','Annen helse','Data og IT','Kunstig intelligens','Cybersikkerhet','Ingeniør','Økonomi','Markedsføring','Regnskap','Jus','Lærer','Statsvitenskap','Sosiologi','Samfunnsfag','Kunst og design','Musikk','Film og media','Journalistikk','Språk','Realfag','Matematikk','Idrett','Annet']
-
 const byer = ['Oslo','Bergen','Trondheim','Tromsø','Stavanger','Kristiansand','Ålesund','Bodø','Gjøvik','Lillehammer','Drammen','Sogndal','Levanger','Haugesund','Molde','Narvik','Alta','Åmot','Ås','Bærum','Elverum','Fredrikstad','Gol','Grimstad','Hamar','Harstad','Horten','Indre Østfold','Kongsvinger','Larvik','Lillestrøm','Mo i Rana','Namsos','Notodden','Orkland','Porsgrunn','Ringerike','Sør-Varanger','Stord','Sunnfjord','Volda']
-
 const masterFagomraader = ['Økonomi','Jus','Psykologi','Informatikk','Ingeniør','Samfunnsfag','Helse','Pedagogikk','Media','Realfag','Idrett','Kunst','Språk']
 const masterByer = ['Oslo','Bergen','Trondheim','Tromsø','Stavanger','Kristiansand']
-
-function PageHeader({ tilbake, undertekst }: { tilbake: () => void, undertekst: string }) {
-  return (
-    <>
-      <button onClick={tilbake} className="text-[var(--accent)] text-sm mb-6 hover:text-[var(--accent-hover)] hover:underline font-medium">← Tilbake</button>
-      <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold text-[var(--ink)] mb-2 tracking-tight">Studie<span className="text-[var(--accent)]">Match</span></h1>
-        <p className="text-[var(--ink-2)]">{undertekst}</p>
-      </div>
-    </>
-  )
-}
 
 function Label({ text, hint }: { text: string, hint: string }) {
   return (
     <div className="mb-3">
-      <p className="text-[var(--ink)] font-semibold text-sm">{text}</p>
-      <p className="text-[var(--ink-2)] text-sm mt-1">{hint}</p>
+      <p className="font-semibold text-sm" style={{color: '#0D1B2A'}}>{text}</p>
+      <p className="text-sm mt-1" style={{color: '#475467'}}>{hint}</p>
     </div>
   )
 }
@@ -75,16 +61,16 @@ function Dropdown({ label, options, valgte, toggle, nullstill }: { label: string
   }, [])
   return (
     <div className="relative" ref={ref}>
-      <button onClick={() => setOpen(!open)} className={`flex items-center gap-2 px-4 py-2 rounded-xl border text-sm font-medium transition ${valgte.length > 0 ? 'border-[var(--accent)] bg-[rgba(30,58,138,0.08)] text-[var(--accent)]' : 'border-[var(--border)] bg-white text-[var(--ink-2)] hover:border-[var(--accent)]'}`}>
-        {label} {valgte.length > 0 && <span className="bg-[var(--accent)] text-white text-xs rounded-full px-2 py-0.5">{valgte.length}</span>}
+      <button onClick={() => setOpen(!open)} className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition bg-white" style={{border: valgte.length > 0 ? '1px solid #1E3A8A' : '1px solid #E4E9F2', color: valgte.length > 0 ? '#1E3A8A' : '#475467', background: valgte.length > 0 ? 'rgba(30,58,138,0.08)' : 'white'}}>
+        {label} {valgte.length > 0 && <span className="text-white text-xs rounded-full px-2 py-0.5" style={{background: '#1E3A8A'}}>{valgte.length}</span>}
         <span className="text-xs">{open ? '▲' : '▼'}</span>
       </button>
       {open && (
-        <div className="absolute top-12 left-0 z-50 bg-white border border-[var(--border)] rounded-2xl shadow-xl p-3 w-64 max-h-72 overflow-y-auto">
+        <div className="absolute top-12 left-0 z-50 bg-white rounded-2xl shadow-xl p-3 w-64 max-h-72 overflow-y-auto" style={{border: '1px solid #E4E9F2'}}>
           {valgte.length > 0 && <button onClick={nullstill} className="text-xs text-red-500 hover:text-red-600 mb-2 block font-medium">Nullstill</button>}
           {options.map(opt => (
-            <button key={opt} onClick={() => toggle(opt)} className={`flex items-center gap-2 w-full text-left px-3 py-2 rounded-lg text-sm transition ${valgte.includes(opt) ? 'bg-[rgba(30,58,138,0.08)] text-[var(--accent)] font-medium' : 'text-[var(--ink-2)] hover:bg-[var(--bg)]'}`}>
-              <span className={`w-4 h-4 rounded border flex items-center justify-center text-xs ${valgte.includes(opt) ? 'bg-[var(--accent)] border-[var(--accent)] text-white' : 'border-[var(--border)]'}`}>{valgte.includes(opt) ? '✓' : ''}</span>
+            <button key={opt} onClick={() => toggle(opt)} className="flex items-center gap-2 w-full text-left px-3 py-2 rounded-lg text-sm transition" style={{background: valgte.includes(opt) ? 'rgba(30,58,138,0.08)' : 'white', color: valgte.includes(opt) ? '#1E3A8A' : '#475467', fontWeight: valgte.includes(opt) ? '500' : 'normal'}}>
+              <span className="w-4 h-4 rounded flex items-center justify-center text-xs" style={{background: valgte.includes(opt) ? '#1E3A8A' : 'white', border: valgte.includes(opt) ? '1px solid #1E3A8A' : '1px solid #E4E9F2', color: 'white'}}>{valgte.includes(opt) ? '✓' : ''}</span>
               {opt}
             </button>
           ))}
@@ -146,14 +132,18 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
   }
 
   return (
-    <main className="min-h-screen bg-[var(--bg)]">
+    <main className="min-h-screen" style={{background: '#F6F9FC'}}>
       <div className="max-w-4xl mx-auto px-6 py-12">
-        <PageHeader tilbake={tilbake} undertekst="Finn bachelorstudier basert på karaktersnittet ditt" />
-        <div className="bg-white rounded-2xl shadow-[0_1px_2px_rgba(13,27,42,0.04),0_4px_12px_rgba(13,27,42,0.04)] border border-[var(--border)] p-6 mb-6">
+        <button onClick={tilbake} className="text-sm mb-6 font-medium hover:underline" style={{color: '#1E3A8A'}}>← Tilbake</button>
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold mb-2" style={{color: '#0D1B2A'}}>Studie<span style={{color: '#1E3A8A'}}>Match</span></h1>
+          <p style={{color: '#475467'}}>Finn bachelorstudier basert på karaktersnittet ditt</p>
+        </div>
+        <div className="bg-white rounded-2xl p-6 mb-6" style={{border: '1px solid #E4E9F2', boxShadow: '0 1px 2px rgba(13,27,42,0.04), 0 4px 12px rgba(13,27,42,0.04)'}}>
           <div className="flex flex-wrap gap-8 items-start mb-6">
             <div className="flex-1 min-w-48">
               <Label text="Karaktersnitt" hint="Skriv inn karaktergjennomsnittet ditt" />
-              <input type="number" placeholder="F.eks. 52.4" value={snitt} onChange={e => setSnitt(e.target.value)} onKeyDown={e => e.key === 'Enter' && finnStudier()} className="border border-[var(--border)] rounded-xl px-4 py-2 text-[var(--ink)] text-sm focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:border-[var(--accent)] w-full" />
+              <input type="number" placeholder="F.eks. 52.4" value={snitt} onChange={e => setSnitt(e.target.value)} onKeyDown={e => e.key === 'Enter' && finnStudier()} className="rounded-xl px-4 py-2 text-sm w-full bg-white focus:outline-none focus:ring-2" style={{border: '1px solid #E4E9F2', color: '#0D1B2A'}} />
             </div>
             <div>
               <Label text="By" hint="Hvilken by ønsker du å studere i?" />
@@ -164,45 +154,45 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
               <Dropdown label="Velg fagområde" options={fagomraader} valgte={valgteFag} toggle={toggleFag} nullstill={() => setValgteFag([])} />
             </div>
           </div>
-          <button onClick={finnStudier} className="w-full bg-[var(--ink)] text-white py-4 rounded-xl font-semibold text-base hover:bg-[var(--accent)] hover:shadow-[0_8px_20px_rgba(30,58,138,0.25)] hover:-translate-y-0.5 transition sticky bottom-4">Finn studier</button>
+          <button onClick={finnStudier} className="w-full text-white py-4 rounded-xl font-semibold text-base transition sticky bottom-4" style={{background: '#0D1B2A'}}>Finn studier</button>
         </div>
 
-        {laster && <div className="text-center text-[var(--ink-3)] py-8">Laster...</div>}
+        {laster && <div className="text-center py-8" style={{color: '#98A2B3'}}>Laster...</div>}
 
         {sokt && !laster && (
           <div>
-            <div className="bg-[rgba(30,58,138,0.06)] border border-[rgba(30,58,138,0.18)] rounded-xl px-5 py-4 mb-3">
-              <p className="text-[var(--ink)] font-bold text-lg">Basert på snittet ditt ({snitttall}), har du gode muligheter på {godSjanseAntall} studier</p>
-              {snittMarginTall !== null && <p className="text-[var(--accent)] text-sm mt-1">{marginTekst(snittMarginTall)}</p>}
+            <div className="rounded-xl px-5 py-4 mb-3" style={{background: 'rgba(30,58,138,0.06)', border: '1px solid rgba(30,58,138,0.18)'}}>
+              <p className="font-bold text-lg" style={{color: '#0D1B2A'}}>Basert på snittet ditt ({snitttall}), har du gode muligheter på {godSjanseAntall} studier</p>
+              {snittMarginTall !== null && <p className="text-sm mt-1" style={{color: '#1E3A8A'}}>{marginTekst(snittMarginTall)}</p>}
             </div>
             <div className="bg-amber-50 border border-amber-100 rounded-xl px-4 py-3 mb-4 text-amber-800 text-sm">Dette er basert på tidligere poenggrenser. Poenggrenser varierer fra år til år og er ikke en garanti.</div>
             <div className="flex flex-wrap gap-3 mb-5 items-center">
-              <button onClick={() => setKunGodSjanse(!kunGodSjanse)} className={`px-4 py-2 rounded-xl text-sm font-medium border transition ${kunGodSjanse ? 'bg-emerald-600 text-white border-emerald-600' : 'bg-white text-[var(--ink-2)] border-[var(--border)] hover:border-emerald-400 hover:text-emerald-700'}`}>Vis kun god sjanse</button>
-              <button onClick={() => setSortering(sortering === 'standard' ? 'beste' : 'standard')} className={`px-4 py-2 rounded-xl text-sm font-medium border transition ${sortering === 'beste' ? 'bg-[var(--accent)] text-white border-[var(--accent)]' : 'bg-white text-[var(--ink-2)] border-[var(--border)] hover:border-[var(--accent)] hover:text-[var(--accent)]'}`}>{sortering === 'beste' ? 'Sortert: beste match' : 'Sorter etter beste match'}</button>
-              <p className="text-[var(--ink-3)] text-sm ml-auto">{viste.length} av {sorterteAlle.length} studier vises</p>
+              <button onClick={() => setKunGodSjanse(!kunGodSjanse)} className="px-4 py-2 rounded-xl text-sm font-medium border transition" style={{background: kunGodSjanse ? '#059669' : 'white', color: kunGodSjanse ? 'white' : '#475467', border: kunGodSjanse ? '1px solid #059669' : '1px solid #E4E9F2'}}>Vis kun god sjanse</button>
+              <button onClick={() => setSortering(sortering === 'standard' ? 'beste' : 'standard')} className="px-4 py-2 rounded-xl text-sm font-medium transition" style={{background: sortering === 'beste' ? '#1E3A8A' : 'white', color: sortering === 'beste' ? 'white' : '#475467', border: sortering === 'beste' ? '1px solid #1E3A8A' : '1px solid #E4E9F2'}}>{sortering === 'beste' ? 'Sortert: beste match' : 'Sorter etter beste match'}</button>
+              <p className="text-sm ml-auto" style={{color: '#98A2B3'}}>{viste.length} av {sorterteAlle.length} studier vises</p>
             </div>
-            <p className="text-[var(--ink)] font-semibold mb-3">Disse studiene passer deg best basert på snittet ditt</p>
+            <p className="font-semibold mb-3" style={{color: '#0D1B2A'}}>Disse studiene passer deg best basert på snittet ditt</p>
           </div>
         )}
 
         <div className="space-y-4">
           {viste.map((s, i) => (
-            <div key={s.id} className={`bg-white rounded-xl border p-5 transition ${i === 0 ? 'border-[var(--accent)] shadow-[0_1px_2px_rgba(13,27,42,0.06),0_8px_20px_rgba(30,58,138,0.10)]' : 'border-[var(--border)] shadow-[0_1px_2px_rgba(13,27,42,0.04)] hover:shadow-[0_4px_12px_rgba(13,27,42,0.08)] hover:-translate-y-0.5'}`}>
+            <div key={s.id} className="bg-white rounded-xl p-5 transition" style={{border: i === 0 ? '1px solid #1E3A8A' : '1px solid #E4E9F2', boxShadow: i === 0 ? '0 8px 20px rgba(30,58,138,0.10)' : '0 1px 2px rgba(13,27,42,0.04)'}}>
               <div className="flex justify-between items-start gap-4">
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1 flex-wrap">
-                    <h2 className="font-semibold text-lg text-[var(--ink)]">{s.study_name}</h2>
+                    <h2 className="font-semibold text-lg" style={{color: '#0D1B2A'}}>{s.study_name}</h2>
                     <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${s.status.color}`}>{s.status.label}</span>
                   </div>
-                  <p className="text-[var(--ink-2)] text-sm">{s.university} – {s.location}</p>
+                  <p className="text-sm" style={{color: '#475467'}}>{s.university} – {s.location}</p>
                   <div className="flex items-center gap-4 mt-2 text-sm flex-wrap">
-                    <span className="text-[var(--ink-2)]">Poenggrense: <strong className="text-[var(--ink)]">{s.cutoff_score}</strong></span>
-                    <span className="text-[var(--ink-2)]">Dine poeng: <strong className="text-[var(--ink)]">{snitttall}</strong></span>
-                    <span className={s.margin >= 0 ? 'text-emerald-600 font-medium' : 'text-rose-600 font-medium'}>{s.margin >= 0 ? '+' : ''}{s.margin.toFixed(1)} poeng</span>
+                    <span style={{color: '#475467'}}>Poenggrense: <strong style={{color: '#0D1B2A'}}>{s.cutoff_score}</strong></span>
+                    <span style={{color: '#475467'}}>Dine poeng: <strong style={{color: '#0D1B2A'}}>{snitttall}</strong></span>
+                    <span style={{color: s.margin >= 0 ? '#059669' : '#e11d48', fontWeight: '500'}}>{s.margin >= 0 ? '+' : ''}{s.margin.toFixed(1)} poeng</span>
                   </div>
-                  <span className="inline-block mt-2 bg-[rgba(30,58,138,0.08)] text-[var(--accent)] text-xs px-2 py-1 rounded-full font-medium">{s.fagomraade}</span>
+                  <span className="inline-block mt-2 text-xs px-2 py-1 rounded-full font-medium" style={{background: 'rgba(30,58,138,0.08)', color: '#1E3A8A'}}>{s.fagomraade}</span>
                 </div>
-                <a href={s.url} target="_blank" rel="noopener noreferrer" className="bg-[var(--ink)] text-white px-4 py-2 rounded-xl text-sm font-semibold hover:bg-[var(--accent)] hover:shadow-[0_6px_16px_rgba(30,58,138,0.25)] transition whitespace-nowrap">Gå til studie</a>
+                <a href={s.url} target="_blank" rel="noopener noreferrer" className="text-white px-4 py-2 rounded-xl text-sm font-semibold transition whitespace-nowrap" style={{background: '#0D1B2A'}}>Gå til studie</a>
               </div>
             </div>
           ))}
@@ -210,7 +200,7 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
 
         {sokt && !laster && visAntall < sorterteAlle.length && (
           <div className="text-center mt-6">
-            <button onClick={() => setVisAntall(v => v + BATCH)} className="bg-white border border-[var(--border)] text-[var(--ink-2)] px-8 py-3 rounded-xl font-medium hover:border-[var(--accent)] hover:text-[var(--accent)] transition">Vis flere studier</button>
+            <button onClick={() => setVisAntall(v => v + BATCH)} className="bg-white px-8 py-3 rounded-xl font-medium transition" style={{border: '1px solid #E4E9F2', color: '#475467'}}>Vis flere studier</button>
           </div>
         )}
       </div>
@@ -283,21 +273,25 @@ function BachelorSide({ tilbake }: { tilbake: () => void }) {
   const kvalifisert = resultater.filter(m => m.status.order === 0).length
 
   return (
-    <main className="min-h-screen bg-[var(--bg)]">
+    <main className="min-h-screen" style={{background: '#F6F9FC'}}>
       <div className="max-w-4xl mx-auto px-6 py-12">
-        <PageHeader tilbake={tilbake} undertekst="Finn masterstudier basert på bacheloren og karakterene dine" />
-        <div className="bg-white rounded-2xl shadow-[0_1px_2px_rgba(13,27,42,0.04),0_4px_12px_rgba(13,27,42,0.04)] border border-[var(--border)] p-6 mb-6">
+        <button onClick={tilbake} className="text-sm mb-6 font-medium hover:underline" style={{color: '#1E3A8A'}}>← Tilbake</button>
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold mb-2" style={{color: '#0D1B2A'}}>Studie<span style={{color: '#1E3A8A'}}>Match</span></h1>
+          <p style={{color: '#475467'}}>Finn masterstudier basert på bacheloren og karakterene dine</p>
+        </div>
+        <div className="bg-white rounded-2xl p-6 mb-6" style={{border: '1px solid #E4E9F2', boxShadow: '0 1px 2px rgba(13,27,42,0.04), 0 4px 12px rgba(13,27,42,0.04)'}}>
           <div className="flex flex-wrap gap-8 items-start mb-6">
             <div className="flex-1 min-w-64">
               <Label text="Hva har du studert?" hint="Velg bachelorutdanningen din fra listen" />
-              <select value={bachelor} onChange={e => setBachelor(e.target.value)} className="border border-[var(--border)] rounded-xl px-4 py-2 text-[var(--ink)] text-sm focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:border-[var(--accent)] w-full">
+              <select value={bachelor} onChange={e => setBachelor(e.target.value)} className="rounded-xl px-4 py-2 text-sm w-full bg-white focus:outline-none focus:ring-2" style={{border: '1px solid #E4E9F2', color: '#0D1B2A'}}>
                 <option value="">Velg bachelorutdanning</option>
                 {bachelorStudier.map(b => <option key={b} value={b}>{b}</option>)}
               </select>
             </div>
             <div>
               <Label text="Karakternivå" hint="Hva er karakternivået ditt?" />
-              <select value={karakter} onChange={e => setKarakter(e.target.value)} className="border border-[var(--border)] rounded-xl px-4 py-2 text-[var(--ink)] text-sm focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:border-[var(--accent)]">
+              <select value={karakter} onChange={e => setKarakter(e.target.value)} className="rounded-xl px-4 py-2 text-sm bg-white focus:outline-none focus:ring-2" style={{border: '1px solid #E4E9F2', color: '#0D1B2A'}}>
                 <option value="">Velg karakter</option>
                 <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option>
               </select>
@@ -313,14 +307,14 @@ function BachelorSide({ tilbake }: { tilbake: () => void }) {
               <Dropdown label="Velg fagområde" options={masterFagomraader} valgte={valgteFag} toggle={toggleFag} nullstill={() => setValgteFag([])} />
             </div>
           </div>
-          <button onClick={() => { if (bachelor && karakter) setSokt(true) }} className="w-full bg-[var(--ink)] text-white py-4 rounded-xl font-semibold text-base hover:bg-[var(--accent)] hover:shadow-[0_8px_20px_rgba(30,58,138,0.25)] hover:-translate-y-0.5 transition sticky bottom-4">Finn studier</button>
+          <button onClick={() => { if (bachelor && karakter) setSokt(true) }} className="w-full text-white py-4 rounded-xl font-semibold text-base transition sticky bottom-4" style={{background: '#0D1B2A'}}>Finn studier</button>
         </div>
 
         {sokt && (
           <div>
-            <div className="bg-[rgba(30,58,138,0.06)] border border-[rgba(30,58,138,0.18)] rounded-xl px-5 py-4 mb-3">
-              <p className="text-[var(--ink)] font-bold">Basert på bacheloren din og karakterene dine, har du disse mulighetene:</p>
-              <p className="text-[var(--accent)] text-sm mt-1">Du kvalifiserer til {kvalifisert} av {resultater.length} masterprogrammer</p>
+            <div className="rounded-xl px-5 py-4 mb-3" style={{background: 'rgba(30,58,138,0.06)', border: '1px solid rgba(30,58,138,0.18)'}}>
+              <p className="font-bold" style={{color: '#0D1B2A'}}>Basert på bacheloren din og karakterene dine, har du disse mulighetene:</p>
+              <p className="text-sm mt-1" style={{color: '#1E3A8A'}}>Du kvalifiserer til {kvalifisert} av {resultater.length} masterprogrammer</p>
             </div>
             <div className="bg-amber-50 border border-amber-100 rounded-xl px-4 py-3 mb-4 text-amber-800 text-sm">Krav varierer mellom studier og år. Dette er en forenklet oversikt.</div>
           </div>
@@ -328,26 +322,26 @@ function BachelorSide({ tilbake }: { tilbake: () => void }) {
 
         <div className="space-y-3">
           {resultater.map((m, i) => (
-            <div key={i} className="bg-white rounded-xl shadow-[0_1px_2px_rgba(13,27,42,0.04)] border border-[var(--border)] p-5 hover:shadow-[0_4px_12px_rgba(13,27,42,0.08)] hover:-translate-y-0.5 transition">
+            <div key={i} className="bg-white rounded-xl p-5 transition" style={{border: '1px solid #E4E9F2', boxShadow: '0 1px 2px rgba(13,27,42,0.04)'}}>
               <div className="flex justify-between items-start gap-4">
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1 flex-wrap">
-                    <h2 className="font-semibold text-lg text-[var(--ink)]">{m.name}</h2>
+                    <h2 className="font-semibold text-lg" style={{color: '#0D1B2A'}}>{m.name}</h2>
                     <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${m.status.color}`}>{m.status.label}</span>
                   </div>
-                  <p className="text-[var(--ink-2)] text-sm">{m.school} – {m.location}</p>
+                  <p className="text-sm" style={{color: '#475467'}}>{m.school} – {m.location}</p>
                   <div className="flex items-center gap-3 mt-2">
-                    <span className="bg-[rgba(30,58,138,0.08)] text-[var(--accent)] text-xs px-2 py-1 rounded-full font-medium">{m.fagomraade}</span>
-                    <span className="text-[var(--ink-3)] text-xs">Krav: min. karakter <strong className="text-[var(--ink-2)]">{m.requires.min_grade}</strong></span>
+                    <span className="text-xs px-2 py-1 rounded-full font-medium" style={{background: 'rgba(30,58,138,0.08)', color: '#1E3A8A'}}>{m.fagomraade}</span>
+                    <span className="text-xs" style={{color: '#98A2B3'}}>Krav: min. karakter <strong style={{color: '#475467'}}>{m.requires.min_grade}</strong></span>
                   </div>
                 </div>
-                <a href={m.url} target="_blank" rel="noopener noreferrer" className="bg-[var(--ink)] text-white px-4 py-2 rounded-xl text-sm font-semibold hover:bg-[var(--accent)] hover:shadow-[0_6px_16px_rgba(30,58,138,0.25)] transition whitespace-nowrap">Gå til studie</a>
+                <a href={m.url} target="_blank" rel="noopener noreferrer" className="text-white px-4 py-2 rounded-xl text-sm font-semibold transition whitespace-nowrap" style={{background: '#0D1B2A'}}>Gå til studie</a>
               </div>
             </div>
           ))}
         </div>
 
-        <p className="text-[var(--ink-3)] text-xs text-center mt-8 max-w-md mx-auto leading-relaxed">Resultatene er veiledende og basert på tidligere poenggrenser og tilgjengelige opptakskrav. Sjekk alltid lærestedets egne sider før du søker.</p>
+        <p className="text-xs text-center mt-8 max-w-md mx-auto leading-relaxed" style={{color: '#98A2B3'}}>Resultatene er veiledende og basert på tidligere poenggrenser og tilgjengelige opptakskrav. Sjekk alltid lærestedets egne sider før du søker.</p>
       </div>
     </main>
   )
