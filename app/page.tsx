@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <main className="min-h-screen flex flex-col items-center justify-center px-6" style={{background: '#F6F9FC'}}>
       <div className="max-w-2xl w-full mx-auto py-16 text-center">
-        <h1 className="text-5xl font-bold mb-4" style={{color: '#0D1B2A'}}>Studie<span style={{color: '#1E3A8A'}}>Match</span></h1>
+        <img src="/logo.png" alt="StudieMatch" className="mx-auto mb-8 h-20 sm:h-24 w-auto" />
         <p className="text-lg mb-12 max-w-xl mx-auto leading-relaxed" style={{color: '#475467'}}>
           Skriv inn snittet ditt eller bacheloren din – og se hva du kan studere
         </p>
@@ -61,7 +61,7 @@ function Dropdown({ label, options, valgte, toggle, nullstill }: { label: string
   }, [])
   return (
     <div className="relative" ref={ref}>
-      <button onClick={() => setOpen(!open)} className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition bg-white" style={{border: valgte.length > 0 ? '1px solid #1E3A8A' : '1px solid #E4E9F2', color: valgte.length > 0 ? '#1E3A8A' : '#475467', background: valgte.length > 0 ? 'rgba(30,58,138,0.08)' : 'white'}}>
+      <button onClick={() => setOpen(!open)} className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition" style={{border: valgte.length > 0 ? '1px solid #1E3A8A' : '1px solid #E4E9F2', color: valgte.length > 0 ? '#1E3A8A' : '#475467', background: valgte.length > 0 ? 'rgba(30,58,138,0.08)' : 'white'}}>
         {label} {valgte.length > 0 && <span className="text-white text-xs rounded-full px-2 py-0.5" style={{background: '#1E3A8A'}}>{valgte.length}</span>}
         <span className="text-xs">{open ? '▲' : '▼'}</span>
       </button>
@@ -136,14 +136,14 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
       <div className="max-w-4xl mx-auto px-6 py-12">
         <button onClick={tilbake} className="text-sm mb-6 font-medium hover:underline" style={{color: '#1E3A8A'}}>← Tilbake</button>
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold mb-2" style={{color: '#0D1B2A'}}>Studie<span style={{color: '#1E3A8A'}}>Match</span></h1>
+          <img src="/logo.png" alt="StudieMatch" className="mx-auto mb-4 h-14 sm:h-16 w-auto" />
           <p style={{color: '#475467'}}>Finn bachelorstudier basert på karaktersnittet ditt</p>
         </div>
         <div className="bg-white rounded-2xl p-6 mb-6" style={{border: '1px solid #E4E9F2', boxShadow: '0 1px 2px rgba(13,27,42,0.04), 0 4px 12px rgba(13,27,42,0.04)'}}>
           <div className="flex flex-wrap gap-8 items-start mb-6">
             <div className="flex-1 min-w-48">
               <Label text="Karaktersnitt" hint="Skriv inn karaktergjennomsnittet ditt" />
-              <input type="number" placeholder="F.eks. 52.4" value={snitt} onChange={e => setSnitt(e.target.value)} onKeyDown={e => e.key === 'Enter' && finnStudier()} className="rounded-xl px-4 py-2 text-sm w-full bg-white focus:outline-none focus:ring-2" style={{border: '1px solid #E4E9F2', color: '#0D1B2A'}} />
+              <input type="number" placeholder="F.eks. 52.4" value={snitt} onChange={e => setSnitt(e.target.value)} onKeyDown={e => e.key === 'Enter' && finnStudier()} className="rounded-xl px-4 py-2 text-sm w-full bg-white focus:outline-none" style={{border: '1px solid #E4E9F2', color: '#0D1B2A'}} />
             </div>
             <div>
               <Label text="By" hint="Hvilken by ønsker du å studere i?" />
@@ -167,7 +167,7 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
             </div>
             <div className="bg-amber-50 border border-amber-100 rounded-xl px-4 py-3 mb-4 text-amber-800 text-sm">Dette er basert på tidligere poenggrenser. Poenggrenser varierer fra år til år og er ikke en garanti.</div>
             <div className="flex flex-wrap gap-3 mb-5 items-center">
-              <button onClick={() => setKunGodSjanse(!kunGodSjanse)} className="px-4 py-2 rounded-xl text-sm font-medium border transition" style={{background: kunGodSjanse ? '#059669' : 'white', color: kunGodSjanse ? 'white' : '#475467', border: kunGodSjanse ? '1px solid #059669' : '1px solid #E4E9F2'}}>Vis kun god sjanse</button>
+              <button onClick={() => setKunGodSjanse(!kunGodSjanse)} className="px-4 py-2 rounded-xl text-sm font-medium transition" style={{background: kunGodSjanse ? '#059669' : 'white', color: kunGodSjanse ? 'white' : '#475467', border: kunGodSjanse ? '1px solid #059669' : '1px solid #E4E9F2'}}>Vis kun god sjanse</button>
               <button onClick={() => setSortering(sortering === 'standard' ? 'beste' : 'standard')} className="px-4 py-2 rounded-xl text-sm font-medium transition" style={{background: sortering === 'beste' ? '#1E3A8A' : 'white', color: sortering === 'beste' ? 'white' : '#475467', border: sortering === 'beste' ? '1px solid #1E3A8A' : '1px solid #E4E9F2'}}>{sortering === 'beste' ? 'Sortert: beste match' : 'Sorter etter beste match'}</button>
               <p className="text-sm ml-auto" style={{color: '#98A2B3'}}>{viste.length} av {sorterteAlle.length} studier vises</p>
             </div>
@@ -277,21 +277,21 @@ function BachelorSide({ tilbake }: { tilbake: () => void }) {
       <div className="max-w-4xl mx-auto px-6 py-12">
         <button onClick={tilbake} className="text-sm mb-6 font-medium hover:underline" style={{color: '#1E3A8A'}}>← Tilbake</button>
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold mb-2" style={{color: '#0D1B2A'}}>Studie<span style={{color: '#1E3A8A'}}>Match</span></h1>
+          <img src="/logo.png" alt="StudieMatch" className="mx-auto mb-4 h-14 sm:h-16 w-auto" />
           <p style={{color: '#475467'}}>Finn masterstudier basert på bacheloren og karakterene dine</p>
         </div>
         <div className="bg-white rounded-2xl p-6 mb-6" style={{border: '1px solid #E4E9F2', boxShadow: '0 1px 2px rgba(13,27,42,0.04), 0 4px 12px rgba(13,27,42,0.04)'}}>
           <div className="flex flex-wrap gap-8 items-start mb-6">
             <div className="flex-1 min-w-64">
               <Label text="Hva har du studert?" hint="Velg bachelorutdanningen din fra listen" />
-              <select value={bachelor} onChange={e => setBachelor(e.target.value)} className="rounded-xl px-4 py-2 text-sm w-full bg-white focus:outline-none focus:ring-2" style={{border: '1px solid #E4E9F2', color: '#0D1B2A'}}>
+              <select value={bachelor} onChange={e => setBachelor(e.target.value)} className="rounded-xl px-4 py-2 text-sm w-full bg-white focus:outline-none" style={{border: '1px solid #E4E9F2', color: '#0D1B2A'}}>
                 <option value="">Velg bachelorutdanning</option>
                 {bachelorStudier.map(b => <option key={b} value={b}>{b}</option>)}
               </select>
             </div>
             <div>
               <Label text="Karakternivå" hint="Hva er karakternivået ditt?" />
-              <select value={karakter} onChange={e => setKarakter(e.target.value)} className="rounded-xl px-4 py-2 text-sm bg-white focus:outline-none focus:ring-2" style={{border: '1px solid #E4E9F2', color: '#0D1B2A'}}>
+              <select value={karakter} onChange={e => setKarakter(e.target.value)} className="rounded-xl px-4 py-2 text-sm bg-white focus:outline-none" style={{border: '1px solid #E4E9F2', color: '#0D1B2A'}}>
                 <option value="">Velg karakter</option>
                 <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option>
               </select>
