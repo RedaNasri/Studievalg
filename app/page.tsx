@@ -10,7 +10,8 @@ export default function Home() {
   return (
     <main className="min-h-screen flex flex-col items-center justify-center px-6" style={{background: '#F6F9FC'}}>
       <div className="max-w-2xl w-full mx-auto py-16 text-center">
-        <img src="/logo.png" alt="StudieMatch" className="mx-auto mt-4 mb-10 w-36 sm:w-48 md:w-60" />
+        <img src="/logo.png" alt="StudieMatch" className="mx-auto mt-4 mb-10 w-40 sm:w-52 md:w-64" />
+        <p className="text-sm font-semibold uppercase tracking-widest mb-2" style={{color: '#1E3A8A'}}>Finn studier på 10 sekunder</p>
         <p className="text-lg mb-12 max-w-xl mx-auto leading-relaxed" style={{color: '#475467'}}>
           Skriv inn snittet ditt eller bacheloren din – og se hva du kan studere
         </p>
@@ -99,6 +100,7 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
   const [kunGodSjanse, setKunGodSjanse] = useState(false)
   const [sortering, setSortering] = useState<'standard' | 'beste'>('standard')
   const [visAntall, setVisAntall] = useState(BATCH)
+  const [delt, setDelt] = useState(false)
 
   const { createClient } = require('@supabase/supabase-js')
   const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)
@@ -116,6 +118,17 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
     const snitttall = parseFloat(snitt)
     const mapped = (data || []).map((s: any) => ({ ...s, status: getStatus(snitttall, s.cutoff_score), margin: snitttall - s.cutoff_score })).sort((a: any, b: any) => a.status.order - b.status.order)
     setResultater(mapped); setLaster(false)
+  }
+
+  function delResultat() {
+    const tekst = `Jeg fant ${godSjanseAntall} studier jeg kan komme inn på med snitt ${snitt}! Sjekk StudieMatch: ${window.location.href}`
+    if (navigator.share) {
+      navigator.share({ title: 'StudieMatch', text: tekst, url: window.location.href })
+    } else {
+      navigator.clipboard.writeText(tekst)
+      setDelt(true)
+      setTimeout(() => setDelt(false), 2000)
+    }
   }
 
   const snitttall = parseFloat(snitt)
@@ -136,7 +149,7 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
       <div className="max-w-4xl mx-auto px-6 py-12">
         <button onClick={tilbake} className="text-sm mb-6 font-medium hover:underline" style={{color: '#1E3A8A'}}>← Tilbake</button>
         <div className="text-center mb-8">
-          <img src="/logo.png" alt="StudieMatch" className="mx-auto mb-6 w-36 sm:w-48 md:w-60" />
+          <img src="/logo.png" alt="StudieMatch" className="mx-auto mb-6 w-40 sm:w-52 md:w-64" />
           <p style={{color: '#475467'}}>Finn bachelorstudier basert på karaktersnittet ditt</p>
         </div>
         <div className="bg-white rounded-2xl p-6 mb-6" style={{border: '1px solid #E4E9F2', boxShadow: '0 1px 2px rgba(13,27,42,0.04), 0 4px 12px rgba(13,27,42,0.04)'}}>
@@ -183,6 +196,7 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
                   <div className="flex items-center gap-2 mb-1 flex-wrap">
                     <h2 className="font-semibold text-lg" style={{color: '#0D1B2A'}}>{s.study_name}</h2>
                     <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${s.status.color}`}>{s.status.label}</span>
+                    {i < 3 && s.status.label === 'God sjanse' && <span className="text-xs font-semibold px-2 py-0.5 rounded-full" style={{background: '#0D1B2A', color: 'white'}}>⭐ Beste match</span>}
                   </div>
                   <p className="text-sm" style={{color: '#475467'}}>{s.university} – {s.location}</p>
                   <div className="flex items-center gap-4 mt-2 text-sm flex-wrap">
@@ -201,6 +215,14 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
         {sokt && !laster && visAntall < sorterteAlle.length && (
           <div className="text-center mt-6">
             <button onClick={() => setVisAntall(v => v + BATCH)} className="bg-white px-8 py-3 rounded-xl font-medium transition" style={{border: '1px solid #E4E9F2', color: '#475467'}}>Vis flere studier</button>
+          </div>
+        )}
+
+        {sokt && !laster && viste.length > 0 && (
+          <div className="text-center mt-6">
+            <button onClick={delResultat} className="text-sm font-medium px-6 py-2 rounded-xl transition" style={{border: '1px solid #E4E9F2', color: '#475467', background: 'white'}}>
+              {delt ? '✓ Kopiert til utklippstavlen!' : '🔗 Del resultatet mitt'}
+            </button>
           </div>
         )}
       </div>
@@ -249,6 +271,7 @@ function BachelorSide({ tilbake }: { tilbake: () => void }) {
   const [sokt, setSokt] = useState(false)
   const [valgteFag, setValgteFag] = useState<string[]>([])
   const [valgteByer, setValgteByer] = useState<string[]>([])
+  const [delt, setDelt] = useState(false)
 
   const gradeOrder: any = { 'A': 5, 'B': 4, 'C': 3, 'D': 2, 'E': 1, 'F': 0 }
 
@@ -272,12 +295,23 @@ function BachelorSide({ tilbake }: { tilbake: () => void }) {
 
   const kvalifisert = resultater.filter(m => m.status.order === 0).length
 
+  function delResultat() {
+    const tekst = `Jeg kvalifiserer til ${kvalifisert} masterprogram! Sjekk StudieMatch: ${window.location.href}`
+    if (navigator.share) {
+      navigator.share({ title: 'StudieMatch', text: tekst, url: window.location.href })
+    } else {
+      navigator.clipboard.writeText(tekst)
+      setDelt(true)
+      setTimeout(() => setDelt(false), 2000)
+    }
+  }
+
   return (
     <main className="min-h-screen" style={{background: '#F6F9FC'}}>
       <div className="max-w-4xl mx-auto px-6 py-12">
         <button onClick={tilbake} className="text-sm mb-6 font-medium hover:underline" style={{color: '#1E3A8A'}}>← Tilbake</button>
         <div className="text-center mb-8">
-          <img src="/logo.png" alt="StudieMatch" className="mx-auto mb-6 w-36 sm:w-48 md:w-60" />
+          <img src="/logo.png" alt="StudieMatch" className="mx-auto mb-6 w-40 sm:w-52 md:w-64" />
           <p style={{color: '#475467'}}>Finn masterstudier basert på bacheloren og karakterene dine</p>
         </div>
         <div className="bg-white rounded-2xl p-6 mb-6" style={{border: '1px solid #E4E9F2', boxShadow: '0 1px 2px rgba(13,27,42,0.04), 0 4px 12px rgba(13,27,42,0.04)'}}>
@@ -328,6 +362,7 @@ function BachelorSide({ tilbake }: { tilbake: () => void }) {
                   <div className="flex items-center gap-2 mb-1 flex-wrap">
                     <h2 className="font-semibold text-lg" style={{color: '#0D1B2A'}}>{m.name}</h2>
                     <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${m.status.color}`}>{m.status.label}</span>
+                    {i < 3 && m.status.order === 0 && <span className="text-xs font-semibold px-2 py-0.5 rounded-full" style={{background: '#0D1B2A', color: 'white'}}>⭐ Beste match</span>}
                   </div>
                   <p className="text-sm" style={{color: '#475467'}}>{m.school} – {m.location}</p>
                   <div className="flex items-center gap-3 mt-2">
@@ -341,7 +376,15 @@ function BachelorSide({ tilbake }: { tilbake: () => void }) {
           ))}
         </div>
 
-        <p className="text-xs text-center mt-8 max-w-md mx-auto leading-relaxed" style={{color: '#98A2B3'}}>Resultatene er veiledende og basert på tidligere poenggrenser og tilgjengelige opptakskrav. Sjekk alltid lærestedets egne sider før du søker.</p>
+        {sokt && resultater.length > 0 && (
+          <div className="text-center mt-6">
+            <button onClick={delResultat} className="text-sm font-medium px-6 py-2 rounded-xl transition" style={{border: '1px solid #E4E9F2', color: '#475467', background: 'white'}}>
+              {delt ? '✓ Kopiert til utklippstavlen!' : '🔗 Del resultatet mitt'}
+            </button>
+          </div>
+        )}
+
+        <p className="text-xs text-center mt-6 max-w-md mx-auto leading-relaxed" style={{color: '#98A2B3'}}>Resultatene er veiledende og basert på tidligere poenggrenser og tilgjengelige opptakskrav. Sjekk alltid lærestedets egne sider før du søker.</p>
       </div>
     </main>
   )
