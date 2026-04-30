@@ -191,6 +191,8 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
         <div className="space-y-4 mt-6">
           {viste.map((s, i) => {
             const erBeste = i < 3 && s.status.label === 'God sjanse'
+            const studie_url = s.url && s.url.length > 30 ? s.url : `https://www.google.com/search?q=${encodeURIComponent(s.study_name + ' ' + s.university + ' studie')}`
+            const harDirekte = s.url && s.url.length > 30
             return (
               <div key={s.id} className="rounded-xl transition" style={{padding: erBeste ? '24px' : '20px', border: erBeste ? '1.5px solid #1E3A8A' : '1px solid #E4E9F2', boxShadow: erBeste ? '0 8px 24px rgba(30,58,138,0.12)' : '0 1px 2px rgba(13,27,42,0.04)', background: erBeste ? 'rgba(30,58,138,0.025)' : 'white'}}>
                 <div className="flex justify-between items-start gap-4">
@@ -208,7 +210,10 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
                     </div>
                     <span className="inline-block mt-2 text-xs px-2 py-1 rounded-full font-medium" style={{background: 'rgba(30,58,138,0.08)', color: '#1E3A8A'}}>{s.fagomraade}</span>
                   </div>
-                  <a href={s.url} target="_blank" rel="noopener noreferrer" className="text-white px-4 py-2 rounded-xl text-sm font-semibold transition whitespace-nowrap" style={{background: '#0D1B2A'}}>Gå til studie</a>
+                  <div className="flex flex-col items-end gap-1">
+                    <a href={studie_url} target="_blank" rel="noopener noreferrer" className="text-white px-4 py-2 rounded-xl text-sm font-semibold transition whitespace-nowrap" style={{background: '#0D1B2A'}}>{harDirekte ? 'Se studie hos skolen' : 'Finn studieside'}</a>
+                    <span className="text-xs" style={{color: '#98A2B3'}}>{harDirekte ? 'Direkte til lærestedets side' : 'Søk etter studieside'}</span>
+                  </div>
                 </div>
               </div>
             )
@@ -238,34 +243,34 @@ const bachelorStudier = ['Bachelor i økonomi og administrasjon','Bachelor i reg
 const bachelorTilKategori: any = {'Bachelor i økonomi og administrasjon':'Økonomi','Bachelor i regnskap og revisjon':'Økonomi','Bachelor i markedsføring og ledelse':'Økonomi','Bachelor i internasjonal business':'Økonomi','Bachelor i finans':'Økonomi','Bachelor i rettsvitenskap / jus':'Jus','Bachelor i psykologi':'Psykologi','Bachelor i sosiologi':'Samfunnsfag','Bachelor i statsvitenskap':'Samfunnsfag','Bachelor i samfunnsøkonomi':'Økonomi','Bachelor i filosofi':'Samfunnsfag','Bachelor i pedagogikk':'Pedagogikk','Bachelor i informatikk':'Informatikk','Bachelor i datateknologi':'Informatikk','Bachelor i kunstig intelligens':'Informatikk','Bachelor i cybersikkerhet':'Informatikk','Bachelor i ingeniør – data':'Ingeniør','Bachelor i ingeniør – maskin':'Ingeniør','Bachelor i ingeniør – bygg':'Ingeniør','Bachelor i ingeniør – elektronikk':'Ingeniør','Bachelor i ingeniør – energi':'Ingeniør','Bachelor i matematikk':'Realfag','Bachelor i fysikk':'Realfag','Bachelor i kjemi':'Realfag','Bachelor i biologi':'Realfag','Bachelor i bioteknologi':'Realfag','Bachelor i sykepleie':'Helse','Bachelor i ergoterapi':'Helse','Bachelor i fysioterapi':'Helse','Bachelor i bioingeniør':'Helse','Bachelor i radiografi':'Helse','Bachelor i paramedisin':'Helse','Bachelor i farmasi':'Helse','Bachelor i tannpleie':'Helse','Bachelor i folkehelse':'Helse','Bachelor i barnevern':'Helse','Bachelor i sosialt arbeid':'Helse','Bachelor i vernepleie':'Helse','Bachelor i journalistikk':'Media','Bachelor i medievitenskap':'Media','Bachelor i kommunikasjon':'Media','Bachelor i film og TV-produksjon':'Media','Bachelor i kunst og design':'Kunst','Bachelor i arkitektur':'Kunst','Bachelor i musikkvitenskap':'Kunst','Bachelor i idrettsvitenskap':'Idrett','Bachelor i friluftsliv':'Idrett','Bachelor i lærerutdanning 1–7':'Pedagogikk','Bachelor i lærerutdanning 5–10':'Pedagogikk','Bachelor i historie':'Samfunnsfag','Bachelor i geografi':'Samfunnsfag','Bachelor i nordisk språk og litteratur':'Språk','Bachelor i engelsk':'Språk','Bachelor i fransk':'Språk','Bachelor i tysk':'Språk','Bachelor i spansk':'Språk','Bachelor i arabisk':'Språk','Bachelor i kinesisk':'Språk','Bachelor i russisk':'Språk','Bachelor i landbruk':'Realfag','Bachelor i havbruk':'Realfag','Bachelor i veterinærmedisin':'Helse','Bachelor i miljøvitenskap':'Realfag','Bachelor i geologi':'Realfag','Bachelor i nanoteknologi':'Realfag'}
 
 const alleMastere = [
-  { name: 'Master i økonomi og administrasjon', school: 'UiO', location: 'Oslo', url: 'https://www.uio.no/studier/program/master-okonomi', fagomraade: 'Økonomi', requires: { kategorier: ['Økonomi'], min_grade: 'C' } },
-  { name: 'Master i finansiell økonomi', school: 'NHH', location: 'Bergen', url: 'https://www.nhh.no/studier/master', fagomraade: 'Økonomi', requires: { kategorier: ['Økonomi'], min_grade: 'B' } },
-  { name: 'Master i regnskap og revisjon', school: 'NHH', location: 'Bergen', url: 'https://www.nhh.no/studier/master/regnskap', fagomraade: 'Økonomi', requires: { kategorier: ['Økonomi'], min_grade: 'C' } },
-  { name: 'Master i psykologi', school: 'UiO', location: 'Oslo', url: 'https://www.uio.no/studier/program/psykologi-master', fagomraade: 'Psykologi', requires: { kategorier: ['Psykologi'], min_grade: 'B' } },
-  { name: 'Master i klinisk psykologi', school: 'NTNU', location: 'Trondheim', url: 'https://www.ntnu.no/studier/mpsyk', fagomraade: 'Psykologi', requires: { kategorier: ['Psykologi'], min_grade: 'A' } },
-  { name: 'Master i informatikk', school: 'UiO', location: 'Oslo', url: 'https://www.uio.no/studier/program/informatikk-master', fagomraade: 'Informatikk', requires: { kategorier: ['Informatikk', 'Ingeniør', 'Realfag'], min_grade: 'C' } },
-  { name: 'Master i kunstig intelligens', school: 'NTNU', location: 'Trondheim', url: 'https://www.ntnu.no/studier/msit', fagomraade: 'Informatikk', requires: { kategorier: ['Informatikk', 'Realfag'], min_grade: 'B' } },
-  { name: 'Master i cybersikkerhet', school: 'NTNU', location: 'Trondheim', url: 'https://www.ntnu.no/studier/msc-cybersecurity', fagomraade: 'Informatikk', requires: { kategorier: ['Informatikk', 'Ingeniør'], min_grade: 'C' } },
-  { name: 'Master i rettsvitenskap', school: 'UiO', location: 'Oslo', url: 'https://www.uio.no/studier/program/rettsvitenskap', fagomraade: 'Jus', requires: { kategorier: ['Jus'], min_grade: 'C' } },
-  { name: 'Master i samfunnsøkonomi', school: 'UiO', location: 'Oslo', url: 'https://www.uio.no/studier/program/samfunnsokonomi-master', fagomraade: 'Økonomi', requires: { kategorier: ['Økonomi', 'Samfunnsfag', 'Realfag'], min_grade: 'C' } },
-  { name: 'Master i sosiologi', school: 'UiO', location: 'Oslo', url: 'https://www.uio.no/studier/program/sosiologi-master', fagomraade: 'Samfunnsfag', requires: { kategorier: ['Samfunnsfag'], min_grade: 'C' } },
-  { name: 'Master i statsvitenskap', school: 'UiO', location: 'Oslo', url: 'https://www.uio.no/studier/program/statsvitenskap-master', fagomraade: 'Samfunnsfag', requires: { kategorier: ['Samfunnsfag'], min_grade: 'C' } },
-  { name: 'Master i sykepleievitenskap', school: 'UiO', location: 'Oslo', url: 'https://www.uio.no/studier/program/sykepleievitenskap-master', fagomraade: 'Helse', requires: { kategorier: ['Helse'], min_grade: 'C' } },
-  { name: 'Master i folkehelsevitenskap', school: 'NTNU', location: 'Trondheim', url: 'https://www.ntnu.no/studier/mfolkehelse', fagomraade: 'Helse', requires: { kategorier: ['Helse', 'Idrett', 'Samfunnsfag'], min_grade: 'C' } },
-  { name: 'Master i idrettsvitenskap', school: 'NIH', location: 'Oslo', url: 'https://www.nih.no/studier/master', fagomraade: 'Idrett', requires: { kategorier: ['Idrett', 'Helse'], min_grade: 'C' } },
-  { name: 'Master i business', school: 'BI', location: 'Oslo', url: 'https://www.bi.no/studier/master', fagomraade: 'Økonomi', requires: { kategorier: ['Økonomi', 'Samfunnsfag'], min_grade: 'C' } },
-  { name: 'Master i ledelse', school: 'BI', location: 'Oslo', url: 'https://www.bi.no/studier/master/ledelse', fagomraade: 'Økonomi', requires: { kategorier: ['Økonomi', 'Samfunnsfag', 'Psykologi', 'Idrett'], min_grade: 'C' } },
-  { name: 'Master i ingeniørvitenskap', school: 'NTNU', location: 'Trondheim', url: 'https://www.ntnu.no/studier/master-ingeniør', fagomraade: 'Ingeniør', requires: { kategorier: ['Ingeniør', 'Realfag'], min_grade: 'C' } },
-  { name: 'Master i pedagogikk', school: 'UiO', location: 'Oslo', url: 'https://www.uio.no/studier/program/pedagogikk-master', fagomraade: 'Pedagogikk', requires: { kategorier: ['Pedagogikk', 'Samfunnsfag'], min_grade: 'C' } },
-  { name: 'Master i journalistikk', school: 'OsloMet', location: 'Oslo', url: 'https://www.oslomet.no/studier/master/journalistikk', fagomraade: 'Media', requires: { kategorier: ['Media', 'Samfunnsfag'], min_grade: 'C' } },
-  { name: 'Master i medievitenskap', school: 'UiO', location: 'Oslo', url: 'https://www.uio.no/studier/program/medievitenskap-master', fagomraade: 'Media', requires: { kategorier: ['Media', 'Samfunnsfag'], min_grade: 'C' } },
-  { name: 'Master i arkitektur', school: 'NTNU', location: 'Trondheim', url: 'https://www.ntnu.no/studier/march', fagomraade: 'Kunst', requires: { kategorier: ['Kunst', 'Ingeniør'], min_grade: 'B' } },
-  { name: 'Master i biologi', school: 'UiO', location: 'Oslo', url: 'https://www.uio.no/studier/program/biologi-master', fagomraade: 'Realfag', requires: { kategorier: ['Realfag'], min_grade: 'C' } },
-  { name: 'Master i kjemi', school: 'UiO', location: 'Oslo', url: 'https://www.uio.no/studier/program/kjemi-master', fagomraade: 'Realfag', requires: { kategorier: ['Realfag'], min_grade: 'C' } },
-  { name: 'Master i matematikk', school: 'UiO', location: 'Oslo', url: 'https://www.uio.no/studier/program/matematikk-master', fagomraade: 'Realfag', requires: { kategorier: ['Realfag'], min_grade: 'C' } },
-  { name: 'Master i spesialpedagogikk', school: 'UiO', location: 'Oslo', url: 'https://www.uio.no/studier/program/spesialpedagogikk-master', fagomraade: 'Pedagogikk', requires: { kategorier: ['Pedagogikk', 'Helse'], min_grade: 'C' } },
-  { name: 'Master i språkvitenskap', school: 'UiO', location: 'Oslo', url: 'https://www.uio.no/studier/program/spraakvitenskap-master', fagomraade: 'Språk', requires: { kategorier: ['Språk'], min_grade: 'C' } },
-  { name: 'Master i historie', school: 'UiO', location: 'Oslo', url: 'https://www.uio.no/studier/program/historie-master', fagomraade: 'Samfunnsfag', requires: { kategorier: ['Samfunnsfag', 'Språk'], min_grade: 'C' } },
+  { name: 'Master i økonomi og administrasjon', school: 'UiO', location: 'Oslo', study_url: 'https://www.uio.no/studier/program/okonomi-administrasjon-master/', fagomraade: 'Økonomi', requires: { kategorier: ['Økonomi'], min_grade: 'C' } },
+  { name: 'Master i finansiell økonomi', school: 'NHH', location: 'Bergen', study_url: 'https://www.nhh.no/studier/masterstudier/finansiell-okonomi/', fagomraade: 'Økonomi', requires: { kategorier: ['Økonomi'], min_grade: 'B' } },
+  { name: 'Master i regnskap og revisjon', school: 'NHH', location: 'Bergen', study_url: 'https://www.nhh.no/studier/masterstudier/regnskap-og-revisjon/', fagomraade: 'Økonomi', requires: { kategorier: ['Økonomi'], min_grade: 'C' } },
+  { name: 'Master i psykologi', school: 'UiO', location: 'Oslo', study_url: 'https://www.uio.no/studier/program/psykologi-master/', fagomraade: 'Psykologi', requires: { kategorier: ['Psykologi'], min_grade: 'B' } },
+  { name: 'Master i klinisk psykologi', school: 'NTNU', location: 'Trondheim', study_url: 'https://www.ntnu.no/studier/mpsyk', fagomraade: 'Psykologi', requires: { kategorier: ['Psykologi'], min_grade: 'A' } },
+  { name: 'Master i informatikk', school: 'UiO', location: 'Oslo', study_url: 'https://www.uio.no/studier/program/informatikk-master/', fagomraade: 'Informatikk', requires: { kategorier: ['Informatikk', 'Ingeniør', 'Realfag'], min_grade: 'C' } },
+  { name: 'Master i kunstig intelligens', school: 'NTNU', location: 'Trondheim', study_url: 'https://www.ntnu.no/studier/msit', fagomraade: 'Informatikk', requires: { kategorier: ['Informatikk', 'Realfag'], min_grade: 'B' } },
+  { name: 'Master i cybersikkerhet', school: 'NTNU', location: 'Trondheim', study_url: 'https://www.ntnu.no/studier/msc-cybersecurity', fagomraade: 'Informatikk', requires: { kategorier: ['Informatikk', 'Ingeniør'], min_grade: 'C' } },
+  { name: 'Master i rettsvitenskap', school: 'UiO', location: 'Oslo', study_url: 'https://www.uio.no/studier/program/rettsvitenskap-master/', fagomraade: 'Jus', requires: { kategorier: ['Jus'], min_grade: 'C' } },
+  { name: 'Master i samfunnsøkonomi', school: 'UiO', location: 'Oslo', study_url: 'https://www.uio.no/studier/program/samfunnsokonomi-master/', fagomraade: 'Økonomi', requires: { kategorier: ['Økonomi', 'Samfunnsfag', 'Realfag'], min_grade: 'C' } },
+  { name: 'Master i sosiologi', school: 'UiO', location: 'Oslo', study_url: 'https://www.uio.no/studier/program/sosiologi-master/', fagomraade: 'Samfunnsfag', requires: { kategorier: ['Samfunnsfag'], min_grade: 'C' } },
+  { name: 'Master i statsvitenskap', school: 'UiO', location: 'Oslo', study_url: 'https://www.uio.no/studier/program/statsvitenskap-master/', fagomraade: 'Samfunnsfag', requires: { kategorier: ['Samfunnsfag'], min_grade: 'C' } },
+  { name: 'Master i sykepleievitenskap', school: 'UiO', location: 'Oslo', study_url: 'https://www.uio.no/studier/program/sykepleievitenskap-master/', fagomraade: 'Helse', requires: { kategorier: ['Helse'], min_grade: 'C' } },
+  { name: 'Master i folkehelsevitenskap', school: 'NTNU', location: 'Trondheim', study_url: 'https://www.ntnu.no/studier/mfolkehelse', fagomraade: 'Helse', requires: { kategorier: ['Helse', 'Idrett', 'Samfunnsfag'], min_grade: 'C' } },
+  { name: 'Master i idrettsvitenskap', school: 'NIH', location: 'Oslo', study_url: 'https://www.nih.no/studier/masterstudier/', fagomraade: 'Idrett', requires: { kategorier: ['Idrett', 'Helse'], min_grade: 'C' } },
+  { name: 'Master i business', school: 'BI', location: 'Oslo', study_url: 'https://www.bi.no/studier/master/', fagomraade: 'Økonomi', requires: { kategorier: ['Økonomi', 'Samfunnsfag'], min_grade: 'C' } },
+  { name: 'Master i ledelse', school: 'BI', location: 'Oslo', study_url: 'https://www.bi.no/studier/master/master-of-management/', fagomraade: 'Økonomi', requires: { kategorier: ['Økonomi', 'Samfunnsfag', 'Psykologi', 'Idrett'], min_grade: 'C' } },
+  { name: 'Master i ingeniørvitenskap', school: 'NTNU', location: 'Trondheim', study_url: 'https://www.ntnu.no/studier/master', fagomraade: 'Ingeniør', requires: { kategorier: ['Ingeniør', 'Realfag'], min_grade: 'C' } },
+  { name: 'Master i pedagogikk', school: 'UiO', location: 'Oslo', study_url: 'https://www.uio.no/studier/program/pedagogikk-master/', fagomraade: 'Pedagogikk', requires: { kategorier: ['Pedagogikk', 'Samfunnsfag'], min_grade: 'C' } },
+  { name: 'Master i journalistikk', school: 'OsloMet', location: 'Oslo', study_url: 'https://www.oslomet.no/studier/sam/journalistikk-master', fagomraade: 'Media', requires: { kategorier: ['Media', 'Samfunnsfag'], min_grade: 'C' } },
+  { name: 'Master i medievitenskap', school: 'UiO', location: 'Oslo', study_url: 'https://www.uio.no/studier/program/medievitenskap-master/', fagomraade: 'Media', requires: { kategorier: ['Media', 'Samfunnsfag'], min_grade: 'C' } },
+  { name: 'Master i arkitektur', school: 'NTNU', location: 'Trondheim', study_url: 'https://www.ntnu.no/studier/march', fagomraade: 'Kunst', requires: { kategorier: ['Kunst', 'Ingeniør'], min_grade: 'B' } },
+  { name: 'Master i biologi', school: 'UiO', location: 'Oslo', study_url: 'https://www.uio.no/studier/program/biologi-master/', fagomraade: 'Realfag', requires: { kategorier: ['Realfag'], min_grade: 'C' } },
+  { name: 'Master i kjemi', school: 'UiO', location: 'Oslo', study_url: 'https://www.uio.no/studier/program/kjemi-master/', fagomraade: 'Realfag', requires: { kategorier: ['Realfag'], min_grade: 'C' } },
+  { name: 'Master i matematikk', school: 'UiO', location: 'Oslo', study_url: 'https://www.uio.no/studier/program/matematikk-master/', fagomraade: 'Realfag', requires: { kategorier: ['Realfag'], min_grade: 'C' } },
+  { name: 'Master i spesialpedagogikk', school: 'UiO', location: 'Oslo', study_url: 'https://www.uio.no/studier/program/spesialpedagogikk-master/', fagomraade: 'Pedagogikk', requires: { kategorier: ['Pedagogikk', 'Helse'], min_grade: 'C' } },
+  { name: 'Master i språkvitenskap', school: 'UiO', location: 'Oslo', study_url: 'https://www.uio.no/studier/program/spraakvitenskap-master/', fagomraade: 'Språk', requires: { kategorier: ['Språk'], min_grade: 'C' } },
+  { name: 'Master i historie', school: 'UiO', location: 'Oslo', study_url: 'https://www.uio.no/studier/program/historie-master/', fagomraade: 'Samfunnsfag', requires: { kategorier: ['Samfunnsfag', 'Språk'], min_grade: 'C' } },
 ]
 
 function BachelorSide({ tilbake }: { tilbake: () => void }) {
@@ -375,7 +380,10 @@ function BachelorSide({ tilbake }: { tilbake: () => void }) {
                       <span className="text-xs" style={{color: '#98A2B3'}}>Krav: min. karakter <strong style={{color: '#475467'}}>{m.requires.min_grade}</strong></span>
                     </div>
                   </div>
-                  <a href={m.url} target="_blank" rel="noopener noreferrer" className="text-white px-4 py-2 rounded-xl text-sm font-semibold transition whitespace-nowrap" style={{background: '#0D1B2A'}}>Gå til studie</a>
+                  <div className="flex flex-col items-end gap-1">
+                    <a href={m.study_url || `https://www.google.com/search?q=${encodeURIComponent(m.name + ' ' + m.school + ' studie')}`} target="_blank" rel="noopener noreferrer" className="text-white px-4 py-2 rounded-xl text-sm font-semibold transition whitespace-nowrap" style={{background: '#0D1B2A'}}>{m.study_url ? 'Se studie hos skolen' : 'Finn studieside'}</a>
+                    <span className="text-xs" style={{color: '#98A2B3'}}>{m.study_url ? 'Direkte til lærestedets side' : 'Søk etter studieside'}</span>
+                  </div>
                 </div>
               </div>
             )
