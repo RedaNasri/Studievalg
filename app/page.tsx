@@ -191,8 +191,6 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
         <div className="space-y-4 mt-6">
           {viste.map((s, i) => {
             const erBeste = i < 3 && s.status.label === 'God sjanse'
-            const studie_url = s.url && s.url.length > 30 ? s.url : `https://www.google.com/search?q=${encodeURIComponent(s.study_name + ' ' + s.university + ' studie')}`
-            const harDirekte = s.url && s.url.length > 30
             return (
               <div key={s.id} className="rounded-xl transition" style={{padding: erBeste ? '24px' : '20px', border: erBeste ? '1.5px solid #1E3A8A' : '1px solid #E4E9F2', boxShadow: erBeste ? '0 8px 24px rgba(30,58,138,0.12)' : '0 1px 2px rgba(13,27,42,0.04)', background: erBeste ? 'rgba(30,58,138,0.025)' : 'white'}}>
                 <div className="flex justify-between items-start gap-4">
@@ -210,10 +208,7 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
                     </div>
                     <span className="inline-block mt-2 text-xs px-2 py-1 rounded-full font-medium" style={{background: 'rgba(30,58,138,0.08)', color: '#1E3A8A'}}>{s.fagomraade}</span>
                   </div>
-                  <div className="flex flex-col items-end gap-1">
-                    <a href={studie_url} target="_blank" rel="noopener noreferrer" className="text-white px-4 py-2 rounded-xl text-sm font-semibold transition whitespace-nowrap" style={{background: '#0D1B2A'}}>{harDirekte ? 'Se studie hos skolen' : 'Finn studieside'}</a>
-                    <span className="text-xs" style={{color: '#98A2B3'}}>{harDirekte ? 'Direkte til lærestedets side' : 'Søk etter studieside'}</span>
-                  </div>
+                  <a href={s.url} target="_blank" rel="noopener noreferrer" className="text-white px-4 py-2 rounded-xl text-sm font-semibold transition whitespace-nowrap" style={{background: '#0D1B2A'}}>Gå til skolen</a>
                 </div>
               </div>
             )
@@ -380,10 +375,7 @@ function BachelorSide({ tilbake }: { tilbake: () => void }) {
                       <span className="text-xs" style={{color: '#98A2B3'}}>Krav: min. karakter <strong style={{color: '#475467'}}>{m.requires.min_grade}</strong></span>
                     </div>
                   </div>
-                  <div className="flex flex-col items-end gap-1">
-                    <a href={m.study_url || `https://www.google.com/search?q=${encodeURIComponent(m.name + ' ' + m.school + ' studie')}`} target="_blank" rel="noopener noreferrer" className="text-white px-4 py-2 rounded-xl text-sm font-semibold transition whitespace-nowrap" style={{background: '#0D1B2A'}}>{m.study_url ? 'Se studie hos skolen' : 'Finn studieside'}</a>
-                    <span className="text-xs" style={{color: '#98A2B3'}}>{m.study_url ? 'Direkte til lærestedets side' : 'Søk etter studieside'}</span>
-                  </div>
+                  <a href={m.study_url} target="_blank" rel="noopener noreferrer" className="text-white px-4 py-2 rounded-xl text-sm font-semibold transition whitespace-nowrap" style={{background: '#0D1B2A'}}>Gå til skolen</a>
                 </div>
               </div>
             )
