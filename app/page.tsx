@@ -38,9 +38,9 @@ export default function Home() {
   )
 }
 
-const fagomraader = ['Annen helse','Bioingeniør','Cybersikkerhet','Data og IT','Farmasi','Film og media','Fysioterapi','Idrett','Ingeniør','Journalistikk','Kunst og design','Kunstig intelligens','Jus','Lærer','Markedsføring','Matematikk','Medisin','Musikk','Psykologi','Realfag','Regnskap','Samfunnsfag','Sosiologi','Språk','Statsvitenskap','Sykepleie','Tannhelse','Økonomi','Annet']
+const fagomraader = ['Annen helse','Bioingeniør','Cybersikkerhet','Data og IT','Farmasi','Film og media','Fysioterapi','Idrett','Ingeniør','Journalistikk','Jus','Kunst og design','Kunstig intelligens','Lærer','Markedsføring','Matematikk','Medisin','Musikk','Psykologi','Realfag','Regnskap','Samfunnsfag','Sosiologi','Språk','Statsvitenskap','Sykepleie','Tannhelse','Økonomi','Annet']
 const byer = ['Oslo','Bergen','Trondheim','Tromsø','Stavanger','Kristiansand','Ålesund','Bodø','Gjøvik','Lillehammer','Drammen','Sogndal','Levanger','Haugesund','Molde','Narvik','Alta','Åmot','Ås','Bærum','Elverum','Fredrikstad','Gol','Grimstad','Hamar','Harstad','Horten','Indre Østfold','Kongsvinger','Larvik','Lillestrøm','Mo i Rana','Namsos','Notodden','Orkland','Porsgrunn','Ringerike','Sør-Varanger','Stord','Sunnfjord','Volda']
-const masterFagomraader = ['Økonomi','Jus','Psykologi','Informatikk','Ingeniør','Samfunnsfag','Helse','Pedagogikk','Media','Realfag','Idrett','Kunst','Språk']
+const masterFagomraader = ['Helse','Idrett','Informatikk','Ingeniør','Jus','Kunst','Media','Pedagogikk','Psykologi','Realfag','Samfunnsfag','Språk','Økonomi']
 const masterByer = ['Oslo','Bergen','Trondheim','Tromsø','Stavanger','Kristiansand']
 
 function Label({ text, hint }: { text: string, hint: string }) {
@@ -188,28 +188,31 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
           </div>
         )}
 
-        <div className="space-y-4">
-          {viste.map((s, i) => (
-            <div key={s.id} className="bg-white rounded-xl p-5 transition" style={{border: i === 0 ? '1px solid #1E3A8A' : '1px solid #E4E9F2', boxShadow: i === 0 ? '0 8px 20px rgba(30,58,138,0.10)' : '0 1px 2px rgba(13,27,42,0.04)'}}>
-              <div className="flex justify-between items-start gap-4">
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-1 flex-wrap">
-                    <h2 className="font-semibold text-lg" style={{color: '#0D1B2A'}}>{s.study_name}</h2>
-                    <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${s.status.color}`}>{s.status.label}</span>
-                    {i < 3 && s.status.label === 'God sjanse' && <span className="text-xs font-semibold px-2 py-0.5 rounded-full" style={{background: '#1E3A8A', color: 'white', letterSpacing: '0.01em'}}>⭐ Beste match</span>}
+        <div className="space-y-4 mt-6">
+          {viste.map((s, i) => {
+            const erBeste = i < 3 && s.status.label === 'God sjanse'
+            return (
+              <div key={s.id} className="rounded-xl transition" style={{padding: erBeste ? '24px' : '20px', border: erBeste ? '1.5px solid #1E3A8A' : '1px solid #E4E9F2', boxShadow: erBeste ? '0 8px 24px rgba(30,58,138,0.12)' : '0 1px 2px rgba(13,27,42,0.04)', background: erBeste ? 'rgba(30,58,138,0.025)' : 'white'}}>
+                <div className="flex justify-between items-start gap-4">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-1 flex-wrap">
+                      <h2 className="font-semibold text-lg" style={{color: '#0D1B2A'}}>{s.study_name}</h2>
+                      <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${s.status.color}`}>{s.status.label}</span>
+                      {erBeste && <span className="text-xs font-semibold px-2 py-0.5 rounded-full" style={{background: '#1E3A8A', color: 'white'}}>⭐ Beste match</span>}
+                    </div>
+                    <p className="text-sm" style={{color: '#475467'}}>{s.university} – {s.location}</p>
+                    <div className="flex items-center gap-4 mt-2 text-sm flex-wrap">
+                      <span style={{color: '#475467'}}>Poenggrense: <strong style={{color: '#0D1B2A'}}>{s.cutoff_score}</strong></span>
+                      <span style={{color: '#475467'}}>Dine poeng: <strong style={{color: '#0D1B2A'}}>{snitttall}</strong></span>
+                      <span style={{color: s.margin >= 0 ? '#059669' : '#e11d48', fontWeight: '500'}}>{s.margin >= 0 ? '+' : ''}{s.margin.toFixed(1)} poeng</span>
+                    </div>
+                    <span className="inline-block mt-2 text-xs px-2 py-1 rounded-full font-medium" style={{background: 'rgba(30,58,138,0.08)', color: '#1E3A8A'}}>{s.fagomraade}</span>
                   </div>
-                  <p className="text-sm" style={{color: '#475467'}}>{s.university} – {s.location}</p>
-                  <div className="flex items-center gap-4 mt-2 text-sm flex-wrap">
-                    <span style={{color: '#475467'}}>Poenggrense: <strong style={{color: '#0D1B2A'}}>{s.cutoff_score}</strong></span>
-                    <span style={{color: '#475467'}}>Dine poeng: <strong style={{color: '#0D1B2A'}}>{snitttall}</strong></span>
-                    <span style={{color: s.margin >= 0 ? '#059669' : '#e11d48', fontWeight: '500'}}>{s.margin >= 0 ? '+' : ''}{s.margin.toFixed(1)} poeng</span>
-                  </div>
-                  <span className="inline-block mt-2 text-xs px-2 py-1 rounded-full font-medium" style={{background: 'rgba(30,58,138,0.08)', color: '#1E3A8A'}}>{s.fagomraade}</span>
+                  <a href={s.url} target="_blank" rel="noopener noreferrer" className="text-white px-4 py-2 rounded-xl text-sm font-semibold transition whitespace-nowrap" style={{background: '#0D1B2A'}}>Gå til studie</a>
                 </div>
-                <a href={s.url} target="_blank" rel="noopener noreferrer" className="text-white px-4 py-2 rounded-xl text-sm font-semibold transition whitespace-nowrap" style={{background: '#0D1B2A'}}>Gå til studie</a>
               </div>
-            </div>
-          ))}
+            )
+          })}
         </div>
 
         {sokt && !laster && visAntall < sorterteAlle.length && (
@@ -221,7 +224,7 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
         {sokt && !laster && viste.length > 0 && (
           <div className="text-center mt-6">
             <button onClick={delResultat} className="text-sm font-medium px-6 py-2 rounded-xl transition" style={{border: '1px solid #E4E9F2', color: '#475467', background: 'white'}}>
-              {delt ? '✓ Kopiert til utklippstavlen!' : '🔗 Del resultatet mitt'}
+              {delt ? '✓ Kopiert!' : '🔗 Del resultatet mitt'}
             </button>
           </div>
         )}
@@ -354,32 +357,35 @@ function BachelorSide({ tilbake }: { tilbake: () => void }) {
           </div>
         )}
 
-        <div className="space-y-3">
-          {resultater.map((m, i) => (
-            <div key={i} className="bg-white rounded-xl p-5 transition" style={{border: '1px solid #E4E9F2', boxShadow: '0 1px 2px rgba(13,27,42,0.04)'}}>
-              <div className="flex justify-between items-start gap-4">
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-1 flex-wrap">
-                    <h2 className="font-semibold text-lg" style={{color: '#0D1B2A'}}>{m.name}</h2>
-                    <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${m.status.color}`}>{m.status.label}</span>
-                    {i < 3 && m.status.order === 0 && <span className="text-xs font-semibold px-2 py-0.5 rounded-full" style={{background: '#1E3A8A', color: 'white', letterSpacing: '0.01em'}}>⭐ Beste match</span>}
+        <div className="space-y-3 mt-6">
+          {resultater.map((m, i) => {
+            const erBeste = i < 3 && m.status.order === 0
+            return (
+              <div key={i} className="rounded-xl transition" style={{padding: erBeste ? '24px' : '20px', border: erBeste ? '1.5px solid #1E3A8A' : '1px solid #E4E9F2', boxShadow: erBeste ? '0 8px 24px rgba(30,58,138,0.12)' : '0 1px 2px rgba(13,27,42,0.04)', background: erBeste ? 'rgba(30,58,138,0.025)' : 'white'}}>
+                <div className="flex justify-between items-start gap-4">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-1 flex-wrap">
+                      <h2 className="font-semibold text-lg" style={{color: '#0D1B2A'}}>{m.name}</h2>
+                      <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${m.status.color}`}>{m.status.label}</span>
+                      {erBeste && <span className="text-xs font-semibold px-2 py-0.5 rounded-full" style={{background: '#1E3A8A', color: 'white'}}>⭐ Beste match</span>}
+                    </div>
+                    <p className="text-sm" style={{color: '#475467'}}>{m.school} – {m.location}</p>
+                    <div className="flex items-center gap-3 mt-2">
+                      <span className="text-xs px-2 py-1 rounded-full font-medium" style={{background: 'rgba(30,58,138,0.08)', color: '#1E3A8A'}}>{m.fagomraade}</span>
+                      <span className="text-xs" style={{color: '#98A2B3'}}>Krav: min. karakter <strong style={{color: '#475467'}}>{m.requires.min_grade}</strong></span>
+                    </div>
                   </div>
-                  <p className="text-sm" style={{color: '#475467'}}>{m.school} – {m.location}</p>
-                  <div className="flex items-center gap-3 mt-2">
-                    <span className="text-xs px-2 py-1 rounded-full font-medium" style={{background: 'rgba(30,58,138,0.08)', color: '#1E3A8A'}}>{m.fagomraade}</span>
-                    <span className="text-xs" style={{color: '#98A2B3'}}>Krav: min. karakter <strong style={{color: '#475467'}}>{m.requires.min_grade}</strong></span>
-                  </div>
+                  <a href={m.url} target="_blank" rel="noopener noreferrer" className="text-white px-4 py-2 rounded-xl text-sm font-semibold transition whitespace-nowrap" style={{background: '#0D1B2A'}}>Gå til studie</a>
                 </div>
-                <a href={m.url} target="_blank" rel="noopener noreferrer" className="text-white px-4 py-2 rounded-xl text-sm font-semibold transition whitespace-nowrap" style={{background: '#0D1B2A'}}>Gå til studie</a>
               </div>
-            </div>
-          ))}
+            )
+          })}
         </div>
 
         {sokt && resultater.length > 0 && (
           <div className="text-center mt-6">
             <button onClick={delResultat} className="text-sm font-medium px-6 py-2 rounded-xl transition" style={{border: '1px solid #E4E9F2', color: '#475467', background: 'white'}}>
-              {delt ? '✓ Kopiert til utklippstavlen!' : '🔗 Del resultatet mitt'}
+              {delt ? '✓ Kopiert!' : '🔗 Del resultatet mitt'}
             </button>
           </div>
         )}
