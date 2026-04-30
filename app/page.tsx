@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <main className="min-h-screen flex flex-col items-center justify-center px-6" style={{background: '#F6F9FC'}}>
       <div className="max-w-2xl w-full mx-auto py-16 text-center">
-        <img src="/logo.png" alt="StudieMatch" className="mx-auto mb-8 w-32 sm:w-44 md:w-56" />
+        <img src="/logo.png" alt="StudieMatch" className="mx-auto mt-4 mb-10 w-36 sm:w-48 md:w-60" />
         <p className="text-lg mb-12 max-w-xl mx-auto leading-relaxed" style={{color: '#475467'}}>
           Skriv inn snittet ditt eller bacheloren din – og se hva du kan studere
         </p>
@@ -136,7 +136,7 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
       <div className="max-w-4xl mx-auto px-6 py-12">
         <button onClick={tilbake} className="text-sm mb-6 font-medium hover:underline" style={{color: '#1E3A8A'}}>← Tilbake</button>
         <div className="text-center mb-8">
-          <img src="/logo.png" alt="StudieMatch" className="mx-auto mb-4 h-14 sm:h-16 w-auto" />
+          <img src="/logo.png" alt="StudieMatch" className="mx-auto mb-6 w-36 sm:w-48 md:w-60" />
           <p style={{color: '#475467'}}>Finn bachelorstudier basert på karaktersnittet ditt</p>
         </div>
         <div className="bg-white rounded-2xl p-6 mb-6" style={{border: '1px solid #E4E9F2', boxShadow: '0 1px 2px rgba(13,27,42,0.04), 0 4px 12px rgba(13,27,42,0.04)'}}>
@@ -277,7 +277,7 @@ function BachelorSide({ tilbake }: { tilbake: () => void }) {
       <div className="max-w-4xl mx-auto px-6 py-12">
         <button onClick={tilbake} className="text-sm mb-6 font-medium hover:underline" style={{color: '#1E3A8A'}}>← Tilbake</button>
         <div className="text-center mb-8">
-          <img src="/logo.png" alt="StudieMatch" className="mx-auto mb-4 h-14 sm:h-16 w-auto" />
+          <img src="/logo.png" alt="StudieMatch" className="mx-auto mb-6 w-36 sm:w-48 md:w-60" />
           <p style={{color: '#475467'}}>Finn masterstudier basert på bacheloren og karakterene dine</p>
         </div>
         <div className="bg-white rounded-2xl p-6 mb-6" style={{border: '1px solid #E4E9F2', boxShadow: '0 1px 2px rgba(13,27,42,0.04), 0 4px 12px rgba(13,27,42,0.04)'}}>
