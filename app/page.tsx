@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <main className="min-h-screen flex flex-col items-center justify-center px-6" style={{background: '#F6F9FC'}}>
       <div className="max-w-2xl w-full mx-auto py-16 text-center">
-        <img src="/logo.png" alt="StudieMatch" className="mx-auto mb-8 h-20 sm:h-24 w-auto" />
+        <img src="/logo.png" alt="StudieMatch" className="mx-auto mb-8 w-32 sm:w-44 md:w-56" />
         <p className="text-lg mb-12 max-w-xl mx-auto leading-relaxed" style={{color: '#475467'}}>
           Skriv inn snittet ditt eller bacheloren din – og se hva du kan studere
         </p>
