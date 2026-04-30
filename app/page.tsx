@@ -38,7 +38,7 @@ export default function Home() {
   )
 }
 
-const fagomraader = ['Medisin','Psykologi','Sykepleie','Fysioterapi','Tannhelse','Farmasi','Bioingeniør','Annen helse','Data og IT','Kunstig intelligens','Cybersikkerhet','Ingeniør','Økonomi','Markedsføring','Regnskap','Jus','Lærer','Statsvitenskap','Sosiologi','Samfunnsfag','Kunst og design','Musikk','Film og media','Journalistikk','Språk','Realfag','Matematikk','Idrett','Annet']
+const fagomraader = ['Annen helse','Bioingeniør','Cybersikkerhet','Data og IT','Farmasi','Film og media','Fysioterapi','Idrett','Ingeniør','Journalistikk','Kunst og design','Kunstig intelligens','Jus','Lærer','Markedsføring','Matematikk','Medisin','Musikk','Psykologi','Realfag','Regnskap','Samfunnsfag','Sosiologi','Språk','Statsvitenskap','Sykepleie','Tannhelse','Økonomi','Annet']
 const byer = ['Oslo','Bergen','Trondheim','Tromsø','Stavanger','Kristiansand','Ålesund','Bodø','Gjøvik','Lillehammer','Drammen','Sogndal','Levanger','Haugesund','Molde','Narvik','Alta','Åmot','Ås','Bærum','Elverum','Fredrikstad','Gol','Grimstad','Hamar','Harstad','Horten','Indre Østfold','Kongsvinger','Larvik','Lillestrøm','Mo i Rana','Namsos','Notodden','Orkland','Porsgrunn','Ringerike','Sør-Varanger','Stord','Sunnfjord','Volda']
 const masterFagomraader = ['Økonomi','Jus','Psykologi','Informatikk','Ingeniør','Samfunnsfag','Helse','Pedagogikk','Media','Realfag','Idrett','Kunst','Språk']
 const masterByer = ['Oslo','Bergen','Trondheim','Tromsø','Stavanger','Kristiansand']
@@ -196,7 +196,7 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
                   <div className="flex items-center gap-2 mb-1 flex-wrap">
                     <h2 className="font-semibold text-lg" style={{color: '#0D1B2A'}}>{s.study_name}</h2>
                     <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${s.status.color}`}>{s.status.label}</span>
-                    {i < 3 && s.status.label === 'God sjanse' && <span className="text-xs font-semibold px-2 py-0.5 rounded-full" style={{background: '#0D1B2A', color: 'white'}}>⭐ Beste match</span>}
+                    {i < 3 && s.status.label === 'God sjanse' && <span className="text-xs font-semibold px-2 py-0.5 rounded-full" style={{background: '#1E3A8A', color: 'white', letterSpacing: '0.01em'}}>⭐ Beste match</span>}
                   </div>
                   <p className="text-sm" style={{color: '#475467'}}>{s.university} – {s.location}</p>
                   <div className="flex items-center gap-4 mt-2 text-sm flex-wrap">
@@ -362,7 +362,7 @@ function BachelorSide({ tilbake }: { tilbake: () => void }) {
                   <div className="flex items-center gap-2 mb-1 flex-wrap">
                     <h2 className="font-semibold text-lg" style={{color: '#0D1B2A'}}>{m.name}</h2>
                     <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${m.status.color}`}>{m.status.label}</span>
-                    {i < 3 && m.status.order === 0 && <span className="text-xs font-semibold px-2 py-0.5 rounded-full" style={{background: '#0D1B2A', color: 'white'}}>⭐ Beste match</span>}
+                    {i < 3 && m.status.order === 0 && <span className="text-xs font-semibold px-2 py-0.5 rounded-full" style={{background: '#1E3A8A', color: 'white', letterSpacing: '0.01em'}}>⭐ Beste match</span>}
                   </div>
                   <p className="text-sm" style={{color: '#475467'}}>{m.school} – {m.location}</p>
                   <div className="flex items-center gap-3 mt-2">
