@@ -12,24 +12,28 @@ export default function Home() {
       <div className="max-w-2xl w-full mx-auto py-16 text-center">
         <img src="/logo.png" alt="StudieMatch" className="mx-auto mt-4 mb-10 w-40 sm:w-52 md:w-64" />
         <p className="text-sm font-semibold uppercase tracking-widest mb-2" style={{color: '#1E3A8A'}}>Finn studier på 10 sekunder</p>
-        <p className="text-lg mb-12 max-w-xl mx-auto leading-relaxed" style={{color: '#475467'}}>
+        <p className="text-lg mb-4 max-w-xl mx-auto leading-relaxed" style={{color: '#475467'}}>
           Skriv inn snittet ditt eller bacheloren din – og se hva du kan studere
         </p>
+        <p className="text-sm mb-10 max-w-xl mx-auto" style={{color: '#98A2B3'}}>
+          Basert på tidligere poenggrenser og tilgjengelige opptakskrav.
+        </p>
         <p className="font-semibold mb-6 text-lg" style={{color: '#0D1B2A'}}>Hva passer deg best?</p>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 mb-12">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 mb-6">
           <button onClick={() => setValg('vgs')} className="bg-white rounded-2xl p-8 hover:-translate-y-0.5 transition text-left group" style={{border: '1px solid #E4E9F2'}}>
             <div className="text-4xl mb-3">📋</div>
             <h2 className="text-xl font-bold mb-2" style={{color: '#0D1B2A'}}>Jeg går på VGS</h2>
             <p className="text-sm leading-relaxed" style={{color: '#475467'}}>Se hvilke bachelorstudier du kan komme inn på med snittet ditt</p>
-            <div className="mt-4 text-sm font-semibold" style={{color: '#1E3A8A'}}>Kom i gang →</div>
+            <div className="mt-4 text-sm font-semibold" style={{color: '#1E3A8A'}}>Finn bachelorstudier →</div>
           </button>
           <button onClick={() => setValg('bachelor')} className="bg-white rounded-2xl p-8 hover:-translate-y-0.5 transition text-left group" style={{border: '1px solid #E4E9F2'}}>
             <div className="text-4xl mb-3">🎓</div>
             <h2 className="text-xl font-bold mb-2" style={{color: '#0D1B2A'}}>Jeg har en bachelor</h2>
             <p className="text-sm leading-relaxed" style={{color: '#475467'}}>Se hvilke masterprogram bacheloren din kan kvalifisere deg til</p>
-            <div className="mt-4 text-sm font-semibold" style={{color: '#1E3A8A'}}>Kom i gang →</div>
+            <div className="mt-4 text-sm font-semibold" style={{color: '#1E3A8A'}}>Finn masterprogram →</div>
           </button>
         </div>
+        <p className="text-xs mb-6" style={{color: '#98A2B3'}}>Tar under 10 sekunder • Ingen innlogging nødvendig</p>
         <p className="text-xs max-w-md mx-auto leading-relaxed" style={{color: '#98A2B3'}}>
           Resultatene er veiledende og basert på tidligere poenggrenser og tilgjengelige opptakskrav. Sjekk alltid lærestedets egne sider før du søker.
         </p>
