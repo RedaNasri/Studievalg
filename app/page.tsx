@@ -85,6 +85,21 @@ function Dropdown({ label, options, valgte, toggle, nullstill }: { label: string
   )
 }
 
+function getRelevantCutoff(s: any, kvote: string): { cutoff: number, mangler: boolean } {
+  if (kvote === 'forstegangsvitnemal') {
+    if (s.first_time_cutoff != null) return { cutoff: s.first_time_cutoff, mangler: false }
+    return { cutoff: s.ordinary_cutoff ?? s.cutoff_score, mangler: true }
+  }
+  if (kvote === 'ordinaer') {
+    return { cutoff: s.ordinary_cutoff ?? s.cutoff_score, mangler: false }
+  }
+  // usikker - bruk mest forsiktig (høyest grense)
+  const ft = s.first_time_cutoff
+  const ord = s.ordinary_cutoff ?? s.cutoff_score
+  if (ft != null) return { cutoff: Math.max(ft, ord), mangler: false }
+  return { cutoff: ord, mangler: false }
+}
+
 function getStatus(snitt: number, grense: number) {
   const margin = snitt - grense
   if (margin >= 3) return { label: 'God sjanse', color: 'bg-emerald-50 text-emerald-700 border border-emerald-100', order: 0 }
@@ -119,22 +134,31 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
     setLaster(true); setSokt(true); setVisAntall(BATCH); setAlternativer([])
     const snitttall = parseFloat(snitt)
 
-    // Hent hovedresultater
     let query = supabase.from('studier').select('*').order('cutoff_score', { ascending: false })
     if (valgteFag.length > 0) query = query.in('fagomraade', valgteFag)
     if (valgteByer.length > 0) query = query.in('location', valgteByer)
     const { data } = await query
-    const mapped = (data || []).map((s: any) => ({ ...s, status: getStatus(snitttall, s.cutoff_score), margin: snitttall - s.cutoff_score })).sort((a: any, b: any) => a.status.order - b.status.order)
+
+    const mapped = (data || []).map((s: any) => {
+      const { cutoff, mangler } = getRelevantCutoff(s, kvote)
+      const margin = snitttall - cutoff
+      return { ...s, relevantCutoff: cutoff, manglerKvotedata: mangler, status: getStatus(snitttall, cutoff), margin }
+    }).sort((a: any, b: any) => a.status.order - b.status.order)
+
     setResultater(mapped)
 
-    // Hvis ingen treff, hent alternativer
+    // Hent alternativer hvis ingen treff over grensen
     const harTreff = mapped.filter((s: any) => s.margin >= 0).length > 0
     if (!harTreff && (valgteByer.length > 0 || valgteFag.length > 0)) {
       let altQuery = supabase.from('studier').select('*').order('cutoff_score', { ascending: false })
       if (valgteFag.length > 0) altQuery = altQuery.in('fagomraade', valgteFag)
       const { data: altData } = await altQuery
       const altMapped = (altData || [])
-        .map((s: any) => ({ ...s, status: getStatus(snitttall, s.cutoff_score), margin: snitttall - s.cutoff_score }))
+        .map((s: any) => {
+          const { cutoff, mangler } = getRelevantCutoff(s, kvote)
+          const margin = snitttall - cutoff
+          return { ...s, relevantCutoff: cutoff, manglerKvotedata: mangler, status: getStatus(snitttall, cutoff), margin }
+        })
         .filter((s: any) => s.margin >= -5)
         .sort((a: any, b: any) => b.margin - a.margin)
         .slice(0, 10)
@@ -160,14 +184,9 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
   const sorterteAlle = sortering === 'beste' ? [...filtrerte].sort((a, b) => b.margin - a.margin) : filtrerte
   const viste = sorterteAlle.slice(0, visAntall)
   const godSjanseAntall = resultater.filter(s => s.status.label === 'God sjanse').length
-  const snittMarginTall = viste.length > 0 ? viste.reduce((sum, s) => sum + s.margin, 0) / viste.length : null
   const harNullTreff = sokt && !laster && resultater.filter(s => s.margin >= 0).length === 0
 
-  function marginTekst(m: number) {
-    if (m >= 3) return `Du ligger i snitt ${m.toFixed(1)} poeng over tidligere poenggrense`
-    if (m >= 0) return `Du ligger rett over tidligere poenggrense – det er tett!`
-    return `Du ligger i snitt ${Math.abs(m).toFixed(1)} poeng under mange av disse studiene`
-  }
+  const kvotetekst = kvote === 'forstegangsvitnemal' ? 'Førstegangsvitnemål' : kvote === 'ordinaer' ? 'Ordinær kvote' : 'Begge kvoter (forsiktig)'
 
   return (
     <main className="min-h-screen" style={{background: '#F6F9FC'}}>
@@ -204,12 +223,12 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
 
           {kvote === 'forstegangsvitnemal' && (
             <div className="mb-4 rounded-xl px-4 py-3 text-sm" style={{background: 'rgba(30,58,138,0.06)', border: '1px solid rgba(30,58,138,0.18)', color: '#1E3A8A'}}>
-              Førstegangsvitnemålskvoten har ofte lavere poenggrense. Vi jobber med å legge inn egne kvotetall – inntil videre vises ordinære poenggrenser. Sjekk alltid Samordna opptak for kvoter.
+              Førstegangsvitnemålskvoten har ofte lavere poenggrense enn ordinær kvote. Vi jobber med å legge inn egne kvotetall – der disse mangler brukes ordinær poenggrense. Sjekk alltid <a href="https://www.samordnaopptak.no" target="_blank" rel="noopener noreferrer" style={{textDecoration: 'underline'}}>Samordna opptak</a> for kvoter.
             </div>
           )}
           {kvote === 'usikker' && (
             <div className="mb-4 rounded-xl px-4 py-3 text-sm" style={{background: '#fffbeb', border: '1px solid #fde68a', color: '#92400e'}}>
-              Vi anbefaler å sjekke Samordna opptak for å finne ut hvilken kvote som gjelder for deg. Resultatene nedenfor er basert på ordinære poenggrenser.
+              Vi viser en forsiktig vurdering basert på høyeste poenggrense. Sjekk <a href="https://www.samordnaopptak.no" target="_blank" rel="noopener noreferrer" style={{textDecoration: 'underline'}}>Samordna opptak</a> for å finne ut hvilken kvote som gjelder for deg.
             </div>
           )}
 
@@ -218,14 +237,14 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
 
         {laster && <div className="text-center py-8" style={{color: '#98A2B3'}}>Laster...</div>}
 
-        {sokt && !laster && !harNullTreff && (
+        {sokt && !laster && !harNullTreff && resultater.filter(s => s.margin >= 0).length > 0 && (
           <div>
             <div className="rounded-xl px-5 py-4 mb-3" style={{background: 'rgba(30,58,138,0.06)', border: '1px solid rgba(30,58,138,0.18)'}}>
-              <p className="font-bold text-lg" style={{color: '#0D1B2A'}}>Basert på snittet ditt ({snitttall}) kan du være kvalifisert for {godSjanseAntall} studier</p>
-              {snittMarginTall !== null && <p className="text-sm mt-1" style={{color: '#1E3A8A'}}>{marginTekst(snittMarginTall)}</p>}
+              <p className="font-bold text-lg" style={{color: '#0D1B2A'}}>Basert på snittet ditt ({snitttall}) og kvote ({kvotetekst}) kan du være kvalifisert for {godSjanseAntall} studier</p>
+              <p className="text-sm mt-1" style={{color: '#1E3A8A'}}>Dette er en veiledende vurdering basert på tidligere poenggrenser. Kvoter kan påvirke resultatet.</p>
             </div>
-            <div className="bg-amber-50 border border-amber-100 rounded-xl px-4 py-3 mb-4 text-amber-800 text-sm">
-              Resultatene er veiledende og basert på tidligere poenggrenser. Poenggrenser varierer fra år til år, og kvoter kan påvirke vurderingen. Sjekk alltid lærestedets og Samordna opptaks egne sider før du søker.
+            <div className="rounded-xl px-4 py-3 mb-4 text-sm" style={{background: '#fffbeb', border: '1px solid #fde68a', color: '#92400e'}}>
+              Resultatene er veiledende og basert på tidligere poenggrenser. Poenggrenser varierer fra år til år, og kvoter kan påvirke vurderingen. Sjekk alltid lærestedets og <a href="https://www.samordnaopptak.no" target="_blank" rel="noopener noreferrer" style={{textDecoration: 'underline'}}>Samordna opptaks</a> egne sider før du søker.
             </div>
             <div className="flex flex-wrap gap-3 mb-5 items-center">
               <button onClick={() => setKunGodSjanse(!kunGodSjanse)} className="px-4 py-2 rounded-xl text-sm font-medium transition" style={{background: kunGodSjanse ? '#059669' : 'white', color: kunGodSjanse ? 'white' : '#475467', border: kunGodSjanse ? '1px solid #059669' : '1px solid #E4E9F2'}}>Vis kun god sjanse</button>
@@ -240,15 +259,15 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
           <div>
             <div className="rounded-xl px-5 py-4 mb-4" style={{background: '#fffbeb', border: '1px solid #fde68a'}}>
               <p className="font-bold" style={{color: '#92400e'}}>Vi fant ingen studier som matcher alle valgene dine</p>
-              <p className="text-sm mt-1" style={{color: '#92400e'}}>Men her er relevante alternativer basert på fagområde og nærliggende steder.</p>
+              <p className="text-sm mt-1" style={{color: '#92400e'}}>Her er relevante alternativer basert på fagområde og nærliggende steder.</p>
             </div>
             {alternativer.length > 0 && (
-              <div className="mb-4">
-                <p className="font-semibold mb-2" style={{color: '#0D1B2A'}}>Alternative muligheter</p>
+              <div className="mb-6">
+                <p className="font-semibold mb-1" style={{color: '#0D1B2A'}}>Alternative muligheter</p>
                 <p className="text-sm mb-4" style={{color: '#475467'}}>Disse studiene matcher ikke alle valgene dine, men kan være relevante basert på fagområde eller sted.</p>
                 <div className="space-y-3">
                   {alternativer.map((s, i) => (
-                    <div key={i} className="rounded-xl p-5 transition" style={{border: '1px solid #E4E9F2', background: 'white', boxShadow: '0 1px 2px rgba(13,27,42,0.04)'}}>
+                    <div key={i} className="rounded-xl p-5" style={{border: '1px solid #E4E9F2', background: 'white'}}>
                       <div className="flex justify-between items-start gap-4">
                         <div className="flex-1">
                           <div className="flex items-center gap-2 mb-1 flex-wrap">
@@ -256,10 +275,11 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
                             <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${s.status.color}`}>{s.status.label}</span>
                           </div>
                           <p className="text-sm" style={{color: '#475467'}}>{s.university} – {s.location}</p>
-                          <div className="flex items-center gap-4 mt-2 text-sm">
-                            <span style={{color: '#475467'}}>Tidligere poenggrense: <strong style={{color: '#0D1B2A'}}>{s.cutoff_score}</strong></span>
+                          <div className="flex items-center gap-4 mt-2 text-sm flex-wrap">
+                            <span style={{color: '#475467'}}>Tidligere poenggrense ({kvotetekst}): <strong style={{color: '#0D1B2A'}}>{s.relevantCutoff}</strong></span>
                             <span style={{color: s.margin >= 0 ? '#059669' : '#e11d48', fontWeight: '500'}}>{s.margin >= 0 ? '+' : ''}{s.margin.toFixed(1)} poeng</span>
                           </div>
+                          {s.manglerKvotedata && <p className="text-xs mt-1" style={{color: '#98A2B3'}}>Full kvotedata mangler – sjekk Samordna opptak.</p>}
                         </div>
                         <a href={s.url} target="_blank" rel="noopener noreferrer" className="text-white px-4 py-2 rounded-xl text-sm font-semibold transition whitespace-nowrap" style={{background: '#0D1B2A'}}>Gå til skolens nettside</a>
                       </div>
@@ -285,10 +305,14 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
                     </div>
                     <p className="text-sm" style={{color: '#475467'}}>{s.university} – {s.location}</p>
                     <div className="flex items-center gap-4 mt-2 text-sm flex-wrap">
-                      <span style={{color: '#475467'}}>Tidligere poenggrense: <strong style={{color: '#0D1B2A'}}>{s.cutoff_score}</strong></span>
+                      <span style={{color: '#475467'}}>Kvote: <strong style={{color: '#0D1B2A'}}>{kvotetekst}</strong></span>
+                      <span style={{color: '#475467'}}>Tidligere poenggrense: <strong style={{color: '#0D1B2A'}}>{s.relevantCutoff}</strong></span>
                       <span style={{color: '#475467'}}>Ditt snitt: <strong style={{color: '#0D1B2A'}}>{snitttall}</strong></span>
                       <span style={{color: s.margin >= 0 ? '#059669' : '#e11d48', fontWeight: '500'}}>{s.margin >= 0 ? '+' : ''}{s.margin.toFixed(1)} poeng</span>
                     </div>
+                    {s.manglerKvotedata && (
+                      <p className="text-xs mt-1" style={{color: '#98A2B3'}}>Full kvotedata mangler – sjekk Samordna opptak for førstegangsvitnemålskvote.</p>
+                    )}
                     <span className="inline-block mt-2 text-xs px-2 py-1 rounded-full font-medium" style={{background: 'rgba(30,58,138,0.08)', color: '#1E3A8A'}}>{s.fagomraade}</span>
                   </div>
                   <a href={s.url} target="_blank" rel="noopener noreferrer" className="text-white px-4 py-2 rounded-xl text-sm font-semibold transition whitespace-nowrap" style={{background: '#0D1B2A'}}>Gå til skolens nettside</a>
@@ -436,7 +460,7 @@ function BachelorSide({ tilbake }: { tilbake: () => void }) {
               <p className="font-bold" style={{color: '#0D1B2A'}}>Basert på bacheloren din og karakterene dine kan du være kvalifisert for disse masterprogrammene:</p>
               <p className="text-sm mt-1" style={{color: '#1E3A8A'}}>Du oppfyller kravene til {kvalifisert} av {resultater.length} masterprogrammer</p>
             </div>
-            <div className="bg-amber-50 border border-amber-100 rounded-xl px-4 py-3 mb-4 text-amber-800 text-sm">
+            <div className="rounded-xl px-4 py-3 mb-4 text-sm" style={{background: '#fffbeb', border: '1px solid #fde68a', color: '#92400e'}}>
               Resultatene er veiledende og basert på tilgjengelige opptakskrav. Masterkrav varierer mellom læresteder, og du må alltid sjekke den offisielle programsiden før du søker.
             </div>
           </div>
