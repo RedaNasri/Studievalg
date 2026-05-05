@@ -222,10 +222,10 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
           </div>
 
           {kvote === 'forstegangsvitnemal' && (
-            <div className="mb-4 rounded-xl px-4 py-3 text-sm" style={{background: 'rgba(30,58,138,0.06)', border: '1px solid rgba(30,58,138,0.18)', color: '#1E3A8A'}}>
-              Førstegangsvitnemålskvoten har ofte lavere poenggrense enn ordinær kvote. Vi jobber med å legge inn egne kvotetall – der disse mangler brukes ordinær poenggrense. Sjekk alltid <a href="https://www.samordnaopptak.no" target="_blank" rel="noopener noreferrer" style={{textDecoration: 'underline'}}>Samordna opptak</a> for kvoter.
-            </div>
-          )}
+  <div className="mb-4 rounded-xl px-4 py-3 text-sm" style={{background: 'rgba(30,58,138,0.06)', border: '1px solid rgba(30,58,138,0.18)', color: '#1E3A8A'}}>
+    Resultatene viser poenggrenser for førstegangsvitnemålskvoten fra Samordna opptak 2025. Poenggrenser varierer fra år til år – sjekk alltid <a href="https://www.samordnaopptak.no" target="_blank" rel="noopener noreferrer" style={{textDecoration: 'underline'}}>Samordna opptak</a> før du søker.
+  </div>
+)}
           {kvote === 'usikker' && (
   <div className="mb-4 rounded-xl px-4 py-3 text-sm" style={{background: 'rgba(30,58,138,0.06)', border: '1px solid rgba(30,58,138,0.18)', color: '#1E3A8A'}}>
     <p className="font-semibold mb-1">Hvilken kvote gjelder for deg?</p>
