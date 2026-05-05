@@ -11,6 +11,9 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
+  verification: {
+    google: "MAzEnRjXS6D7kzu4c6LI-hmNS21lcUtGFExwYYH5wkw",
+  },
   title: "StudieMatch – Finn studier du kan være kvalifisert for",
   description: "StudieMatch hjelper elever og studenter med å finne studier og masterprogram de kan være kvalifisert for basert på snitt eller bachelor.",
   openGraph: {
