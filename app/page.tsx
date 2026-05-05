@@ -186,7 +186,7 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
   const godSjanseAntall = resultater.filter(s => s.status.label === 'God sjanse').length
   const harNullTreff = sokt && !laster && resultater.filter(s => s.margin >= 0).length === 0
 
-  const kvotetekst = kvote === 'forstegangsvitnemal' ? 'Førstegangsvitnemål' : kvote === 'ordinaer' ? 'Ordinær kvote' : 'Begge kvoter (forsiktig)'
+  const kvotetekst = kvote === 'forstegangsvitnemal' ? 'Førstegangsvitnemål' : kvote === 'ordinaer' ? 'Ordinær kvote' : ''
 
   return (
     <main className="min-h-screen" style={{background: '#F6F9FC'}}>
@@ -305,7 +305,7 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
                     </div>
                     <p className="text-sm" style={{color: '#475467'}}>{s.university} – {s.location}</p>
                     <div className="flex items-center gap-4 mt-2 text-sm flex-wrap">
-                      <span style={{color: '#475467'}}>Kvote: <strong style={{color: '#0D1B2A'}}>{kvotetekst}</strong></span>
+                      {kvotetekst && <span style={{color: '#475467'}}>Kvote: <strong style={{color: '#0D1B2A'}}>{kvotetekst}</strong></span>}
                       <span style={{color: '#475467'}}>Tidligere poenggrense: <strong style={{color: '#0D1B2A'}}>{s.relevantCutoff}</strong></span>
                       <span style={{color: '#475467'}}>Ditt snitt: <strong style={{color: '#0D1B2A'}}>{snitttall}</strong></span>
                       <span style={{color: s.margin >= 0 ? '#059669' : '#e11d48', fontWeight: '500'}}>{s.margin >= 0 ? '+' : ''}{s.margin.toFixed(1)} poeng</span>
