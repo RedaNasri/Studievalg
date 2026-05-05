@@ -227,10 +227,12 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
             </div>
           )}
           {kvote === 'usikker' && (
-            <div className="mb-4 rounded-xl px-4 py-3 text-sm" style={{background: '#fffbeb', border: '1px solid #fde68a', color: '#92400e'}}>
-              Vi viser en forsiktig vurdering basert på høyeste poenggrense. Sjekk <a href="https://www.samordnaopptak.no" target="_blank" rel="noopener noreferrer" style={{textDecoration: 'underline'}}>Samordna opptak</a> for å finne ut hvilken kvote som gjelder for deg.
-            </div>
-          )}
+  <div className="mb-4 rounded-xl px-4 py-3 text-sm" style={{background: 'rgba(30,58,138,0.06)', border: '1px solid rgba(30,58,138,0.18)', color: '#1E3A8A'}}>
+    <p className="font-semibold mb-1">Hvilken kvote gjelder for deg?</p>
+    <p className="mb-2">Hvis du går ut av videregående for første gang i år, tilhører du sannsynligvis <strong>førstegangsvitnemålskvoten</strong> – som ofte har lavere poenggrense. Har du gått ut tidligere, eller forbedret karakterer, tilhører du <strong>ordinær kvote</strong>.</p>
+    <p>Vi viser nå ordinære poenggrenser. Sjekk <a href="https://www.samordnaopptak.no" target="_blank" rel="noopener noreferrer" style={{textDecoration: 'underline'}}>Samordna opptak</a> for å bekrefte hvilken kvote som gjelder for deg.</p>
+  </div>
+)}
 
           <button onClick={finnStudier} className="w-full text-white py-4 rounded-xl font-semibold text-base transition sticky bottom-4" style={{background: '#0D1B2A'}}>Finn studier</button>
         </div>
