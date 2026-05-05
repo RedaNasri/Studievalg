@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
+import Script from "next/script";
 
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
 const jakarta = Plus_Jakarta_Sans({
@@ -17,6 +18,17 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="nb" className={`${inter.variable} ${jakarta.variable} h-full antialiased`} style={{ colorScheme: "light" }}>
+      <head>
+        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-NKVEW2ZQL1" />
+        <Script id="google-analytics">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-NKVEW2ZQL1');
+          `}
+        </Script>
+      </head>
       <body className="min-h-full flex flex-col" style={{ background: "#F6F9FC", color: "#0D1B2A" }}>
         {children}
       </body>
