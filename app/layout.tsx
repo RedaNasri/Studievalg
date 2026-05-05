@@ -13,6 +13,19 @@ const jakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: "StudieMatch – Finn studier du kan være kvalifisert for",
   description: "StudieMatch hjelper elever og studenter med å finne studier og masterprogram de kan være kvalifisert for basert på snitt eller bachelor.",
+  openGraph: {
+    title: "StudieMatch – Finn studier du kan være kvalifisert for",
+    description: "Skriv inn snittet ditt og se hvilke studier du kan være kvalifisert for. Basert på poenggrenser fra Samordna opptak 2025.",
+    url: "https://studiematch.no",
+    siteName: "StudieMatch",
+    locale: "nb_NO",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "StudieMatch – Finn studier du kan være kvalifisert for",
+    description: "Skriv inn snittet ditt og se hvilke studier du kan være kvalifisert for. Basert på poenggrenser fra Samordna opptak 2025.",
+  },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
