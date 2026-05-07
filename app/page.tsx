@@ -454,7 +454,7 @@ function BachelorSide({ tilbake }: { tilbake: () => void }) {
               <Dropdown label="Velg fagområde" options={masterFagomraader} valgte={valgteFag} toggle={toggleFag} nullstill={() => setValgteFag([])} />
             </div>
           </div>
-          <button onClick={() => { if (bachelor && karakter) setSokt(true) }} className="w-full text-white py-4 rounded-xl font-semibold text-base transition sticky bottom-4" style={{background: '#0D1B2A'}}>Finn masterprogram</button>
+          <button onClick={() => { if (bachelor && karakter) { setSokt(true); setTimeout(() => { document.getElementById('resultater-master')?.scrollIntoView({ behavior: 'smooth' }) }, 300) } }} className="w-full text-white py-4 rounded-xl font-semibold text-base transition sticky bottom-4" style={{background: '#0D1B2A'}}>Finn masterprogram</button>
         </div>
 
         {sokt && (
@@ -469,7 +469,7 @@ function BachelorSide({ tilbake }: { tilbake: () => void }) {
           </div>
         )}
 
-        <div className="space-y-3 mt-6">
+        <div id="resultater-master" className="space-y-3 mt-6">
           {resultater.map((m, i) => {
             const erBeste = i < 3 && m.status.order === 0
             return (
