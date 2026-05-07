@@ -121,7 +121,7 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
   const [sortering, setSortering] = useState<'standard' | 'beste'>('standard')
   const [visAntall, setVisAntall] = useState(BATCH)
   const [delt, setDelt] = useState(false)
-
+const [visAlle, setVisAlle] = useState(false)
   const { createClient } = require('@supabase/supabase-js')
   const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)
 
@@ -384,11 +384,13 @@ function BachelorSide({ tilbake }: { tilbake: () => void }) {
     return { label: '❌ Oppfyller ikke krav', color: 'bg-rose-50 text-rose-700 border border-rose-100', order: 2 }
   }
 
-  const resultater = sokt ? alleMastere.filter(m => {
-    if (valgteFag.length > 0 && !valgteFag.includes(m.fagomraade)) return false
-    if (valgteByer.length > 0 && !valgteByer.includes(m.location)) return false
-    return true
-  }).map(m => ({ ...m, status: getStatus(m) })).sort((a, b) => a.status.order - b.status.order) : []
+const alleResultater = sokt ? alleMastere.filter(m => {
+  if (valgteFag.length > 0 && !valgteFag.includes(m.fagomraade)) return false
+  if (valgteByer.length > 0 && !valgteByer.includes(m.location)) return false
+  return true
+}).map(m => ({ ...m, status: getStatus(m) })).sort((a, b) => a.status.order - b.status.order) : []
+
+const resultater = visAlle ? alleResultater : alleResultater.filter(m => m.status.order < 2)
 
   const kvalifisert = resultater.filter(m => m.status.order === 0).length
 
@@ -479,6 +481,14 @@ function BachelorSide({ tilbake }: { tilbake: () => void }) {
             )
           })}
         </div>
+
+        {sokt && alleResultater.filter(m => m.status.order === 2).length > 0 && (
+          <div className="text-center mt-4">
+            <button onClick={() => setVisAlle(!visAlle)} className="text-sm font-medium px-6 py-2 rounded-xl transition" style={{border: '1px solid #E4E9F2', color: '#475467', background: 'white'}}>
+              {visAlle ? 'Skjul programmer du ikke kvalifiserer til' : `Vis også ${alleResultater.filter(m => m.status.order === 2).length} programmer du ikke kvalifiserer til`}
+            </button>
+          </div>
+        )}
 
         {sokt && resultater.length > 0 && (
           <div className="text-center mt-6">
