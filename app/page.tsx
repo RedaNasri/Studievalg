@@ -93,7 +93,6 @@ function getRelevantCutoff(s: any, kvote: string): { cutoff: number, mangler: bo
   if (kvote === 'ordinaer') {
     return { cutoff: s.ordinary_cutoff ?? s.cutoff_score, mangler: false }
   }
-  // usikker - bruk mest forsiktig (høyest grense)
   const ft = s.first_time_cutoff
   const ord = s.ordinary_cutoff ?? s.cutoff_score
   if (ft != null) return { cutoff: Math.max(ft, ord), mangler: false }
@@ -130,7 +129,6 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
   function toggleBy(by: string) { setValgteByer(prev => prev.includes(by) ? prev.filter(b => b !== by) : [...prev, by]) }
 
   async function finnStudier() {
-    async function finnStudier() {
     if (!snitt) return
     setLaster(true); setSokt(true); setVisAntall(BATCH); setAlternativer([])
     setTimeout(() => {
@@ -151,7 +149,6 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
 
     setResultater(mapped)
 
-    // Hent alternativer hvis ingen treff over grensen
     const harTreff = mapped.filter((s: any) => s.margin >= 0).length > 0
     if (!harTreff && (valgteByer.length > 0 || valgteFag.length > 0)) {
       let altQuery = supabase.from('studier').select('*').order('cutoff_score', { ascending: false })
@@ -189,7 +186,6 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
   const viste = sorterteAlle.slice(0, visAntall)
   const godSjanseAntall = resultater.filter(s => s.status.label === 'God sjanse').length
   const harNullTreff = sokt && !laster && resultater.filter(s => s.margin >= 0).length === 0
-
   const kvotetekst = kvote === 'forstegangsvitnemal' ? 'Førstegangsvitnemål' : kvote === 'ordinaer' ? 'Ordinær kvote' : ''
 
   return (
@@ -226,123 +222,122 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
           </div>
 
           {kvote === 'forstegangsvitnemal' && (
-  <div className="mb-4 rounded-xl px-4 py-3 text-sm" style={{background: 'rgba(30,58,138,0.06)', border: '1px solid rgba(30,58,138,0.18)', color: '#1E3A8A'}}>
-    Resultatene viser poenggrenser for førstegangsvitnemålskvoten fra Samordna opptak 2025. Poenggrenser varierer fra år til år – sjekk alltid <a href="https://www.samordnaopptak.no" target="_blank" rel="noopener noreferrer" style={{textDecoration: 'underline'}}>Samordna opptak</a> før du søker.
-  </div>
-)}
+            <div className="mb-4 rounded-xl px-4 py-3 text-sm" style={{background: 'rgba(30,58,138,0.06)', border: '1px solid rgba(30,58,138,0.18)', color: '#1E3A8A'}}>
+              Resultatene viser poenggrenser for førstegangsvitnemålskvoten fra Samordna opptak 2025. Poenggrenser varierer fra år til år – sjekk alltid <a href="https://www.samordnaopptak.no" target="_blank" rel="noopener noreferrer" style={{textDecoration: 'underline'}}>Samordna opptak</a> før du søker.
+            </div>
+          )}
           {kvote === 'usikker' && (
-  <div className="mb-4 rounded-xl px-4 py-3 text-sm" style={{background: 'rgba(30,58,138,0.06)', border: '1px solid rgba(30,58,138,0.18)', color: '#1E3A8A'}}>
-    <p className="font-semibold mb-1">Hvilken kvote gjelder for deg?</p>
-    <p className="mb-2">Hvis du går ut av videregående for første gang i år, tilhører du sannsynligvis <strong>førstegangsvitnemålskvoten</strong> – som ofte har lavere poenggrense. Har du gått ut tidligere, eller forbedret karakterer, tilhører du <strong>ordinær kvote</strong>.</p>
-    <p>Vi viser nå ordinære poenggrenser. Sjekk <a href="https://www.samordnaopptak.no" target="_blank" rel="noopener noreferrer" style={{textDecoration: 'underline'}}>Samordna opptak</a> for å bekrefte hvilken kvote som gjelder for deg.</p>
-  </div>
-)}
+            <div className="mb-4 rounded-xl px-4 py-3 text-sm" style={{background: 'rgba(30,58,138,0.06)', border: '1px solid rgba(30,58,138,0.18)', color: '#1E3A8A'}}>
+              <p className="font-semibold mb-1">Hvilken kvote gjelder for deg?</p>
+              <p className="mb-2">Hvis du går ut av videregående for første gang i år, tilhører du sannsynligvis <strong>førstegangsvitnemålskvoten</strong> – som ofte har lavere poenggrense. Har du gått ut tidligere, eller forbedret karakterer, tilhører du <strong>ordinær kvote</strong>.</p>
+              <p>Vi viser nå ordinære poenggrenser. Sjekk <a href="https://www.samordnaopptak.no" target="_blank" rel="noopener noreferrer" style={{textDecoration: 'underline'}}>Samordna opptak</a> for å bekrefte hvilken kvote som gjelder for deg.</p>
+            </div>
+          )}
 
           <button onClick={finnStudier} className="w-full text-white py-4 rounded-xl font-semibold text-base transition sticky bottom-4" style={{background: '#0D1B2A'}}>Finn studier</button>
         </div>
 
         <div id="resultater">
-{laster && <div className="text-center py-8" style={{color: '#98A2B3'}}>Laster...</div>}
+          {laster && <div className="text-center py-8" style={{color: '#98A2B3'}}>Laster...</div>}
 
-        {sokt && !laster && !harNullTreff && resultater.filter(s => s.margin >= 0).length > 0 && (
-          <div>
-            <div className="rounded-xl px-5 py-4 mb-3" style={{background: 'rgba(30,58,138,0.06)', border: '1px solid rgba(30,58,138,0.18)'}}>
-              <p className="font-bold text-lg" style={{color: '#0D1B2A'}}>Basert på snittet ditt ({snitttall}) og kvote ({kvotetekst}) kan du være kvalifisert for {godSjanseAntall} studier</p>
-              <p className="text-sm mt-1" style={{color: '#1E3A8A'}}>Dette er en veiledende vurdering basert på tidligere poenggrenser. Kvoter kan påvirke resultatet.</p>
+          {sokt && !laster && !harNullTreff && resultater.filter(s => s.margin >= 0).length > 0 && (
+            <div>
+              <div className="rounded-xl px-5 py-4 mb-3" style={{background: 'rgba(30,58,138,0.06)', border: '1px solid rgba(30,58,138,0.18)'}}>
+                <p className="font-bold text-lg" style={{color: '#0D1B2A'}}>Basert på snittet ditt ({snitttall}) kan du være kvalifisert for {godSjanseAntall} studier</p>
+                <p className="text-sm mt-1" style={{color: '#1E3A8A'}}>Dette er en veiledende vurdering basert på tidligere poenggrenser. Kvoter kan påvirke resultatet.</p>
+              </div>
+              <div className="rounded-xl px-4 py-3 mb-4 text-sm" style={{background: '#fffbeb', border: '1px solid #fde68a', color: '#92400e'}}>
+                Resultatene er veiledende og basert på tidligere poenggrenser. Poenggrenser varierer fra år til år, og kvoter kan påvirke vurderingen. Sjekk alltid lærestedets og <a href="https://www.samordnaopptak.no" target="_blank" rel="noopener noreferrer" style={{textDecoration: 'underline'}}>Samordna opptaks</a> egne sider før du søker.
+              </div>
+              <div className="flex flex-wrap gap-3 mb-5 items-center">
+                <button onClick={() => setKunGodSjanse(!kunGodSjanse)} className="px-4 py-2 rounded-xl text-sm font-medium transition" style={{background: kunGodSjanse ? '#059669' : 'white', color: kunGodSjanse ? 'white' : '#475467', border: kunGodSjanse ? '1px solid #059669' : '1px solid #E4E9F2'}}>Vis kun god sjanse</button>
+                <button onClick={() => setSortering(sortering === 'standard' ? 'beste' : 'standard')} className="px-4 py-2 rounded-xl text-sm font-medium transition" style={{background: sortering === 'beste' ? '#1E3A8A' : 'white', color: sortering === 'beste' ? 'white' : '#475467', border: sortering === 'beste' ? '1px solid #1E3A8A' : '1px solid #E4E9F2'}}>{sortering === 'beste' ? 'Sortert: beste match' : 'Sorter etter beste match'}</button>
+                <p className="text-sm ml-auto" style={{color: '#98A2B3'}}>{viste.length} av {sorterteAlle.length} studier vises</p>
+              </div>
+              <p className="font-semibold mb-3" style={{color: '#0D1B2A'}}>Mulige studier basert på tidligere poenggrenser</p>
             </div>
-            <div className="rounded-xl px-4 py-3 mb-4 text-sm" style={{background: '#fffbeb', border: '1px solid #fde68a', color: '#92400e'}}>
-              Resultatene er veiledende og basert på tidligere poenggrenser. Poenggrenser varierer fra år til år, og kvoter kan påvirke vurderingen. Sjekk alltid lærestedets og <a href="https://www.samordnaopptak.no" target="_blank" rel="noopener noreferrer" style={{textDecoration: 'underline'}}>Samordna opptaks</a> egne sider før du søker.
-            </div>
-            <div className="flex flex-wrap gap-3 mb-5 items-center">
-              <button onClick={() => setKunGodSjanse(!kunGodSjanse)} className="px-4 py-2 rounded-xl text-sm font-medium transition" style={{background: kunGodSjanse ? '#059669' : 'white', color: kunGodSjanse ? 'white' : '#475467', border: kunGodSjanse ? '1px solid #059669' : '1px solid #E4E9F2'}}>Vis kun god sjanse</button>
-              <button onClick={() => setSortering(sortering === 'standard' ? 'beste' : 'standard')} className="px-4 py-2 rounded-xl text-sm font-medium transition" style={{background: sortering === 'beste' ? '#1E3A8A' : 'white', color: sortering === 'beste' ? 'white' : '#475467', border: sortering === 'beste' ? '1px solid #1E3A8A' : '1px solid #E4E9F2'}}>{sortering === 'beste' ? 'Sortert: beste match' : 'Sorter etter beste match'}</button>
-              <p className="text-sm ml-auto" style={{color: '#98A2B3'}}>{viste.length} av {sorterteAlle.length} studier vises</p>
-            </div>
-            <p className="font-semibold mb-3" style={{color: '#0D1B2A'}}>Mulige studier basert på tidligere poenggrenser</p>
-          </div>
-        )}
+          )}
 
-        {harNullTreff && (
-          <div>
-            <div className="rounded-xl px-5 py-4 mb-4" style={{background: '#fffbeb', border: '1px solid #fde68a'}}>
-              <p className="font-bold" style={{color: '#92400e'}}>Vi fant ingen studier som matcher alle valgene dine</p>
-              <p className="text-sm mt-1" style={{color: '#92400e'}}>Her er relevante alternativer basert på fagområde og nærliggende steder.</p>
-            </div>
-            {alternativer.length > 0 && (
-              <div className="mb-6">
-                <p className="font-semibold mb-1" style={{color: '#0D1B2A'}}>Alternative muligheter</p>
-                <p className="text-sm mb-4" style={{color: '#475467'}}>Disse studiene matcher ikke alle valgene dine, men kan være relevante basert på fagområde eller sted.</p>
-                <div className="space-y-3">
-                  {alternativer.map((s, i) => (
-                    <div key={i} className="rounded-xl p-5" style={{border: '1px solid #E4E9F2', background: 'white'}}>
-                      <div className="flex justify-between items-start gap-4">
-                        <div className="flex-1">
-                          <div className="flex items-center gap-2 mb-1 flex-wrap">
-                            <h2 className="font-semibold text-lg" style={{color: '#0D1B2A'}}>{s.study_name}</h2>
-                            <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${s.status.color}`}>{s.status.label}</span>
+          {harNullTreff && (
+            <div>
+              <div className="rounded-xl px-5 py-4 mb-4" style={{background: '#fffbeb', border: '1px solid #fde68a'}}>
+                <p className="font-bold" style={{color: '#92400e'}}>Vi fant ingen studier som matcher alle valgene dine</p>
+                <p className="text-sm mt-1" style={{color: '#92400e'}}>Her er relevante alternativer basert på fagområde og nærliggende steder.</p>
+              </div>
+              {alternativer.length > 0 && (
+                <div className="mb-6">
+                  <p className="font-semibold mb-1" style={{color: '#0D1B2A'}}>Alternative muligheter</p>
+                  <p className="text-sm mb-4" style={{color: '#475467'}}>Disse studiene matcher ikke alle valgene dine, men kan være relevante basert på fagområde eller sted.</p>
+                  <div className="space-y-3">
+                    {alternativer.map((s, i) => (
+                      <div key={i} className="rounded-xl p-5" style={{border: '1px solid #E4E9F2', background: 'white'}}>
+                        <div className="flex justify-between items-start gap-4">
+                          <div className="flex-1">
+                            <div className="flex items-center gap-2 mb-1 flex-wrap">
+                              <h2 className="font-semibold text-lg" style={{color: '#0D1B2A'}}>{s.study_name}</h2>
+                              <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${s.status.color}`}>{s.status.label}</span>
+                            </div>
+                            <p className="text-sm" style={{color: '#475467'}}>{s.university} – {s.location}</p>
+                            <div className="flex items-center gap-4 mt-2 text-sm flex-wrap">
+                              <span style={{color: '#475467'}}>Tidligere poenggrense: <strong style={{color: '#0D1B2A'}}>{s.relevantCutoff}</strong></span>
+                              <span style={{color: s.margin >= 0 ? '#059669' : '#e11d48', fontWeight: '500'}}>{s.margin >= 0 ? '+' : ''}{s.margin.toFixed(1)} poeng</span>
+                            </div>
                           </div>
-                          <p className="text-sm" style={{color: '#475467'}}>{s.university} – {s.location}</p>
-                          <div className="flex items-center gap-4 mt-2 text-sm flex-wrap">
-                            <span style={{color: '#475467'}}>Tidligere poenggrense ({kvotetekst}): <strong style={{color: '#0D1B2A'}}>{s.relevantCutoff}</strong></span>
-                            <span style={{color: s.margin >= 0 ? '#059669' : '#e11d48', fontWeight: '500'}}>{s.margin >= 0 ? '+' : ''}{s.margin.toFixed(1)} poeng</span>
-                          </div>
-                          {s.manglerKvotedata && <p className="text-xs mt-1" style={{color: '#98A2B3'}}>Full kvotedata mangler – sjekk Samordna opptak.</p>}
+                          <a href={s.url} target="_blank" rel="noopener noreferrer" className="text-white px-4 py-2 rounded-xl text-sm font-semibold transition whitespace-nowrap" style={{background: '#0D1B2A'}}>Gå til skolens nettside</a>
                         </div>
-                        <a href={s.url} target="_blank" rel="noopener noreferrer" className="text-white px-4 py-2 rounded-xl text-sm font-semibold transition whitespace-nowrap" style={{background: '#0D1B2A'}}>Gå til skolens nettside</a>
                       </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-        )}
-
-        <div className="space-y-4 mt-4">
-          {viste.map((s, i) => {
-            const erBeste = i < 3 && s.status.label === 'God sjanse'
-            return (
-              <div key={s.id} className="rounded-xl transition" style={{padding: erBeste ? '24px' : '20px', border: erBeste ? '1.5px solid #1E3A8A' : '1px solid #E4E9F2', boxShadow: erBeste ? '0 8px 24px rgba(30,58,138,0.12)' : '0 1px 2px rgba(13,27,42,0.04)', background: erBeste ? 'rgba(30,58,138,0.025)' : 'white'}}>
-                <div className="flex justify-between items-start gap-4">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-1 flex-wrap">
-                      <h2 className="font-semibold text-lg" style={{color: '#0D1B2A'}}>{s.study_name}</h2>
-                      <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${s.status.color}`}>{s.status.label}</span>
-                      {erBeste && <span className="text-xs font-semibold px-2 py-0.5 rounded-full" style={{background: '#1E3A8A', color: 'white'}}>⭐ Beste match</span>}
-                    </div>
-                    <p className="text-sm" style={{color: '#475467'}}>{s.university} – {s.location}</p>
-                    <div className="flex items-center gap-4 mt-2 text-sm flex-wrap">
-                      {kvotetekst && <span style={{color: '#475467'}}>Kvote: <strong style={{color: '#0D1B2A'}}>{kvotetekst}</strong></span>}
-                      <span style={{color: '#475467'}}>Tidligere poenggrense: <strong style={{color: '#0D1B2A'}}>{s.relevantCutoff}</strong></span>
-                      <span style={{color: '#475467'}}>Ditt snitt: <strong style={{color: '#0D1B2A'}}>{snitttall}</strong></span>
-                      <span style={{color: s.margin >= 0 ? '#059669' : '#e11d48', fontWeight: '500'}}>{s.margin >= 0 ? '+' : ''}{s.margin.toFixed(1)} poeng</span>
-                    </div>
-                    {s.manglerKvotedata && (
-                      <p className="text-xs mt-1" style={{color: '#98A2B3'}}>Full kvotedata mangler – sjekk Samordna opptak for førstegangsvitnemålskvote.</p>
-                    )}
-                    <span className="inline-block mt-2 text-xs px-2 py-1 rounded-full font-medium" style={{background: 'rgba(30,58,138,0.08)', color: '#1E3A8A'}}>{s.fagomraade}</span>
+                    ))}
                   </div>
-                  <a href={s.url} target="_blank" rel="noopener noreferrer" className="text-white px-4 py-2 rounded-xl text-sm font-semibold transition whitespace-nowrap" style={{background: '#0D1B2A'}}>Gå til skolens nettside</a>
                 </div>
-              </div>
-            )
-          })}
+              )}
+            </div>
+          )}
+
+          <div className="space-y-4 mt-4">
+            {viste.map((s, i) => {
+              const erBeste = i < 3 && s.status.label === 'God sjanse'
+              return (
+                <div key={s.id} className="rounded-xl transition" style={{padding: erBeste ? '24px' : '20px', border: erBeste ? '1.5px solid #1E3A8A' : '1px solid #E4E9F2', boxShadow: erBeste ? '0 8px 24px rgba(30,58,138,0.12)' : '0 1px 2px rgba(13,27,42,0.04)', background: erBeste ? 'rgba(30,58,138,0.025)' : 'white'}}>
+                  <div className="flex justify-between items-start gap-4">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1 flex-wrap">
+                        <h2 className="font-semibold text-lg" style={{color: '#0D1B2A'}}>{s.study_name}</h2>
+                        <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${s.status.color}`}>{s.status.label}</span>
+                        {erBeste && <span className="text-xs font-semibold px-2 py-0.5 rounded-full" style={{background: '#1E3A8A', color: 'white'}}>⭐ Beste match</span>}
+                      </div>
+                      <p className="text-sm" style={{color: '#475467'}}>{s.university} – {s.location}</p>
+                      <div className="flex items-center gap-4 mt-2 text-sm flex-wrap">
+                        {kvotetekst && <span style={{color: '#475467'}}>Kvote: <strong style={{color: '#0D1B2A'}}>{kvotetekst}</strong></span>}
+                        <span style={{color: '#475467'}}>Tidligere poenggrense: <strong style={{color: '#0D1B2A'}}>{s.relevantCutoff}</strong></span>
+                        <span style={{color: '#475467'}}>Ditt snitt: <strong style={{color: '#0D1B2A'}}>{snitttall}</strong></span>
+                        <span style={{color: s.margin >= 0 ? '#059669' : '#e11d48', fontWeight: '500'}}>{s.margin >= 0 ? '+' : ''}{s.margin.toFixed(1)} poeng</span>
+                      </div>
+                      {s.manglerKvotedata && (
+                        <p className="text-xs mt-1" style={{color: '#98A2B3'}}>Full kvotedata mangler – sjekk Samordna opptak for førstegangsvitnemålskvote.</p>
+                      )}
+                      <span className="inline-block mt-2 text-xs px-2 py-1 rounded-full font-medium" style={{background: 'rgba(30,58,138,0.08)', color: '#1E3A8A'}}>{s.fagomraade}</span>
+                    </div>
+                    <a href={s.url} target="_blank" rel="noopener noreferrer" className="text-white px-4 py-2 rounded-xl text-sm font-semibold transition whitespace-nowrap" style={{background: '#0D1B2A'}}>Gå til skolens nettside</a>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+
+          {sokt && !laster && visAntall < sorterteAlle.length && (
+            <div className="text-center mt-6">
+              <button onClick={() => setVisAntall(v => v + BATCH)} className="bg-white px-8 py-3 rounded-xl font-medium transition" style={{border: '1px solid #E4E9F2', color: '#475467'}}>Vis flere studier</button>
+            </div>
+          )}
+
+          {sokt && !laster && viste.length > 0 && (
+            <div className="text-center mt-6">
+              <button onClick={delResultat} className="text-sm font-medium px-6 py-2 rounded-xl transition" style={{border: '1px solid #E4E9F2', color: '#475467', background: 'white'}}>
+                {delt ? '✓ Kopiert!' : '🔗 Del resultatet mitt'}
+              </button>
+            </div>
+          )}
         </div>
-
-        {sokt && !laster && visAntall < sorterteAlle.length && (
-          <div className="text-center mt-6">
-            <button onClick={() => setVisAntall(v => v + BATCH)} className="bg-white px-8 py-3 rounded-xl font-medium transition" style={{border: '1px solid #E4E9F2', color: '#475467'}}>Vis flere studier</button>
-          </div>
-        )}
-
-        {sokt && !laster && viste.length > 0 && (
-          <div className="text-center mt-6">
-            <button onClick={delResultat} className="text-sm font-medium px-6 py-2 rounded-xl transition" style={{border: '1px solid #E4E9F2', color: '#475467', background: 'white'}}>
-              {delt ? '✓ Kopiert!' : '🔗 Del resultatet mitt'}
-            </button>
-          </div>
-        )}
-      </div>
       </div>
     </main>
   )
