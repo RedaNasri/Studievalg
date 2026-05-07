@@ -23,11 +23,13 @@ export const metadata: Metadata = {
     siteName: "StudieMatch",
     locale: "nb_NO",
     type: "website",
+    images: [{ url: "https://studiematch.no/og-image.png", width: 1200, height: 630, alt: "StudieMatch" }],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "StudieMatch – Finn studier du kan være kvalifisert for",
     description: "Skriv inn snittet ditt og se hvilke studier du kan være kvalifisert for. Basert på poenggrenser fra Samordna opptak 2025.",
+    images: ["https://studiematch.no/og-image.png"],
   },
 };
 
@@ -43,6 +45,19 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             gtag('js', new Date());
             gtag('config', 'G-NKVEW2ZQL1');
           `}
+        </Script>
+        <Script id="structured-data" type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "StudieMatch",
+            "url": "https://studiematch.no",
+            "description": "Finn studier og masterprogram du kan være kvalifisert for basert på karaktersnitt eller bachelor.",
+            "applicationCategory": "EducationApplication",
+            "operatingSystem": "Web",
+            "inLanguage": "nb",
+            "offers": { "@type": "Offer", "price": "0", "priceCurrency": "NOK" }
+          })}
         </Script>
       </head>
       <body className="min-h-full flex flex-col" style={{ background: "#F6F9FC", color: "#0D1B2A" }}>
