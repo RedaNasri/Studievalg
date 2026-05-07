@@ -130,8 +130,12 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
   function toggleBy(by: string) { setValgteByer(prev => prev.includes(by) ? prev.filter(b => b !== by) : [...prev, by]) }
 
   async function finnStudier() {
+    async function finnStudier() {
     if (!snitt) return
     setLaster(true); setSokt(true); setVisAntall(BATCH); setAlternativer([])
+    setTimeout(() => {
+      document.getElementById('resultater')?.scrollIntoView({ behavior: 'smooth' })
+    }, 300)
     const snitttall = parseFloat(snitt)
 
     let query = supabase.from('studier').select('*').order('cutoff_score', { ascending: false })
@@ -237,7 +241,8 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
           <button onClick={finnStudier} className="w-full text-white py-4 rounded-xl font-semibold text-base transition sticky bottom-4" style={{background: '#0D1B2A'}}>Finn studier</button>
         </div>
 
-        {laster && <div className="text-center py-8" style={{color: '#98A2B3'}}>Laster...</div>}
+        <div id="resultater">
+{laster && <div className="text-center py-8" style={{color: '#98A2B3'}}>Laster...</div>}
 
         {sokt && !laster && !harNullTreff && resultater.filter(s => s.margin >= 0).length > 0 && (
           <div>
@@ -337,6 +342,7 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
             </button>
           </div>
         )}
+      </div>
       </div>
     </main>
   )
