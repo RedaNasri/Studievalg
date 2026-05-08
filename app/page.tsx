@@ -8,32 +8,34 @@ export default function Home() {
   if (valg === 'bachelor') return <BachelorSide tilbake={() => setValg('start')} />
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center px-6" style={{background: '#F6F9FC'}}>
-      <div className="max-w-2xl w-full mx-auto py-16 text-center">
-        <img src="/logo.png" alt="StudieMatch" className="mx-auto mt-4 mb-10 w-40 sm:w-52 md:w-64" />
+    <main className="min-h-screen flex flex-col items-center justify-center px-4" style={{background: '#F6F9FC'}}>
+      <div className="max-w-2xl w-full mx-auto py-12 text-center">
+        {/* FIX 1: Logo uten hvit boks – bruk object-contain og ingen bg */}
+        <img src="/logo.png" alt="StudieMatch" className="mx-auto mt-4 mb-8" style={{width: '180px', height: 'auto', display: 'block'}} />
         <p className="text-sm font-semibold uppercase tracking-widest mb-2" style={{color: '#1E3A8A'}}>Finn studier på 10 sekunder</p>
         <p className="text-lg mb-4 max-w-xl mx-auto leading-relaxed" style={{color: '#475467'}}>
           Skriv inn snittet ditt eller bacheloren din – og se hvilke studier du kan være kvalifisert for
         </p>
-        <p className="text-sm mb-10 max-w-xl mx-auto" style={{color: '#98A2B3'}}>
+        <p className="text-sm mb-8 max-w-xl mx-auto" style={{color: '#98A2B3'}}>
           Basert på tidligere poenggrenser og tilgjengelige opptakskrav.
         </p>
-        <p className="font-semibold mb-6 text-lg" style={{color: '#0D1B2A'}}>Hva passer deg best?</p>
+        <p className="font-semibold mb-4 text-lg" style={{color: '#0D1B2A'}}>Hva passer deg best?</p>
+        {/* FIX 2: grid-cols-1 på mobil alltid, sm:grid-cols-2 på større skjermer */}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 mb-6">
-          <button onClick={() => setValg('vgs')} className="bg-white rounded-2xl p-8 hover:-translate-y-0.5 transition text-left group" style={{border: '1px solid #E4E9F2'}}>
+          <button onClick={() => setValg('vgs')} className="bg-white rounded-2xl p-6 hover:-translate-y-0.5 transition text-left" style={{border: '1px solid #E4E9F2'}}>
             <div className="text-4xl mb-3">📋</div>
             <h2 className="text-xl font-bold mb-2" style={{color: '#0D1B2A'}}>Jeg går på VGS</h2>
             <p className="text-sm leading-relaxed" style={{color: '#475467'}}>Se hvilke bachelorstudier du kan være kvalifisert for basert på snittet ditt</p>
             <div className="mt-4 text-sm font-semibold" style={{color: '#1E3A8A'}}>Finn bachelorstudier →</div>
           </button>
-          <button onClick={() => setValg('bachelor')} className="bg-white rounded-2xl p-8 hover:-translate-y-0.5 transition text-left group" style={{border: '1px solid #E4E9F2'}}>
+          <button onClick={() => setValg('bachelor')} className="bg-white rounded-2xl p-6 hover:-translate-y-0.5 transition text-left" style={{border: '1px solid #E4E9F2'}}>
             <div className="text-4xl mb-3">🎓</div>
             <h2 className="text-xl font-bold mb-2" style={{color: '#0D1B2A'}}>Jeg har en bachelor</h2>
             <p className="text-sm leading-relaxed" style={{color: '#475467'}}>Se hvilke masterprogram bacheloren din kan kvalifisere deg til</p>
             <div className="mt-4 text-sm font-semibold" style={{color: '#1E3A8A'}}>Finn masterprogram →</div>
           </button>
         </div>
-        <p className="text-xs mb-6" style={{color: '#98A2B3'}}>Tar under 10 sekunder • Ingen innlogging nødvendig</p>
+        <p className="text-xs mb-4" style={{color: '#98A2B3'}}>Tar under 10 sekunder • Ingen innlogging nødvendig</p>
         <p className="text-xs max-w-md mx-auto leading-relaxed" style={{color: '#98A2B3'}}>
           Resultatene er veiledende og basert på tidligere poenggrenser og tilgjengelige opptakskrav. Sjekk alltid lærestedets egne sider før du søker.
         </p>
@@ -49,9 +51,9 @@ const masterByer = ['Oslo','Bergen','Trondheim','Tromsø','Stavanger','Kristians
 
 function Label({ text, hint }: { text: string, hint: string }) {
   return (
-    <div className="mb-3">
+    <div className="mb-2">
       <p className="font-semibold text-sm" style={{color: '#0D1B2A'}}>{text}</p>
-      <p className="text-sm mt-1" style={{color: '#475467'}}>{hint}</p>
+      <p className="text-sm mt-0.5" style={{color: '#475467'}}>{hint}</p>
     </div>
   )
 }
@@ -65,9 +67,11 @@ function Dropdown({ label, options, valgte, toggle, nullstill }: { label: string
     return () => document.removeEventListener('mousedown', handleClick)
   }, [])
   return (
-    <div className="relative" ref={ref}>
-      <button onClick={() => setOpen(!open)} className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition" style={{border: valgte.length > 0 ? '1px solid #1E3A8A' : '1px solid #E4E9F2', color: valgte.length > 0 ? '#1E3A8A' : '#475467', background: valgte.length > 0 ? 'rgba(30,58,138,0.08)' : 'white'}}>
-        {label} {valgte.length > 0 && <span className="text-white text-xs rounded-full px-2 py-0.5" style={{background: '#1E3A8A'}}>{valgte.length}</span>}
+    <div className="relative w-full" ref={ref}>
+      {/* FIX 3: Dropdown-knapp full bredde på mobil */}
+      <button onClick={() => setOpen(!open)} className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition w-full" style={{border: valgte.length > 0 ? '1px solid #1E3A8A' : '1px solid #E4E9F2', color: valgte.length > 0 ? '#1E3A8A' : '#475467', background: valgte.length > 0 ? 'rgba(30,58,138,0.08)' : 'white'}}>
+        <span className="flex-1 text-left">{label}</span>
+        {valgte.length > 0 && <span className="text-white text-xs rounded-full px-2 py-0.5" style={{background: '#1E3A8A'}}>{valgte.length}</span>}
         <span className="text-xs">{open ? '▲' : '▼'}</span>
       </button>
       {open && (
@@ -75,7 +79,7 @@ function Dropdown({ label, options, valgte, toggle, nullstill }: { label: string
           {valgte.length > 0 && <button onClick={nullstill} className="text-xs text-red-500 hover:text-red-600 mb-2 block font-medium">Nullstill</button>}
           {options.map(opt => (
             <button key={opt} onClick={() => toggle(opt)} className="flex items-center gap-2 w-full text-left px-3 py-2 rounded-lg text-sm transition" style={{background: valgte.includes(opt) ? 'rgba(30,58,138,0.08)' : 'white', color: valgte.includes(opt) ? '#1E3A8A' : '#475467', fontWeight: valgte.includes(opt) ? '500' : 'normal'}}>
-              <span className="w-4 h-4 rounded flex items-center justify-center text-xs" style={{background: valgte.includes(opt) ? '#1E3A8A' : 'white', border: valgte.includes(opt) ? '1px solid #1E3A8A' : '1px solid #E4E9F2', color: 'white'}}>{valgte.includes(opt) ? '✓' : ''}</span>
+              <span className="w-4 h-4 rounded flex items-center justify-center text-xs flex-shrink-0" style={{background: valgte.includes(opt) ? '#1E3A8A' : 'white', border: valgte.includes(opt) ? '1px solid #1E3A8A' : '1px solid #E4E9F2', color: 'white'}}>{valgte.includes(opt) ? '✓' : ''}</span>
               {opt}
             </button>
           ))}
@@ -190,32 +194,34 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
 
   return (
     <main className="min-h-screen" style={{background: '#F6F9FC'}}>
-      <div className="max-w-4xl mx-auto px-6 py-12">
+      {/* FIX 4: overflow-x-hidden for å stoppe horisontal scroll */}
+      <div className="max-w-4xl mx-auto px-4 py-8 overflow-x-hidden">
         <button onClick={tilbake} className="text-sm mb-6 font-medium hover:underline" style={{color: '#1E3A8A'}}>← Tilbake</button>
-        <div className="text-center mb-8">
-          <img src="/logo.png" alt="StudieMatch" className="mx-auto mb-6 w-40 sm:w-52 md:w-64" />
+        <div className="text-center mb-6">
+          <img src="/logo.png" alt="StudieMatch" className="mx-auto mb-4" style={{width: '160px', height: 'auto'}} />
           <p style={{color: '#475467'}}>Se hvilke bachelorstudier du kan være kvalifisert for</p>
         </div>
 
-        <div className="bg-white rounded-2xl p-6 mb-6" style={{border: '1px solid #E4E9F2', boxShadow: '0 1px 2px rgba(13,27,42,0.04), 0 4px 12px rgba(13,27,42,0.04)'}}>
-          <div className="flex flex-wrap gap-8 items-start mb-6">
-            <div className="flex-1 min-w-48">
+        <div className="bg-white rounded-2xl p-4 sm:p-6 mb-6" style={{border: '1px solid #E4E9F2', boxShadow: '0 1px 2px rgba(13,27,42,0.04), 0 4px 12px rgba(13,27,42,0.04)'}}>
+          {/* FIX 5: Skjema – flex-col på mobil, flex-wrap på desktop */}
+          <div className="flex flex-col gap-5 sm:flex-row sm:flex-wrap sm:items-start mb-5">
+            <div className="w-full sm:flex-1 sm:min-w-48">
               <Label text="Karaktersnitt" hint="Skriv inn karaktergjennomsnittet ditt" />
-              <input type="number" placeholder="F.eks. 52.4" value={snitt} onChange={e => setSnitt(e.target.value)} onKeyDown={e => e.key === 'Enter' && finnStudier()} className="rounded-xl px-4 py-2 text-sm w-full bg-white focus:outline-none" style={{border: '1px solid #E4E9F2', color: '#0D1B2A'}} />
+              <input type="number" placeholder="F.eks. 52.4" value={snitt} onChange={e => setSnitt(e.target.value)} onKeyDown={e => e.key === 'Enter' && finnStudier()} className="rounded-xl px-4 py-3 text-sm w-full bg-white focus:outline-none" style={{border: '1px solid #E4E9F2', color: '#0D1B2A'}} />
             </div>
-            <div>
+            <div className="w-full sm:w-auto">
               <Label text="Kvote" hint="Hvilken kvote gjelder for deg?" />
-              <select value={kvote} onChange={e => setKvote(e.target.value)} className="rounded-xl px-4 py-2 text-sm bg-white focus:outline-none" style={{border: '1px solid #E4E9F2', color: '#0D1B2A'}}>
+              <select value={kvote} onChange={e => setKvote(e.target.value)} className="rounded-xl px-4 py-3 text-sm bg-white focus:outline-none w-full" style={{border: '1px solid #E4E9F2', color: '#0D1B2A'}}>
                 <option value="forstegangsvitnemal">Førstegangsvitnemål</option>
                 <option value="ordinaer">Ordinær kvote</option>
                 <option value="usikker">Usikker</option>
               </select>
             </div>
-            <div>
+            <div className="w-full sm:w-auto">
               <Label text="By" hint="Hvilken by ønsker du å studere i?" />
               <Dropdown label="Velg by" options={byer} valgte={valgteByer} toggle={toggleBy} nullstill={() => setValgteByer([])} />
             </div>
-            <div>
+            <div className="w-full sm:w-auto">
               <Label text="Fagområde" hint="Hvilke fagområder er du interessert i?" />
               <Dropdown label="Velg fagområde" options={fagomraader} valgte={valgteFag} toggle={toggleFag} nullstill={() => setValgteFag([])} />
             </div>
@@ -234,7 +240,7 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
             </div>
           )}
 
-          <button onClick={finnStudier} className="w-full text-white py-4 rounded-xl font-semibold text-base transition sticky bottom-4" style={{background: '#0D1B2A'}}>Finn studier</button>
+          <button onClick={finnStudier} className="w-full text-white py-4 rounded-xl font-semibold text-base transition" style={{background: '#0D1B2A'}}>Finn studier</button>
         </div>
 
         <div id="resultater">
@@ -249,10 +255,11 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
               <div className="rounded-xl px-4 py-3 mb-4 text-sm" style={{background: '#fffbeb', border: '1px solid #fde68a', color: '#92400e'}}>
                 Resultatene er veiledende og basert på tidligere poenggrenser. Poenggrenser varierer fra år til år, og kvoter kan påvirke vurderingen. Sjekk alltid lærestedets og <a href="https://www.samordnaopptak.no" target="_blank" rel="noopener noreferrer" style={{textDecoration: 'underline'}}>Samordna opptaks</a> egne sider før du søker.
               </div>
-              <div className="flex flex-wrap gap-3 mb-5 items-center">
+              {/* FIX 6: Filter-knapper stablet på mobil */}
+              <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center mb-5">
                 <button onClick={() => setKunGodSjanse(!kunGodSjanse)} className="px-4 py-2 rounded-xl text-sm font-medium transition" style={{background: kunGodSjanse ? '#059669' : 'white', color: kunGodSjanse ? 'white' : '#475467', border: kunGodSjanse ? '1px solid #059669' : '1px solid #E4E9F2'}}>Vis kun god sjanse</button>
                 <button onClick={() => setSortering(sortering === 'standard' ? 'beste' : 'standard')} className="px-4 py-2 rounded-xl text-sm font-medium transition" style={{background: sortering === 'beste' ? '#1E3A8A' : 'white', color: sortering === 'beste' ? 'white' : '#475467', border: sortering === 'beste' ? '1px solid #1E3A8A' : '1px solid #E4E9F2'}}>{sortering === 'beste' ? 'Sortert: beste match' : 'Sorter etter beste match'}</button>
-                <p className="text-sm ml-auto" style={{color: '#98A2B3'}}>{viste.length} av {sorterteAlle.length} studier vises</p>
+                <p className="text-sm sm:ml-auto" style={{color: '#98A2B3'}}>{viste.length} av {sorterteAlle.length} studier vises</p>
               </div>
               <p className="font-semibold mb-3" style={{color: '#0D1B2A'}}>Mulige studier basert på tidligere poenggrenser</p>
             </div>
@@ -270,20 +277,19 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
                   <p className="text-sm mb-4" style={{color: '#475467'}}>Disse studiene matcher ikke alle valgene dine, men kan være relevante basert på fagområde eller sted.</p>
                   <div className="space-y-3">
                     {alternativer.map((s, i) => (
-                      <div key={i} className="rounded-xl p-5" style={{border: '1px solid #E4E9F2', background: 'white'}}>
-                        <div className="flex justify-between items-start gap-4">
-                          <div className="flex-1">
-                            <div className="flex items-center gap-2 mb-1 flex-wrap">
-                              <h2 className="font-semibold text-lg" style={{color: '#0D1B2A'}}>{s.study_name}</h2>
-                              <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${s.status.color}`}>{s.status.label}</span>
-                            </div>
-                            <p className="text-sm" style={{color: '#475467'}}>{s.university} – {s.location}</p>
-                            <div className="flex items-center gap-4 mt-2 text-sm flex-wrap">
-                              <span style={{color: '#475467'}}>Tidligere poenggrense: <strong style={{color: '#0D1B2A'}}>{s.relevantCutoff}</strong></span>
-                              <span style={{color: s.margin >= 0 ? '#059669' : '#e11d48', fontWeight: '500'}}>{s.margin >= 0 ? '+' : ''}{s.margin.toFixed(1)} poeng</span>
-                            </div>
+                      <div key={i} className="rounded-xl p-4" style={{border: '1px solid #E4E9F2', background: 'white'}}>
+                        <div className="flex flex-col gap-3">
+                          <div className="flex items-start gap-2 flex-wrap">
+                            <h2 className="font-semibold text-base" style={{color: '#0D1B2A'}}>{s.study_name}</h2>
+                            <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${s.status.color}`}>{s.status.label}</span>
                           </div>
-                          <a href={s.url} target="_blank" rel="noopener noreferrer" className="text-white px-4 py-2 rounded-xl text-sm font-semibold transition whitespace-nowrap" style={{background: '#0D1B2A'}}>Gå til skolens nettside</a>
+                          <p className="text-sm" style={{color: '#475467'}}>{s.university} – {s.location}</p>
+                          <div className="flex items-center gap-3 text-sm flex-wrap">
+                            <span style={{color: '#475467'}}>Tidligere poenggrense: <strong style={{color: '#0D1B2A'}}>{s.relevantCutoff}</strong></span>
+                            <span style={{color: s.margin >= 0 ? '#059669' : '#e11d48', fontWeight: '500'}}>{s.margin >= 0 ? '+' : ''}{s.margin.toFixed(1)} poeng</span>
+                          </div>
+                          {/* FIX 7: Knapp full bredde under innhold på mobil */}
+                          <a href={s.url} target="_blank" rel="noopener noreferrer" className="text-white px-4 py-2 rounded-xl text-sm font-semibold transition text-center" style={{background: '#0D1B2A'}}>Gå til skolens nettside</a>
                         </div>
                       </div>
                     ))}
@@ -297,27 +303,28 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
             {viste.map((s, i) => {
               const erBeste = i < 3 && s.status.label === 'God sjanse'
               return (
-                <div key={s.id} className="rounded-xl transition" style={{padding: erBeste ? '24px' : '20px', border: erBeste ? '1.5px solid #1E3A8A' : '1px solid #E4E9F2', boxShadow: erBeste ? '0 8px 24px rgba(30,58,138,0.12)' : '0 1px 2px rgba(13,27,42,0.04)', background: erBeste ? 'rgba(30,58,138,0.025)' : 'white'}}>
-                  <div className="flex justify-between items-start gap-4">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-1 flex-wrap">
-                        <h2 className="font-semibold text-lg" style={{color: '#0D1B2A'}}>{s.study_name}</h2>
-                        <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${s.status.color}`}>{s.status.label}</span>
-                        {erBeste && <span className="text-xs font-semibold px-2 py-0.5 rounded-full" style={{background: '#1E3A8A', color: 'white'}}>⭐ Beste match</span>}
-                      </div>
-                      <p className="text-sm" style={{color: '#475467'}}>{s.university} – {s.location}</p>
-                      <div className="flex items-center gap-4 mt-2 text-sm flex-wrap">
-                        {kvotetekst && <span style={{color: '#475467'}}>Kvote: <strong style={{color: '#0D1B2A'}}>{kvotetekst}</strong></span>}
-                        <span style={{color: '#475467'}}>Tidligere poenggrense: <strong style={{color: '#0D1B2A'}}>{s.relevantCutoff}</strong></span>
-                        <span style={{color: '#475467'}}>Ditt snitt: <strong style={{color: '#0D1B2A'}}>{snitttall}</strong></span>
-                        <span style={{color: s.margin >= 0 ? '#059669' : '#e11d48', fontWeight: '500'}}>{s.margin >= 0 ? '+' : ''}{s.margin.toFixed(1)} poeng</span>
-                      </div>
-                      {s.manglerKvotedata && (
-                        <p className="text-xs mt-1" style={{color: '#98A2B3'}}>Full kvotedata mangler – sjekk Samordna opptak for førstegangsvitnemålskvote.</p>
-                      )}
-                      <span className="inline-block mt-2 text-xs px-2 py-1 rounded-full font-medium" style={{background: 'rgba(30,58,138,0.08)', color: '#1E3A8A'}}>{s.fagomraade}</span>
+                <div key={s.id} className="rounded-xl transition" style={{padding: erBeste ? '20px' : '16px', border: erBeste ? '1.5px solid #1E3A8A' : '1px solid #E4E9F2', boxShadow: erBeste ? '0 8px 24px rgba(30,58,138,0.12)' : '0 1px 2px rgba(13,27,42,0.04)', background: erBeste ? 'rgba(30,58,138,0.025)' : 'white'}}>
+                  {/* FIX 7: Kortinnhold i kolonner, knapp under på mobil */}
+                  <div className="flex flex-col gap-3">
+                    <div className="flex items-start gap-2 flex-wrap">
+                      <h2 className="font-semibold text-base" style={{color: '#0D1B2A'}}>{s.study_name}</h2>
+                      <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${s.status.color}`}>{s.status.label}</span>
+                      {erBeste && <span className="text-xs font-semibold px-2 py-0.5 rounded-full" style={{background: '#1E3A8A', color: 'white'}}>⭐ Beste match</span>}
                     </div>
-                    <a href={s.url} target="_blank" rel="noopener noreferrer" className="text-white px-4 py-2 rounded-xl text-sm font-semibold transition whitespace-nowrap" style={{background: '#0D1B2A'}}>Gå til skolens nettside</a>
+                    <p className="text-sm" style={{color: '#475467'}}>{s.university} – {s.location}</p>
+                    <div className="flex items-center gap-3 text-sm flex-wrap">
+                      {kvotetekst && <span style={{color: '#475467'}}>Kvote: <strong style={{color: '#0D1B2A'}}>{kvotetekst}</strong></span>}
+                      <span style={{color: '#475467'}}>Poenggrense: <strong style={{color: '#0D1B2A'}}>{s.relevantCutoff}</strong></span>
+                      <span style={{color: '#475467'}}>Snitt: <strong style={{color: '#0D1B2A'}}>{snitttall}</strong></span>
+                      <span style={{color: s.margin >= 0 ? '#059669' : '#e11d48', fontWeight: '500'}}>{s.margin >= 0 ? '+' : ''}{s.margin.toFixed(1)} poeng</span>
+                    </div>
+                    {s.manglerKvotedata && (
+                      <p className="text-xs" style={{color: '#98A2B3'}}>Full kvotedata mangler – sjekk Samordna opptak for førstegangsvitnemålskvote.</p>
+                    )}
+                    <div className="flex items-center justify-between gap-3 flex-wrap">
+                      <span className="inline-block text-xs px-2 py-1 rounded-full font-medium" style={{background: 'rgba(30,58,138,0.08)', color: '#1E3A8A'}}>{s.fagomraade}</span>
+                      <a href={s.url} target="_blank" rel="noopener noreferrer" className="text-white px-4 py-2 rounded-xl text-sm font-semibold transition text-center flex-shrink-0" style={{background: '#0D1B2A'}}>Gå til skolens nettside</a>
+                    </div>
                   </div>
                 </div>
               )
@@ -380,9 +387,9 @@ function BachelorSide({ tilbake }: { tilbake: () => void }) {
     const kategori = bachelorTilKategori[bachelor]
     const bachelorMatch = kategori && m.requires_kategorier?.includes(kategori)
     const gradeMatch = gradeOrder[karakter] >= gradeOrder[m.requires_min_grade]
-    if (bachelorMatch && gradeMatch) return { label: '✔ Oppfyller krav', color: 'bg-emerald-50 text-emerald-700 border border-emerald-100', order: 0 }
+    if (bachelorMatch && gradeMatch) return { label: '✓ Oppfyller krav', color: 'bg-emerald-50 text-emerald-700 border border-emerald-100', order: 0 }
     if (bachelorMatch && !gradeMatch) return { label: '⚠ Kanskje – sjekk krav', color: 'bg-amber-50 text-amber-700 border border-amber-100', order: 1 }
-    return { label: '❌ Oppfyller ikke krav', color: 'bg-rose-50 text-rose-700 border border-rose-100', order: 2 }
+    return { label: '✗ Oppfyller ikke krav', color: 'bg-rose-50 text-rose-700 border border-rose-100', order: 2 }
   }
 
   const alleResultater = sokt ? alleMastere.filter(m => {
@@ -407,40 +414,40 @@ function BachelorSide({ tilbake }: { tilbake: () => void }) {
 
   return (
     <main className="min-h-screen" style={{background: '#F6F9FC'}}>
-      <div className="max-w-4xl mx-auto px-6 py-12">
+      <div className="max-w-4xl mx-auto px-4 py-8 overflow-x-hidden">
         <button onClick={tilbake} className="text-sm mb-6 font-medium hover:underline" style={{color: '#1E3A8A'}}>← Tilbake</button>
-        <div className="text-center mb-8">
-          <img src="/logo.png" alt="StudieMatch" className="mx-auto mb-6 w-40 sm:w-52 md:w-64" />
+        <div className="text-center mb-6">
+          <img src="/logo.png" alt="StudieMatch" className="mx-auto mb-4" style={{width: '160px', height: 'auto'}} />
           <p style={{color: '#475467'}}>Se hvilke masterprogram du kan være kvalifisert for</p>
         </div>
-        <div className="bg-white rounded-2xl p-6 mb-6" style={{border: '1px solid #E4E9F2', boxShadow: '0 1px 2px rgba(13,27,42,0.04), 0 4px 12px rgba(13,27,42,0.04)'}}>
-          <div className="flex flex-wrap gap-8 items-start mb-6">
-            <div className="flex-1 min-w-64">
+        <div className="bg-white rounded-2xl p-4 sm:p-6 mb-6" style={{border: '1px solid #E4E9F2', boxShadow: '0 1px 2px rgba(13,27,42,0.04), 0 4px 12px rgba(13,27,42,0.04)'}}>
+          <div className="flex flex-col gap-5 sm:flex-row sm:flex-wrap sm:items-start mb-5">
+            <div className="w-full sm:flex-1 sm:min-w-64">
               <Label text="Hva har du studert?" hint="Velg bachelorutdanningen din fra listen" />
-              <select value={bachelor} onChange={e => setBachelor(e.target.value)} className="rounded-xl px-4 py-2 text-sm w-full bg-white focus:outline-none" style={{border: '1px solid #E4E9F2', color: '#0D1B2A'}}>
+              <select value={bachelor} onChange={e => setBachelor(e.target.value)} className="rounded-xl px-4 py-3 text-sm w-full bg-white focus:outline-none" style={{border: '1px solid #E4E9F2', color: '#0D1B2A'}}>
                 <option value="">Velg bachelorutdanning</option>
                 {bachelorStudier.map(b => <option key={b} value={b}>{b}</option>)}
               </select>
             </div>
-            <div>
+            <div className="w-full sm:w-auto">
               <Label text="Karakternivå" hint="Hva er karakternivået ditt?" />
-              <select value={karakter} onChange={e => setKarakter(e.target.value)} className="rounded-xl px-4 py-2 text-sm bg-white focus:outline-none" style={{border: '1px solid #E4E9F2', color: '#0D1B2A'}}>
+              <select value={karakter} onChange={e => setKarakter(e.target.value)} className="rounded-xl px-4 py-3 text-sm bg-white focus:outline-none w-full" style={{border: '1px solid #E4E9F2', color: '#0D1B2A'}}>
                 <option value="">Velg karakter</option>
                 <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option>
               </select>
             </div>
           </div>
-          <div className="flex flex-wrap gap-8 items-start mb-6">
-            <div>
+          <div className="flex flex-col gap-5 sm:flex-row sm:flex-wrap sm:items-start mb-5">
+            <div className="w-full sm:w-auto">
               <Label text="By" hint="Hvilken by ønsker du å studere i?" />
               <Dropdown label="Velg by" options={masterByer} valgte={valgteByer} toggle={toggleBy} nullstill={() => setValgteByer([])} />
             </div>
-            <div>
+            <div className="w-full sm:w-auto">
               <Label text="Fagområde" hint="Hvilke fagområder er du interessert i?" />
               <Dropdown label="Velg fagområde" options={masterFagomraader} valgte={valgteFag} toggle={toggleFag} nullstill={() => setValgteFag([])} />
             </div>
           </div>
-          <button onClick={() => { if (bachelor && karakter) { setSokt(true); setVisAlle(false); setTimeout(() => { document.getElementById('resultater-master')?.scrollIntoView({ behavior: 'smooth' }) }, 300) } }} className="w-full text-white py-4 rounded-xl font-semibold text-base transition sticky bottom-4" style={{background: '#0D1B2A'}}>
+          <button onClick={() => { if (bachelor && karakter) { setSokt(true); setVisAlle(false); setTimeout(() => { document.getElementById('resultater-master')?.scrollIntoView({ behavior: 'smooth' }) }, 300) } }} className="w-full text-white py-4 rounded-xl font-semibold text-base transition" style={{background: '#0D1B2A'}}>
             {laster ? 'Laster...' : 'Finn masterprogram'}
           </button>
         </div>
@@ -461,21 +468,19 @@ function BachelorSide({ tilbake }: { tilbake: () => void }) {
           {resultater.map((m, i) => {
             const erBeste = i < 3 && m.status.order === 0
             return (
-              <div key={i} className="rounded-xl transition" style={{padding: erBeste ? '24px' : '20px', border: erBeste ? '1.5px solid #1E3A8A' : '1px solid #E4E9F2', boxShadow: erBeste ? '0 8px 24px rgba(30,58,138,0.12)' : '0 1px 2px rgba(13,27,42,0.04)', background: erBeste ? 'rgba(30,58,138,0.025)' : 'white'}}>
-                <div className="flex justify-between items-start gap-4">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-1 flex-wrap">
-                      <h2 className="font-semibold text-lg" style={{color: '#0D1B2A'}}>{m.name}</h2>
-                      <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${m.status.color}`}>{m.status.label}</span>
-                      {erBeste && <span className="text-xs font-semibold px-2 py-0.5 rounded-full" style={{background: '#1E3A8A', color: 'white'}}>⭐ Beste match</span>}
-                    </div>
-                    <p className="text-sm" style={{color: '#475467'}}>{m.school} – {m.location}</p>
-                    <div className="flex items-center gap-3 mt-2">
-                      <span className="text-xs px-2 py-1 rounded-full font-medium" style={{background: 'rgba(30,58,138,0.08)', color: '#1E3A8A'}}>{m.fagomraade}</span>
-                      <span className="text-xs" style={{color: '#98A2B3'}}>Krav: min. karakter <strong style={{color: '#475467'}}>{m.requires_min_grade}</strong></span>
-                    </div>
+              <div key={i} className="rounded-xl transition" style={{padding: erBeste ? '20px' : '16px', border: erBeste ? '1.5px solid #1E3A8A' : '1px solid #E4E9F2', boxShadow: erBeste ? '0 8px 24px rgba(30,58,138,0.12)' : '0 1px 2px rgba(13,27,42,0.04)', background: erBeste ? 'rgba(30,58,138,0.025)' : 'white'}}>
+                <div className="flex flex-col gap-3">
+                  <div className="flex items-start gap-2 flex-wrap">
+                    <h2 className="font-semibold text-base" style={{color: '#0D1B2A'}}>{m.name}</h2>
+                    <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${m.status.color}`}>{m.status.label}</span>
+                    {erBeste && <span className="text-xs font-semibold px-2 py-0.5 rounded-full" style={{background: '#1E3A8A', color: 'white'}}>⭐ Beste match</span>}
                   </div>
-                  <a href={m.study_url} target="_blank" rel="noopener noreferrer" className="text-white px-4 py-2 rounded-xl text-sm font-semibold transition whitespace-nowrap" style={{background: '#0D1B2A'}}>Gå til skolens nettside</a>
+                  <p className="text-sm" style={{color: '#475467'}}>{m.school} – {m.location}</p>
+                  <div className="flex items-center gap-3 flex-wrap">
+                    <span className="text-xs px-2 py-1 rounded-full font-medium" style={{background: 'rgba(30,58,138,0.08)', color: '#1E3A8A'}}>{m.fagomraade}</span>
+                    <span className="text-xs" style={{color: '#98A2B3'}}>Krav: min. karakter <strong style={{color: '#475467'}}>{m.requires_min_grade}</strong></span>
+                  </div>
+                  <a href={m.study_url} target="_blank" rel="noopener noreferrer" className="text-white px-4 py-2 rounded-xl text-sm font-semibold transition text-center" style={{background: '#0D1B2A'}}>Gå til skolens nettside</a>
                 </div>
               </div>
             )
