@@ -44,6 +44,39 @@ export default function Home() {
   )
 }
 
+function FeedbackBoks({ snitt, kvote }: { snitt: string, kvote: string }) {
+  const [valgt, setValgt] = useState<'up' | 'down' | null>(null)
+
+  function sendFeedback(type: 'up' | 'down') {
+    if (valgt) return
+    setValgt(type)
+    if (typeof window !== 'undefined' && (window as any).gtag) {
+      (window as any).gtag('event', type === 'up' ? 'feedback_positive' : 'feedback_negative', {
+        event_category: 'feedback',
+        event_label: `snitt:${snitt}_kvote:${kvote}`,
+      })
+    }
+  }
+
+  return (
+    <div className="rounded-xl px-5 py-4 mb-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3" style={{background: 'white', border: '1px solid #E4E9F2'}}>
+      <p className="text-sm font-medium" style={{color: '#0D1B2A'}}>
+        {valgt ? (valgt === 'up' ? '🎉 Takk for tilbakemeldingen!' : '😔 Takk! Vi jobber med å bli bedre.') : 'Var resultatet nyttig?'}
+      </p>
+      {!valgt && (
+        <div className="flex gap-2">
+          <button onClick={() => sendFeedback('up')} className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-medium transition hover:scale-105" style={{border: '1px solid #E4E9F2', background: '#F6F9FC', color: '#0D1B2A'}}>
+            👍 Ja
+          </button>
+          <button onClick={() => sendFeedback('down')} className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-medium transition hover:scale-105" style={{border: '1px solid #E4E9F2', background: '#F6F9FC', color: '#0D1B2A'}}>
+            👎 Nei
+          </button>
+        </div>
+      )}
+    </div>
+  )
+}
+
 const fagomraader = ['Annen helse','Bioingeniør','Cybersikkerhet','Data og IT','Farmasi','Film og media','Fysioterapi','Idrett','Ingeniør','Journalistikk','Jus','Kunst og design','Kunstig intelligens','Lærer','Markedsføring','Matematikk','Medisin','Musikk','Psykologi','Realfag','Regnskap','Samfunnsfag','Sosiologi','Språk','Statsvitenskap','Sykepleie','Tannhelse','Økonomi','Annet']
 const byer = ['Oslo','Bergen','Trondheim','Tromsø','Stavanger','Kristiansand','Ålesund','Bodø','Gjøvik','Lillehammer','Drammen','Sogndal','Levanger','Haugesund','Molde','Narvik','Alta','Åmot','Ås','Bærum','Elverum','Fredrikstad','Gol','Grimstad','Hamar','Harstad','Horten','Indre Østfold','Kongsvinger','Larvik','Lillestrøm','Mo i Rana','Namsos','Notodden','Orkland','Porsgrunn','Ringerike','Sør-Varanger','Stord','Sunnfjord','Volda']
 const masterFagomraader = ['Helse','Idrett','Informatikk','Ingeniør','Jus','Kunst','Media','Pedagogikk','Psykologi','Realfag','Samfunnsfag','Språk','Økonomi']
@@ -245,6 +278,8 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
 
         <div id="resultater">
           {laster && <div className="text-center py-8" style={{color: '#98A2B3'}}>Laster...</div>}
+
+          {sokt && !laster && <FeedbackBoks snitt={snitt} kvote={kvote} />}
 
           {sokt && !laster && !harNullTreff && resultater.filter(s => s.margin >= 0).length > 0 && (
             <div>
@@ -451,6 +486,8 @@ function BachelorSide({ tilbake }: { tilbake: () => void }) {
             {laster ? 'Laster...' : 'Finn masterprogram'}
           </button>
         </div>
+
+        {sokt && <FeedbackBoks snitt={bachelor} kvote={karakter} />}
 
         {sokt && (
           <div>
