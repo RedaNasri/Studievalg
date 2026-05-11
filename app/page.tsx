@@ -418,13 +418,73 @@ function BachelorSide({ tilbake }: { tilbake: () => void }) {
   function toggleFag(fag: string) { setValgteFag(prev => prev.includes(fag) ? prev.filter(f => f !== fag) : [...prev, fag]) }
   function toggleBy(by: string) { setValgteByer(prev => prev.includes(by) ? prev.filter(b => b !== by) : [...prev, by]) }
 
-  function getMasterStatus(m: any) {
-    const kategori = bachelorTilKategori[bachelor]
-    const bachelorMatch = kategori && m.requires_kategorier?.includes(kategori)
-    const gradeMatch = gradeOrder[karakter] >= gradeOrder[m.requires_min_grade]
-    if (bachelorMatch && gradeMatch) return { label: '✓ Oppfyller krav', color: 'bg-emerald-50 text-emerald-700 border border-emerald-100', order: 0 }
-    if (bachelorMatch && !gradeMatch) return { label: '⚠ Kanskje – sjekk krav', color: 'bg-amber-50 text-amber-700 border border-amber-100', order: 1 }
-    return { label: '✗ Oppfyller ikke krav', color: 'bg-rose-50 text-rose-700 border border-rose-100', order: 2 }
+  function getMasterStatus(m: any) const bachelorTilKategori: any = {
+  'Bachelor i økonomi og administrasjon': 'Økonomi',
+  'Bachelor i regnskap og revisjon': 'Økonomi',
+  'Bachelor i markedsføring og ledelse': 'Økonomi',
+  'Bachelor i internasjonal business': 'Økonomi',
+  'Bachelor i finans': 'Økonomi',
+  'Bachelor i rettsvitenskap / jus': 'Lov og orden',
+  'Bachelor i psykologi': 'Helse',
+  'Bachelor i sosiologi': 'Samfunn',
+  'Bachelor i statsvitenskap': 'Samfunn',
+  'Bachelor i samfunnsøkonomi': 'Økonomi',
+  'Bachelor i filosofi': 'Samfunn',
+  'Bachelor i pedagogikk': 'Pedagogikk',
+  'Bachelor i informatikk': 'IT og data',
+  'Bachelor i datateknologi': 'IT og data',
+  'Bachelor i kunstig intelligens': 'IT og data',
+  'Bachelor i cybersikkerhet': 'IT og data',
+  'Bachelor i ingeniør – data': 'Teknologi',
+  'Bachelor i ingeniør – maskin': 'Teknologi',
+  'Bachelor i ingeniør – bygg': 'Bygg og anlegg',
+  'Bachelor i ingeniør – elektronikk': 'Elektronikk',
+  'Bachelor i ingeniør – energi': 'Olje, gass og energi',
+  'Bachelor i matematikk': 'Realfag',
+  'Bachelor i fysikk': 'Realfag',
+  'Bachelor i kjemi': 'Realfag',
+  'Bachelor i biologi': 'Natur',
+  'Bachelor i bioteknologi': 'Realfag',
+  'Bachelor i sykepleie': 'Helse',
+  'Bachelor i ergoterapi': 'Helse',
+  'Bachelor i fysioterapi': 'Helse',
+  'Bachelor i bioingeniør': 'Helse',
+  'Bachelor i radiografi': 'Helse',
+  'Bachelor i paramedisin': 'Helse',
+  'Bachelor i farmasi': 'Helse',
+  'Bachelor i tannpleie': 'Helse',
+  'Bachelor i folkehelse': 'Helse',
+  'Bachelor i barnevern': 'Barn',
+  'Bachelor i sosialt arbeid': 'Mennesker',
+  'Bachelor i vernepleie': 'Helse',
+  'Bachelor i journalistikk': 'Media og kommunikasjon',
+  'Bachelor i medievitenskap': 'Media og kommunikasjon',
+  'Bachelor i kommunikasjon': 'Media og kommunikasjon',
+  'Bachelor i film og TV-produksjon': 'Kunst og kultur',
+  'Bachelor i kunst og design': 'Design',
+  'Bachelor i arkitektur': 'Bygg og anlegg',
+  'Bachelor i musikkvitenskap': 'Kunst og kultur',
+  'Bachelor i idrettsvitenskap': 'Idrett',
+  'Bachelor i friluftsliv': 'Idrett',
+  'Bachelor i lærerutdanning 1–7': 'Pedagogikk',
+  'Bachelor i lærerutdanning 5–10': 'Pedagogikk',
+  'Bachelor i historie': 'Historie',
+  'Bachelor i geografi': 'Natur',
+  'Bachelor i nordisk språk og litteratur': 'Språk',
+  'Bachelor i engelsk': 'Språk',
+  'Bachelor i fransk': 'Språk',
+  'Bachelor i tysk': 'Språk',
+  'Bachelor i spansk': 'Språk',
+  'Bachelor i arabisk': 'Språk',
+  'Bachelor i kinesisk': 'Språk',
+  'Bachelor i russisk': 'Språk',
+  'Bachelor i landbruk': 'Landbruk',
+  'Bachelor i havbruk': 'Fiskeri og havbruk',
+  'Bachelor i veterinærmedisin': 'Dyr',
+  'Bachelor i miljøvitenskap': 'Klima og miljø',
+  'Bachelor i geologi': 'Realfag',
+  'Bachelor i nanoteknologi': 'Teknologi',
+}
   }
 
   const alleResultater = sokt ? alleMastere.filter(m => {
