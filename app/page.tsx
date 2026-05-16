@@ -673,7 +673,7 @@ function BachelorSide({ tilbake }: { tilbake: () => void }) {
 
     // Sjekk om masterens fagområde er relatert til bachelor via masterFagTilBachelorKategorier
     const masterFagKategorier = masterFagTilBachelorKategorier[m.fagomraade] || []
-    const fagomraadeMatch = alleKategorier.some(k => masterFagKategorier.includes(k))
+    const fagomraadeMatch = alleKategorier.some((k: string) => masterFagKategorier.includes(k))
 
     const bachelorMatch = direkteMatch || relatertMatch || fagomraadeMatch
     const gradeMatch = karakter && m.requires_min_grade ? gradeOrder[karakter] >= gradeOrder[m.requires_min_grade] : false
