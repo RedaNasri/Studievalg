@@ -16,6 +16,9 @@ export const metadata: Metadata = {
   },
   title: "StudieMatch – Finn studier du kan være kvalifisert for",
   description: "StudieMatch hjelper elever og studenter med å finne studier og masterprogram de kan være kvalifisert for basert på snitt eller bachelor.",
+  robots: "index, follow",
+  keywords: ["poenggrenser 2025", "hvilke studier kan jeg komme inn på", "karakterkrav bachelor", "finn masterprogram", "samordna opptak 2025"],
+  alternates: { canonical: "https://studiematch.no" },
   openGraph: {
     title: "StudieMatch – Finn studier du kan være kvalifisert for",
     description: "Skriv inn snittet ditt og se hvilke studier du kan være kvalifisert for. Basert på poenggrenser fra Samordna opptak 2025.",
@@ -65,4 +68,4 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       </body>
     </html>
   );
-} 
+}
