@@ -91,7 +91,7 @@ function FeedbackBoks({ snitt, kvote }: { snitt: string, kvote: string }) {
 
 const fagomraader = ['Annen helse','Bioingeniør','Cybersikkerhet','Data og IT','Farmasi','Film og media','Fysioterapi','Idrett','Ingeniør','Journalistikk','Jus','Kunst og design','Kunstig intelligens','Lærer','Markedsføring','Matematikk','Medisin','Musikk','Psykologi','Realfag','Regnskap','Samfunnsfag','Sosiologi','Språk','Statsvitenskap','Sykepleie','Tannhelse','Økonomi','Annet']
 const byer = ['Oslo','Bergen','Trondheim','Tromsø','Stavanger','Kristiansand','Ålesund','Bodø','Gjøvik','Lillehammer','Drammen','Sogndal','Levanger','Haugesund','Molde','Narvik','Alta','Åmot','Ås','Bærum','Elverum','Fredrikstad','Gol','Grimstad','Hamar','Harstad','Horten','Indre Østfold','Kongsvinger','Larvik','Lillestrøm','Mo i Rana','Namsos','Notodden','Orkland','Porsgrunn','Ringerike','Sør-Varanger','Stord','Sunnfjord','Volda']
-const masterFagomraader = ['Helse','Idrett','Informatikk','Ingeniør','Jus','Kunst','Media','Pedagogikk','Psykologi','Realfag','Samfunnsfag','Språk','Økonomi']
+const masterFagomraader = ['Dyr','Helse','Idrett','Ingeniør','Kunst','Landbruk','Lov og orden','Media','Mennesker','Økonomi','Pedagogikk','Realfag','Reiseliv','Samfunnsfag','Sikkerhet og beredskap','Sjøfart','Språk','Transport']
 const masterByer = ['Oslo','Bergen','Trondheim','Tromsø','Stavanger','Kristiansand','Gjøvik']
 
 function Label({ text, hint }: { text: string, hint: string }) {
