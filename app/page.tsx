@@ -40,7 +40,6 @@ export default function Home() {
           Resultatene er veiledende og basert på tidligere poenggrenser og tilgjengelige opptakskrav.  Sjekk alltid lærestedets egne siderfør du søker.
         </p>
         <section className="mt-12 max-w-2xl mx-auto text-left px-2">
-          <p style={{color: 'red', fontSize: '30px'}}>TEST</p>
           <h2 className="text-lg font-bold mb-2" style={{color: '#0D1B2A'}}>Hvilke studier kan jeg komme inn på?</h2>
           <p className="text-sm mb-6 leading-relaxed" style={{color: '#475467'}}>
             Skriv inn karaktersnittet ditt og se hvilke bachelorstudier du kan være kvalifisert for – basert på poenggrenser fra Samordna opptak 2025. StudieMatch dekker hundrevis av studier ved norske læresteder som UiO, NTNU, UiB, UiT, OsloMet og BI.
