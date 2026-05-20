@@ -3,17 +3,24 @@ import { useState, useRef, useEffect } from 'react'
 
 export default function Home() {
   const [valg, setValg] = useState<'start' | 'vgs' | 'bachelor'>('start')
+
   if (valg === 'vgs') return <VGSSide tilbake={() => setValg('start')} />
   if (valg === 'bachelor') return <BachelorSide tilbake={() => setValg('start')} />
+
   return (
     <main className="min-h-screen flex flex-col items-center px-4 pt-12" style={{background: '#F6F9FC'}}>
       <div className="max-w-2xl w-full mx-auto py-12 text-center">
+        {/* FIX 1: Logo uten hvit boks – bruk object-contain og ingen bg */}
         <img src="/logo.png" alt="StudieMatch" className="mx-auto mt-4 mb-8" style={{width: '180px', height: 'auto', display: 'block'}} />
-        <h1 className="text-3xl font-bold mb-4" style={{color: '#0D1B2A'}}>Finn studier du kan komme inn på</h1>
         <p className="text-sm font-semibold uppercase tracking-widest mb-2" style={{color: '#1E3A8A'}}>Finn studier på 10 sekunder</p>
-        <p className="text-lg mb-4 max-w-xl mx-auto leading-relaxed" style={{color: '#475467'}}>Skriv inn snittet ditt eller bacheloren din – og se hvilke studier du kan være kvalifisert for</p>
-        <p className="text-sm mb-8 max-w-xl mx-auto" style={{color: '#98A2B3'}}>Basert på tidligere poenggrenser og tilgjengelige opptakskrav.</p>
+        <p className="text-lg mb-4 max-w-xl mx-auto leading-relaxed" style={{color: '#475467'}}>
+          Skriv inn snittet ditt eller bacheloren din – og se hvilke studier du kan være kvalifisert for
+        </p>
+        <p className="text-sm mb-8 max-w-xl mx-auto" style={{color: '#98A2B3'}}>
+          Basert på tidligere poenggrenser og tilgjengelige opptakskrav.
+        </p>
         <p className="font-semibold mb-4 text-lg" style={{color: '#0D1B2A'}}>Hva passer deg best?</p>
+        {/* FIX 2: grid-cols-1 på mobil alltid, sm:grid-cols-2 på større skjermer */}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 mb-6">
           <button onClick={() => setValg('vgs')} className="bg-white rounded-2xl p-6 hover:-translate-y-0.5 transition text-left" style={{border: '1px solid #E4E9F2'}}>
             <div className="text-4xl mb-3">📋</div>
@@ -29,8 +36,11 @@ export default function Home() {
           </button>
         </div>
         <p className="text-xs mb-4" style={{color: '#98A2B3'}}>Tar under 10 sekunder • Ingen innlogging nødvendig</p>
-        <p className="text-xs max-w-md mx-auto leading-relaxed" style={{color: '#98A2B3'}}>Resultatene er veiledende og basert på tidligere poenggrenser og tilgjengelige opptakskrav. Sjekk alltid lærestedets egne sider før du søker.</p>
+        <p className="text-xs max-w-md mx-auto leading-relaxed" style={{color: '#98A2B3'}}>
+          Resultatene er veiledende og basert på tidligere poenggrenser og tilgjengelige opptakskrav.  Sjekk alltid lærestedets egne siderfør du søker.
+        </p>
         <section className="mt-12 max-w-2xl mx-auto text-left px-2">
+          <p style={{color: 'red', fontSize: '30px'}}>TEST</p>
           <h2 className="text-lg font-bold mb-2" style={{color: '#0D1B2A'}}>Hvilke studier kan jeg komme inn på?</h2>
           <p className="text-sm mb-6 leading-relaxed" style={{color: '#475467'}}>
             Skriv inn karaktersnittet ditt og se hvilke bachelorstudier du kan være kvalifisert for – basert på poenggrenser fra Samordna opptak 2025. StudieMatch dekker hundrevis av studier ved norske læresteder som UiO, NTNU, UiB, UiT, OsloMet og BI.
@@ -43,19 +53,12 @@ export default function Home() {
           <p className="text-sm mb-6 leading-relaxed" style={{color: '#475467'}}>
             Har du en bachelor og lurer på hvilke masterprogram du kan søke på? Velg bachelorutdanningen din og karakternivå, så matcher StudieMatch deg mot relevante masterprogram i Norge.
           </p>
-          <h2 className="text-lg font-bold mb-2" style={{color: '#0D1B2A'}}>Karakterkrav til bachelor 2025</h2>
-<p className="text-sm mb-6 leading-relaxed" style={{color: '#475467'}}>
-  Karakterkravene til bachelorstudier oppgis i poeng fra Samordna opptak. Poengene regnes ut fra gjennomsnittet ditt pluss eventuelle tilleggspoeng for eksamen, folkehøyskole eller realfag. Mange populære studier som medisin, psykologi og jus har høye poenggrenser, mens andre studier har lavere krav.
-</p>
-<h2 className="text-lg font-bold mb-2" style={{color: '#0D1B2A'}}>Samordna opptak 2025 – hva du trenger å vite</h2>
-<p className="text-sm mb-6 leading-relaxed" style={{color: '#475467'}}>
-  Samordna opptak koordinerer opptak til de fleste høyere utdanninger i Norge. Søknadsfristen er 15. april, og svar kommer i juli. StudieMatch bruker poenggrenser fra Samordna opptak 2024 som veiledning for hva du kan forvente i 2025.
-</p>
         </section>
       </div>
     </main>
   )
 }
+
 function FeedbackBoks({ snitt, kvote }: { snitt: string, kvote: string }) {
   const [valgt, setValgt] = useState<'up' | 'down' | null>(null)
 
@@ -91,7 +94,7 @@ function FeedbackBoks({ snitt, kvote }: { snitt: string, kvote: string }) {
 
 const fagomraader = ['Annen helse','Bioingeniør','Cybersikkerhet','Data og IT','Farmasi','Film og media','Fysioterapi','Idrett','Ingeniør','Journalistikk','Jus','Kunst og design','Kunstig intelligens','Lærer','Markedsføring','Matematikk','Medisin','Musikk','Psykologi','Realfag','Regnskap','Samfunnsfag','Sosiologi','Språk','Statsvitenskap','Sykepleie','Tannhelse','Økonomi','Annet']
 const byer = ['Oslo','Bergen','Trondheim','Tromsø','Stavanger','Kristiansand','Ålesund','Bodø','Gjøvik','Lillehammer','Drammen','Sogndal','Levanger','Haugesund','Molde','Narvik','Alta','Åmot','Ås','Bærum','Elverum','Fredrikstad','Gol','Grimstad','Hamar','Harstad','Horten','Indre Østfold','Kongsvinger','Larvik','Lillestrøm','Mo i Rana','Namsos','Notodden','Orkland','Porsgrunn','Ringerike','Sør-Varanger','Stord','Sunnfjord','Volda']
-const masterFagomraader = ['Dyr','Helse','Idrett','Ingeniør','Kunst','Landbruk','Lov og orden','Media','Mennesker','Økonomi','Pedagogikk','Realfag','Reiseliv','Samfunnsfag','Sikkerhet og beredskap','Sjøfart','Språk','Transport']
+const masterFagomraader = ['Helse','Idrett','Informatikk','Ingeniør','Jus','Kunst','Media','Pedagogikk','Psykologi','Realfag','Samfunnsfag','Språk','Økonomi']
 const masterByer = ['Oslo','Bergen','Trondheim','Tromsø','Stavanger','Kristiansand','Gjøvik']
 
 function Label({ text, hint }: { text: string, hint: string }) {
@@ -170,7 +173,7 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
   const [sortering, setSortering] = useState<'standard' | 'beste'>('standard')
   const [visAntall, setVisAntall] = useState(BATCH)
   const [delt, setDelt] = useState(false)
-
+  const [privateSkoler, setPrivateSkoler] = useState<any[]>([])
   const { createClient } = require('@supabase/supabase-js')
   const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)
 
@@ -214,7 +217,12 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
         .slice(0, 10)
       setAlternativer(altMapped)
     }
-
+    let privateQuery = supabase.from('private_skoler').select('*')
+    if (valgteFag.length > 0) privateQuery = privateQuery.in('fagomraade', valgteFag)
+    if (valgteByer.length > 0) privateQuery = privateQuery.in('location', valgteByer)
+    const { data: privateData } = await privateQuery
+    setPrivateSkoler(privateData || [])
+    
     setLaster(false)
   }
 
@@ -392,6 +400,34 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
             </div>
           )}
         </div>
+        {sokt && !laster && (
+          <div className="mt-8">
+            {privateSkoler.length > 0 && (
+              <div>
+                <div className="rounded-xl px-5 py-4 mb-3" style={{background: 'rgba(30,58,138,0.06)', border: '1px solid rgba(30,58,138,0.18)'}}>
+                  <p className="font-bold text-lg" style={{color: '#0D1B2A'}}>🏫 Private høyskoler</p>
+                  <p className="text-sm mt-1" style={{color: '#1E3A8A'}}>Disse skolene har egne opptakskrav – ikke poengbasert opptak via Samordna opptak.</p>
+                </div>
+                <div className="space-y-3">
+                  {privateSkoler.map((s: any, i: number) => (
+                    <div key={i} className="rounded-xl p-4 bg-white" style={{border: '1px solid #E4E9F2'}}>
+                      <div className="flex flex-col gap-2">
+                        <h2 className="font-semibold text-base" style={{color: '#0D1B2A'}}>{s.study_name}</h2>
+                        <p className="text-sm" style={{color: '#475467'}}>{s.university} – {s.location}</p>
+                        <p className="text-sm" style={{color: '#475467'}}>{s.opptak_info}</p>
+                        {s.pris_per_semester && <p className="text-xs" style={{color: '#98A2B3'}}>Pris: {s.pris_per_semester.toLocaleString('nb-NO')} kr per semester</p>}
+                        <div className="flex items-center justify-between flex-wrap gap-2">
+                          <span className="text-xs px-2 py-1 rounded-full font-medium" style={{background: 'rgba(30,58,138,0.08)', color: '#1E3A8A'}}>{s.fagomraade}</span>
+                          <a href={s.url} target="_blank" rel="noopener noreferrer" className="text-white px-4 py-2 rounded-xl text-sm font-semibold" style={{background: '#0D1B2A'}}>Gå til skolens nettside</a>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </main>
   )
