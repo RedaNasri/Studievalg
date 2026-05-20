@@ -52,6 +52,14 @@ export default function Home() {
           <p className="text-sm mb-6 leading-relaxed" style={{color: '#475467'}}>
             Har du en bachelor og lurer på hvilke masterprogram du kan søke på? Velg bachelorutdanningen din og karakternivå, så matcher StudieMatch deg mot relevante masterprogram i Norge.
           </p>
+          <h2 className="text-lg font-bold mb-2" style={{color: '#0D1B2A'}}>Karakterkrav til bachelor 2025</h2>
+          <p className="text-sm mb-6 leading-relaxed" style={{color: '#475467'}}>
+            Karakterkravene til bachelorstudier oppgis i poeng fra Samordna opptak. Poengene regnes ut fra gjennomsnittet ditt pluss eventuelle tilleggspoeng for eksamen, folkehøyskole eller realfag. Mange populære studier som medisin, psykologi og jus har høye poenggrenser, mens andre studier har lavere krav.
+          </p>
+          <h2 className="text-lg font-bold mb-2" style={{color: '#0D1B2A'}}>Samordna opptak 2025 – hva du trenger å vite</h2>
+          <p className="text-sm mb-6 leading-relaxed" style={{color: '#475467'}}>
+            Samordna opptak koordinerer opptak til de fleste høyere utdanninger i Norge. Søknadsfristen er 15. april, og svar kommer i juli. StudieMatch bruker poenggrenser fra Samordna opptak 2024 som veiledning for hva du kan forvente i 2025.
+          </p>
         </section>
       </div>
     </main>
