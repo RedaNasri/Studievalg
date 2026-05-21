@@ -101,6 +101,34 @@ function FeedbackBoks({ snitt, kvote }: { snitt: string, kvote: string }) {
 
 const fagomraader = ['Annen helse','Bioingeniør','Cybersikkerhet','Data og IT','Farmasi','Film og media','Fysioterapi','Idrett','Ingeniør','Journalistikk','Jus','Kunst og design','Kunstig intelligens','Lærer','Markedsføring','Matematikk','Medisin','Musikk','Psykologi','Realfag','Regnskap','Samfunnsfag','Sosiologi','Språk','Statsvitenskap','Sykepleie','Tannhelse','Økonomi','Annet']
 const byer = ['Oslo','Bergen','Trondheim','Tromsø','Stavanger','Kristiansand','Ålesund','Bodø','Gjøvik','Lillehammer','Drammen','Sogndal','Levanger','Haugesund','Molde','Narvik','Alta','Åmot','Ås','Bærum','Elverum','Fredrikstad','Gol','Grimstad','Hamar','Harstad','Horten','Indre Østfold','Kongsvinger','Larvik','Lillestrøm','Mo i Rana','Namsos','Notodden','Orkland','Porsgrunn','Ringerike','Sør-Varanger','Stord','Sunnfjord','Volda']
+const universitetNavn: any = {
+  'AHO': 'Arkitektur- og designhøgskolen i Oslo',
+  'AHS': 'Ansgar Høgskole',
+  'HIM': 'Høgskolen i Molde',
+  'HIØ': 'Høgskolen i Østfold',
+  'HVL': 'Høgskulen på Vestlandet',
+  'HVO': 'Høgskulen i Volda',
+  'INN': 'Høgskolen i Innlandet',
+  'LDH': 'Lovisenberg diakonale høgskole',
+  'NHH': 'Norges Handelshøyskole',
+  'NIH': 'Norges idrettshøgskole',
+  'NLA': 'NLA Høgskolen',
+  'NMBU': 'Norges miljø- og biovitenskapelige universitet',
+  'NORD': 'Nord universitet',
+  'NTNU': 'NTNU',
+  'OSLOMET': 'OsloMet',
+  'PHS': 'Politihøgskolen',
+  'UIA': 'Universitetet i Agder',
+  'UIB': 'Universitetet i Bergen',
+  'UIO': 'Universitetet i Oslo',
+  'UIS': 'Universitetet i Stavanger',
+  'UIT': 'Universitetet i Tromsø',
+  'USN': 'Universitetet i Sørøst-Norge',
+  'VID': 'VID vitenskapelige høgskole'
+}
+const alleStatligeSkoler = Object.values(universitetNavn).sort() as string[]
+const allePrivateSkoler = ['Handelshøyskolen BI', 'Høyskolen Kristiania', 'Oslo Nye Høyskole', 'Noroff Høyskole']
+const alleSkoler = [...alleStatligeSkoler, ...allePrivateSkoler].sort() as string[]
 const masterFagomraader = ['Dyr','Helse','Idrett','Ingeniør','Kunst','Landbruk','Lov og orden','Media','Mennesker','Økonomi','Pedagogikk','Realfag','Reiseliv','Samfunnsfag','Sikkerhet og beredskap','Sjøfart','Språk','Transport']
 const masterByer = ['Oslo','Bergen','Trondheim','Tromsø','Stavanger','Kristiansand','Gjøvik']
 
@@ -180,6 +208,7 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
   const [sortering, setSortering] = useState<'standard' | 'beste'>('standard')
   const [visAntall, setVisAntall] = useState(BATCH)
   const [delt, setDelt] = useState(false)
+  const [valgteSkOler, setValgteSkOler] = useState<string[]>([])
   const [privateSkoler, setPrivateSkoler] = useState<any[]>([])
   const { createClient } = require('@supabase/supabase-js')
   const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)
@@ -199,8 +228,11 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
     if (valgteFag.length > 0) query = query.in('fagomraade', valgteFag)
     if (valgteByer.length > 0) query = query.in('location', valgteByer)
     const { data } = await query
-
-    const mapped = (data || []).map((s: any) => {
+    const mapped = (data || []).filter((s: any) => {
+    if (valgteSkOler.length === 0) return true
+    const fulltNavn = universitetNavn[s.university] || s.university
+  return valgteSkOler.includes(fulltNavn)
+}).map((s: any) => {
       const { cutoff, mangler } = getRelevantCutoff(s, kvote)
       const margin = snitttall - cutoff
       return { ...s, relevantCutoff: cutoff, manglerKvotedata: mangler, status: getVGSStatus(snitttall, cutoff), margin }
@@ -225,12 +257,16 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
       setAlternativer(altMapped)
     }
     let privateQuery = supabase.from('private_skoler').select('*')
-    if (valgteFag.length > 0) privateQuery = privateQuery.in('fagomraade', valgteFag)
-    if (valgteByer.length > 0) privateQuery = privateQuery.in('location', valgteByer)
-    const { data: privateData } = await privateQuery
-    setPrivateSkoler(privateData || [])
-    
-    setLaster(false)
+if (valgteFag.length > 0) privateQuery = privateQuery.in('fagomraade', valgteFag)
+if (valgteByer.length > 0) privateQuery = privateQuery.in('location', valgteByer)
+const { data: privateData } = await privateQuery
+const filtrertePrivate = (privateData || []).filter((s: any) => {
+  if (valgteSkOler.length === 0) return true
+  return valgteSkOler.includes(s.university)
+})
+setPrivateSkoler(filtrertePrivate)
+
+setLaster(false)
   }
 
   function delResultat() {
@@ -284,6 +320,10 @@ function VGSSide({ tilbake }: { tilbake: () => void }) {
             <div className="w-full sm:w-auto">
               <Label text="Fagområde" hint="Hvilke fagområder er du interessert i?" />
               <Dropdown label="Velg fagområde" options={fagomraader} valgte={valgteFag} toggle={toggleFag} nullstill={() => setValgteFag([])} />
+            </div>
+            <div className="w-full sm:w-auto">
+            <Label text="Skole" hint="Filtrer på en bestemt skole (valgfritt)" />
+            <Dropdown label="Velg skole" options={alleSkoler} valgte={valgteSkOler} toggle={s => setValgteSkOler(prev => prev.includes(s) ? prev.filter(x => x !== s) : [...prev, s])} nullstill={() => setValgteSkOler([])} />
             </div>
           </div>
 
